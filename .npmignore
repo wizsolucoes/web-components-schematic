@@ -1,6 +1,0 @@
-# Ignores TypeScript files, but keeps definitions.
-!*.d.ts
-.vscode/
-azure-pipelines.yml
-docs/
-!src/**/azure-pipelines.yml
