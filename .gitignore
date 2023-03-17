@@ -9,6 +9,9 @@
 # Node
 /node_modules
 project-web-component/node_modules
+angular.json
+.vscode
+projects/*
 npm-debug.log
 yarn-error.log
 

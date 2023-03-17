@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "schematics:intall": "yarn --cwd ./schematics-webcomponent install",
+    "schematics:build": "yarn --cwd ./schematics-webcomponent build",
+    "schematics:link": "yarn --cwd ./schematics-webcomponent link"
   },
   "private": true,
   "dependencies": {

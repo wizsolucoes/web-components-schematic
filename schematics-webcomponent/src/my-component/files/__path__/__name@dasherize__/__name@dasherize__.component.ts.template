@@ -1,0 +1,19 @@
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+
+export class <%= classify(name) %>Component implements OnChanges {
+
+  @Input() currentPath: string;
+  @Output() appOutput = new EventEmitter(); // --> custom event in DOOM
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.currentPath) {
+      this.router.navigateByUrl(changes.currentPath.currentValue);
+    }
+  }
+  constructor(
+    private router:Router) {
+    this.router.initialNavigation();
+  }
+
+}
