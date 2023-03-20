@@ -7,9 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "schematics:intall": "yarn --cwd ./schematics-webcomponent install",
-    "schematics:build": "yarn --cwd ./schematics-webcomponent build",
-    "schematics:link": "yarn --cwd ./schematics-webcomponent link"
+    "schematics:intall": "yarn --cwd ./application-webcomponents install",
+    "schematics:build": "yarn --cwd ./application-webcomponents build",
+    "schematics:link": "yarn --cwd ./application-webcomponents link",
+    "build:web-component": "ng build --project funillara --single-bundle --output-hashing none  --aot --build-optimizer",
+    "build:web-component:staging": "ng build --configuration=staging --project funillara --single-bundle --output-hashing none  --aot --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -17,12 +19,16 @@
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
     "@angular/core": "^15.2.0",
+    "@angular/elements": "^15.2.3",
     "@angular/forms": "^15.2.0",
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@schematics/angular": "^15.2.4",
+    "ngx-build-plus": "^15.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "updated": "^2.0.5",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

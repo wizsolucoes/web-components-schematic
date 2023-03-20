@@ -1,0 +1,11 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "application": {
+      "aliases": ["webcomponents"],
+      "factory": "./template-webcomponents",
+      "schema": "./template-webcomponents/schema.json",
+      "description": "Create an Angular application."
+    }
+  }
+}

@@ -1,27 +1,56 @@
-# AngularSchematicsWebcomponents
+# angular schematics web components
+Este é um *Schematic* para gerar um projeto com *Web Components* utilizando o *Angular*.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+___
 
-## Development server
+![](./docs/Thumbnail.jpg)
+___ 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+IMPORTANTE: Este esquema supõe que você está usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
 
-## Code scaffolding
+## Como usar
+Execute o comando no seu terminal. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+ng g @wizco/schematics-webcomponents:webcomponents NOME -p ELEMENTO_TAG
+```
+> Substitua o parâmetro NOME e ELEMENTO_TAG pelo valor de sua escolha.
 
-## Build
+| Parâmetro | Descrição | exemplo | | 
+| --- | --- | --- | --- |
+| NOME | Nome do projeto | usuarios | projects/usuarios |
+| ELEMENTO_TAG | Nome do elemento | usuarios | `<wc-usuarios-modules></wc-usuarios-modules>` | 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+___
 
-## Running unit tests
+![](./docs/termina-comands.jpg)
+___ 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## O que é gerado
+O esquema irá gerar um projeto com a seguinte estrutura:
 
-## Running end-to-end tests
+```bash
+├── src/
+│   ├── projects/
+│   │   ├── NOME/
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+O pacote também ira adiciona os  scripts para build em produção e staging.
 
-## Further help
+````json
+scripts: {
+  "build:web-component": "ng build --project NOME --single-bundle --output-hashing none  --aot --build-optimizer",
+  "build:web-component:staging": "ng build --configuration=staging --project NOME --single-bundle --output-hashing none  --aot --build-optimizer"
+}
+````
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+Os scripts podem ser executados com os seguintes comandos:
+  
+```bash 
+# Produção
+npm run build:web-component
+
+# Homologação
+npm run build:web-component:staging
+```
