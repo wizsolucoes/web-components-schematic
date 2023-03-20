@@ -1,0 +1,5 @@
+{
+  "path": "<%= relativePathToWorkspaceRoot %>/<%= name %>",
+  "name": "<%= name %>",
+  "tag": "wc-<%= prefix %>-module"
+}

@@ -1,27 +1,46 @@
-# Outputs
-src/**/*.js
-src/**/*.js.map
-src/**/*.d.ts
-!src/**/schema.d.ts
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# IDEs
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+project-web-component/node_modules
+angular.json
+.vscode
+projects/*
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
 .idea/
-jsconfig.json
-.vscode/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Misc
-node_modules/
-npm-debug.log*
-yarn-error.log*
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-# Mac OSX Finder files.
-**/.DS_Store
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
 .DS_Store
-
-# Generated files
-*.tgz
-
-# Include configuration files
-!src/**/commitlint.config.js
-!src/**/ngcc.config.js
-!src/**/karma.conf.js
+Thumbs.db

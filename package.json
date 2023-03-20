@@ -1,46 +1,47 @@
 {
-  "name": "@wizsolucoes/angular-starter",
-  "version": "15.0.1",
-  "description": "Generates Wiz boilerplate Angular starter application.",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "angular-schematics-webcomponents",
+  "version": "0.0.0",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build:watch": "tsc -p tsconfig.json --watch",
-    "test": "npm run build && jasmine src/**/*_spec.js && npm run test:generated:app",
-    "test:watch": "npm run build && jasmine src/**/*_spec.js --watch=true ",
-    "format:check": "prettier **/*.{html,ts,json,scss} --check",
-    "format:write": "prettier ./src/{starter,ng-add}/**/*.{html,ts,json,scss} --write",
-    "test:generated:apps": "npm run test:generated:app && npm run test:generated:whitelabel",
-    "test:generated:app": "npx zx ./test-generated-app.mjs",
-    "test:generated:whitelabel": "cross-env WHITE_LABEL=true npx zx ./test-generated-app.mjs",
-    "pretest": "npm uninstall -g @angular/cli && npm install -g @angular/cli@latest && ng version"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "schematics:intall": "yarn --cwd ./application-webcomponents install",
+    "schematics:build": "yarn --cwd ./application-webcomponents build",
+    "schematics:link": "yarn --cwd ./application-webcomponents link",
+    "build:web-component": "ng build --project funillara --single-bundle --output-hashing none  --aot --build-optimizer",
+    "build:web-component:staging": "ng build --configuration=staging --project funillara --single-bundle --output-hashing none  --aot --build-optimizer"
   },
-  "keywords": [
-    "schematics"
-  ],
-  "author": "",
-  "license": "MIT",
-  "schematics": "./src/collection.json",
+  "private": true,
   "dependencies": {
-    "@angular-devkit/core": "^15.1.3",
-    "@angular-devkit/schematics": "^15.1.3",
-    "@angular-eslint/schematics": "^15.2.0",
-    "@schematics/angular": "^15.1.3",
-    "@wizsolucoes/ng-material-theme": "^13.0.0",
-    "comment-json": "^4.2.3",
-    "typescript": "~4.9.4"
+    "@angular/animations": "^15.2.0",
+    "@angular/common": "^15.2.0",
+    "@angular/compiler": "^15.2.0",
+    "@angular/core": "^15.2.0",
+    "@angular/elements": "^15.2.3",
+    "@angular/forms": "^15.2.0",
+    "@angular/platform-browser": "^15.2.0",
+    "@angular/platform-browser-dynamic": "^15.2.0",
+    "@angular/router": "^15.2.0",
+    "@schematics/angular": "^15.2.4",
+    "ngx-build-plus": "^15.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "updated": "^2.0.5",
+    "zone.js": "~0.12.0"
   },
   "devDependencies": {
-    "@types/jasmine": "~4.3.1",
-    "@types/node": "^18.11.18",
-    "cross-env": "^7.0.3",
-    "jasmine": "^4.5.0",
-    "prettier": "^2.8.3"
-  },
-  "ng-add": {
-    "save": false
+    "@angular-devkit/build-angular": "^15.2.1",
+    "@angular/cli": "~15.2.1",
+    "@angular/compiler-cli": "^15.2.0",
+    "@types/jasmine": "~4.3.0",
+    "jasmine-core": "~4.5.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "typescript": "~4.9.4"
   }
 }
