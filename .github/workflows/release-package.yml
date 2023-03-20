@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: |
           cd application-webcomponents
-          npm ci
+          npm install
           npm run build
   publish-npm:
     needs: build
@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
+      - run: npm install
       - run: npm publish ./application-webcomponents
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
