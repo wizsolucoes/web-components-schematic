@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 16
       - run: |
-        cd ./application-webcomponents
+        cd application-webcomponents
         npm ci
         npm run build
   publish-npm:
