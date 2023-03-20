@@ -6,7 +6,7 @@ ___
 ![](./docs/Thumbnail.jpg)
 ___ 
 
-IMPORTANTE: Este esquema supõe que você está usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
+IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
 
 ## Como usar
 Execute o comando no seu terminal. 
@@ -54,3 +54,13 @@ npm run build:web-component
 # Homologação
 npm run build:web-component:staging
 ```
+
+
+## Contruibuição
+Para contribuir com o projeto, siga os passos abaixo:
+
+Clone o repositório e instale as dependências.
+
+Leia o [guia para rodar local](./README_LOCAL.md) para saber como contribuir com o projeto.
+
+Abra um pull request e envia as alterações.
