@@ -13,10 +13,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
-        cd application-webcomponents
-        npm ci
-        npm run build
+      - name: Build
+        run: |
+          cd application-webcomponents
+          npm ci
+          npm run build
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
