@@ -8,6 +8,13 @@ ___
 
 IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
 
+## Instalação
+Para instalar o esquema, execute o comando abaixo no seu terminal.
+
+```bash
+npm i @wizco/schematics-webcomponents --save-dev
+```
+
 ## Como usar
 Execute o comando no seu terminal. 
 

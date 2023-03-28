@@ -2,9 +2,19 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "application": {
-      "aliases": ["webcomponents"],
+      "aliases": ["init"],
       "factory": "./template-webcomponents",
       "schema": "./template-webcomponents/schema.json",
+      "description": "Create an Angular application."
+    },
+    "application-mfe": {
+      "factory": "./template-mfe",
+      "schema": "./template-mfe/schema.json",
+      "description": "Create an Angular application."
+    },
+    "application-mfe-final-change": {
+      "factory": "./template-mfe-final-change",
+      "schema": "./template-mfe-final-change/schema.json",
       "description": "Create an Angular application."
     }
   }

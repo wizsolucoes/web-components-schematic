@@ -7,25 +7,27 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "run:clean": "node --experimental-modules ./sripts/run-local.mjs",
+    "run:local": "npm run run:clean && npm run schematics:build && npm run schematics:link",
+    "postrun:local": "ng g @wizco/schematics-webcomponents:init",
     "schematics:intall": "yarn --cwd ./application-webcomponents install",
     "schematics:build": "yarn --cwd ./application-webcomponents build",
-    "schematics:link": "yarn --cwd ./application-webcomponents link",
-    "build:web-component": "ng build --project funillara --single-bundle --output-hashing none  --aot --build-optimizer",
-    "build:web-component:staging": "ng build --configuration=staging --project funillara --single-bundle --output-hashing none  --aot --build-optimizer"
+    "schematics:link": "npm unlink ./application-webcomponents && npm link ./application-webcomponents",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation": "^15.0.3",
     "@angular/animations": "^15.2.0",
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
     "@angular/core": "^15.2.0",
-    "@angular/elements": "^15.2.3",
+    "@angular/elements": "^15.2.4",
     "@angular/forms": "^15.2.0",
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "@schematics/angular": "^15.2.4",
-    "ngx-build-plus": "^15.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "updated": "^2.0.5",
@@ -42,6 +44,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ngx-build-plus": "^15.0.0",
     "typescript": "~4.9.4"
   }
 }

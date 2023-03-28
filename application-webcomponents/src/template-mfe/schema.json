@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "template-webcomponents",
+  "$id": "template-mfe",
   "title": "Angular Application Options Schema",
   "type": "object",
   "description": "Generates a new basic application definition in the \"projects\" subfolder of the workspace.",
@@ -63,27 +63,7 @@
       "description": "The file extension or preprocessor to use for style files.",
       "type": "string",
       "default": "css",
-      "enum": ["css", "scss", "sass", "less"],
-      "x-prompt": {
-        "message": "Escolha um formato de estilo para seu web component",
-        "type": "list",
-        "items": [
-          { "value": "css", "label": "CSS" },
-          {
-            "value": "scss",
-            "label": "SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]"
-          },
-          {
-            "value": "sass",
-            "label": "Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]"
-          },
-          {
-            "value": "less",
-            "label": "Less   [ http://lesscss.org                                             ]"
-          }
-        ]
-      },
-      "x-user-analytics": 5
+      "enum": ["css", "scss", "sass", "less"]
     },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",
@@ -121,6 +101,5 @@
       "alias": "r",
       "x-user-analytics": 8
     }
-  },
-  "required": ["name"]
+  }
 }

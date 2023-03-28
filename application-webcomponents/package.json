@@ -1,6 +1,6 @@
 {
   "name": "@wizco/schematics-webcomponents",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Angular Schematics for Web Components",
   "scripts": {
     "build": "tsc -p tsconfig.json",
