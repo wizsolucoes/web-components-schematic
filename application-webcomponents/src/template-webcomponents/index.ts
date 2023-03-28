@@ -10,12 +10,11 @@ import { join, JsonObject, normalize } from '@angular-devkit/core';
 import {
   apply,
   applyTemplates,
-  chain,
-  filter, MergeStrategy, mergeWith,
+  chain, filter, MergeStrategy, mergeWith,
   move,
-  noop, Rule, SchematicContext, SchematicsException, strings, Tree, url
+  noop, Rule, SchematicContext, strings, Tree, url
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
 import { Schema as ComponentOptions } from '@schematics/angular/component/schema';
 import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
@@ -23,7 +22,6 @@ import { latestVersions } from '@schematics/angular/utility/latest-versions';
 import { relativePathToWorkspaceRoot } from '@schematics/angular/utility/paths';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/workspace';
 import { Builders, ProjectType } from '@schematics/angular/utility/workspace-models';
-import { exec } from 'child_process';
 
 function addDependenciesToPackageJson(options: ApplicationOptions) {
   return (host: Tree, context: SchematicContext) => {
@@ -56,53 +54,6 @@ function addDependenciesToPackageJson(options: ApplicationOptions) {
   };
 }
 
-/**
- * Adiciona a dependência web component.
- * @returns Rule
- */
-function addDependenciesWebComponents(): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    context.logger.info('Adicionando a dependência web component...');
-    context.logger.info('----- ngx-build-plus @angular/elements -----');
-    exec('npm install ngx-build-plus @angular/elements  --save', (err) => {
-      if (err) {
-        context.logger.error(`Erro ao instalar dependências: ${err}`);
-        throw err;
-      }
-      context.logger.info('Dependência web components instalada com sucesso!');
-    });
-    return tree;
-  };
-}
-
-function addScripts(option: ApplicationOptions): Rule {
-  const projectName = option.name || 'module';
-  console.log('addScripts', 'projectName', projectName);
-
-  debugger
-  return (tree: Tree, _context: SchematicContext) => {
-    _context.logger.info(`Criando script para build. ${projectName}`);
-    // const projectName = options.name || 'module';
-    // console.log('addScripts', 'projectName', options.name);
-    const packageJsonBuffer = tree.read('package.json');
-
-    if (!packageJsonBuffer) {
-      throw new SchematicsException('No package.json file found');
-    }
-
-    const packageJsonObject = JSON.parse(packageJsonBuffer.toString());
-    const scripts = packageJsonObject.scripts;
-
-    scripts['build:web-component'] = `ng build --project ${projectName} --single-bundle --output-hashing none  --aot --build-optimizer`;
-    scripts['build:web-component:staging'] = `ng build --configuration=staging --project ${projectName} --single-bundle --output-hashing none  --aot --build-optimizer`;
-
-    tree.overwrite('package.json', JSON.stringify(packageJsonObject, null, 2));
-
-    return tree;
-  };
-}
-
-
 function addAppToWorkspaceFile(
   options: ApplicationOptions,
   appDir: string,
@@ -131,7 +82,6 @@ function addAppToWorkspaceFile(
     if (options.style && options.style !== Style.Css) {
       componentSchematicsOptions.style = options.style;
     }
-
     schematics['@schematics/angular:component'] = componentSchematicsOptions;
   }
 
@@ -237,10 +187,15 @@ function addAppToWorkspaceFile(
       serve: {
         builder: 'ngx-build-plus:dev-server',
         defaultConfiguration: 'development',
-        options: {},
+        options: {
+          port: 5300,
+          publicHost: "http://localhost:5300",
+          extraWebpackConfig: `${options.name}/webpack.config.js`
+        },
         configurations: {
           production: {
             browserTarget: `${options.name}:build:production`,
+            extraWebpackConfig: `${options.name}/webpack.prod.config.js`
           },
           development: {
             browserTarget: `${options.name}:build:development`,
@@ -263,7 +218,10 @@ function addAppToWorkspaceFile(
               tsConfig: `${projectRoot}tsconfig.spec.json`,
               karmaConfig: `${projectRoot}karma.conf.js`,
               inlineStyleLanguage,
-              assets: [`${sourceRoot}/favicon.ico`, `${sourceRoot}/assets`],
+              assets: [
+                `${sourceRoot}/favicon.ico`,
+                `${sourceRoot}/assets`
+              ],
               styles: [
                 `src/styles.${options.style}`
               ],
@@ -321,7 +279,6 @@ export default function (options: ApplicationOptions): Rule {
     const sourceDir = `${appDir}/src/app`;
 
     return chain([
-      addScripts(options),
       addAppToWorkspaceFile(options, appDir, folderName),
       mergeWith(
         apply(url('./files'), [
@@ -357,8 +314,16 @@ export default function (options: ApplicationOptions): Rule {
         ]),
         MergeStrategy.Overwrite,
       ),
-      addDependenciesWebComponents(),
       options.skipPackageJson ? noop() : addDependenciesToPackageJson(options),
+      test(options),
     ]);
   };
+}
+
+function test(options: ApplicationOptions): Rule {
+  return (_: Tree, context: SchematicContext) => {
+    context.logger.info(`🚀 Creating application "${options.name}"`);
+    const installTaskId = context.addTask(new RunSchematicTask("application-mfe", options))
+    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [installTaskId]);
+  }
 }

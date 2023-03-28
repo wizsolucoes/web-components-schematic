@@ -1,56 +1,41 @@
-# angular schematics web components
-Este é um *Schematic* para gerar um projeto com *Web Components* utilizando o *Angular*.
+# Rodando local
 
-___
+A pasta raiz é um projeto angular >15 simples. Nele você pode rodar e testar a estrutura normalmente.
 
-![](./docs/Thumbnail.jpg)
-___ 
+📁 Existe uma pasta chamado ***application-webcomponents***, onde ali esta nosso pacote angular de schematics. **toda mudança do pacote acontece no application-webcomponents/**
 
-IMPORTANTE: Este esquema supõe que você está usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
+### Como eu testo local essas mudanças.
 
-## Como usar
-Execute o comando no seu terminal. 
+Depois de alterar o que for preciso na pasta ***application-webcomponents***, volte para o repositório **raiz** e rode os seguintes comandos.
 
 ```bash
-ng g @wizco/schematics-webcomponents:webcomponents NOME -p ELEMENTO_TAG
-```
-> Substitua o parâmetro NOME e ELEMENTO_TAG pelo valor de sua escolha.
-
-| Parâmetro | Descrição | exemplo | | 
-| --- | --- | --- | --- |
-| NOME | Nome do projeto | usuarios | projects/usuarios |
-| ELEMENTO_TAG | Nome do elemento | usuarios | `<wc-usuarios-modules></wc-usuarios-modules>` | 
-
-___
-
-![](./docs/termina-comands.jpg)
-___ 
-
-## O que é gerado
-O esquema irá gerar um projeto com a seguinte estrutura:
-
-```bash
-├── src/
-│   ├── projects/
-│   │   ├── NOME/
+	npm run schematics:intall
 ```
 
-O pacote também ira adiciona os  scripts para build em produção e staging.
+> Acima estamos instalando as dependências dessa pasta especifica, que schematics do angular esta usando usando. 
 
-````json
-scripts: {
-  "build:web-component": "ng build --project NOME --single-bundle --output-hashing none  --aot --build-optimizer",
-  "build:web-component:staging": "ng build --configuration=staging --project NOME --single-bundle --output-hashing none  --aot --build-optimizer"
-}
-````
-
-
-Os scripts podem ser executados com os seguintes comandos:
-  
 ```bash 
-# Produção
-npm run build:web-component
-
-# Homologação
-npm run build:web-component:staging
+npm run schematics:build
 ```
+> Acima iremos criar uma build daquele pacote para ser usado nos próximos passos. Ele vai criar uma build do angular schematics.
+
+#### Agora precisamos testar e usar localmente esse build. 
+```
+ npm link ./application-webcomponents
+```
+> Agora usamos a o npm link para associar esse pacote NPM com angular nas nossas dependências.
+
+Pronto tudo certo.
+
+Sempre que alterar algum arquivo na pasta ***application-webcomponents***, deve seguir os passos de build e npm link. 
+
+## Vamos usar o pacote gerado.
+
+Na pasta raiz do repositório, onde se encontra um projeto angular simples.  Nele iremos testar e usar nossas mudanças.
+
+```bash 
+	ng g application-webcomponents:init
+```
+
+
+Isso é tudo por enquanto.

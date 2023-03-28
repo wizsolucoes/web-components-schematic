@@ -1,28 +1,73 @@
-# Getting Started With Schematics
+# angular schematics web components
+Este é um *Schematic* para gerar um projeto com *Web Components* utilizando o *Angular*.
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+___
 
-### Testing
+![](https://raw.githubusercontent.com/raulmelo/web-components-schematic/master/docs/Thumbnail.jpg)
+___ 
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
+IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
 
-Check the documentation with
-
-```bash
-schematics --help
-```
-
-### Unit Testing
-
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
-
-### Publishing
-
-To publish, simply do:
+## Instalação
+Para instalar o esquema, execute o comando abaixo no seu terminal.
 
 ```bash
-npm run build
-npm publish
+npm i @wizco/schematics-webcomponents --save-dev
 ```
 
-That's it!
+## Como usar
+Execute o comando no seu terminal. 
+
+```bash
+ng g @wizco/schematics-webcomponents:webcomponents NOME -p ELEMENTO_TAG
+```
+> Substitua o parâmetro NOME e ELEMENTO_TAG pelo valor de sua escolha.
+
+| Parâmetro | Descrição | exemplo | | 
+| --- | --- | --- | --- |
+| NOME | Nome do projeto | usuarios | projects/usuarios |
+| ELEMENTO_TAG | Nome do elemento | usuarios | `<wc-usuarios-modules></wc-usuarios-modules>` | 
+
+___
+
+![](https://github.com/raulmelo/web-components-schematic/blob/master/docs/termina-comands.jpg?raw=true)
+___ 
+
+## O que é gerado
+O esquema irá gerar um projeto com a seguinte estrutura:
+
+```bash
+├── src/
+│   ├── projects/
+│   │   ├── NOME/
+```
+
+O pacote também ira adiciona os  scripts para build em produção e staging.
+
+````json
+scripts: {
+  "build:web-component": "ng build --project NOME --single-bundle --output-hashing none  --aot --build-optimizer",
+  "build:web-component:staging": "ng build --configuration=staging --project NOME --single-bundle --output-hashing none  --aot --build-optimizer"
+}
+````
+
+
+Os scripts podem ser executados com os seguintes comandos:
+  
+```bash 
+# Produção
+npm run build:web-component
+
+# Homologação
+npm run build:web-component:staging
+```
+
+
+## Contruibuição
+Para contribuir com o projeto, siga os passos abaixo:
+
+Clone o repositório e instale as dependências.
+
+Leia o [guia para rodar local](./README_LOCAL.md) para saber como contribuir com o projeto.
+
+Abra um pull request e envia as alterações.
