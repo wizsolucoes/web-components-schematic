@@ -3,7 +3,7 @@ Este é um *Schematic* para gerar um projeto com *Web Components* utilizando o *
 
 ___
 
-![](https://raw.githubusercontent.com/raulmelo/web-components-schematic/master/docs/Thumbnail.jpg)
+![](https://github.com/wizsolucoes/web-components-schematic/blob/master/docs/Thumbnail.jpg)
 ___ 
 
 IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
@@ -30,7 +30,7 @@ ng g @wizco/schematics-webcomponents:init NOME -p ELEMENTO_TAG
 
 ___
 
-![](https://github.com/raulmelo/web-components-schematic/blob/master/docs/termina-comands.jpg?raw=true)
+![](https://github.com/wizsolucoes/web-components-schematic/blob/master/docs/termina-comands.jpg?raw=true)
 ___ 
 
 ## O que é gerado

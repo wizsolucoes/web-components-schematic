@@ -11,8 +11,11 @@
     "schematics",
     "angular",
     "webcomponents",
-    "build",
-    "built-webcomponents"
+    "build", 
+    "built-webcomponents",
+    "webcomponents-builder",
+    "mfe",
+    "mfe-webcomponents"
   ],
   "private": false,
   "publishConfig": {
@@ -26,9 +29,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wizsolucoes/schematics-webcomponents/issues"
+    "url": "https://github.com/wizsolucoes/web-components-schematic/issues"
   },
-  "homepage": "https://github.com/wizsolucoes/schematics-webcomponents#readme",
+  "homepage": "https://github.com/wizsolucoes/web-components-schematic#readme",
   "schematics": "./src/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^15.2.4",

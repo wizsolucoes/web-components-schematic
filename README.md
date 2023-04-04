@@ -8,8 +8,15 @@ A pasta raiz é um projeto angular >15 simples. Nele você pode rodar e testar a
 
 Depois de alterar o que for preciso na pasta ***application-webcomponents***, volte para o repositório **raiz** e rode os seguintes comandos.
 
+#### Modo simples 
+Foi criado um script para seguir todos os passos para testar o fluxo use ele para testes mais rápidos.
 ```bash
-	npm run schematics:intall
+npm run run:local
+```
+
+#### Modo manual
+```bash
+npm run schematics:intall
 ```
 
 > Acima estamos instalando as dependências dessa pasta especifica, que schematics do angular esta usando usando. 
@@ -21,7 +28,7 @@ npm run schematics:build
 
 #### Agora precisamos testar e usar localmente esse build. 
 ```
- npm link ./application-webcomponents
+npm link ./application-webcomponents
 ```
 > Agora usamos a o npm link para associar esse pacote NPM com angular nas nossas dependências.
 
@@ -34,7 +41,7 @@ Sempre que alterar algum arquivo na pasta ***application-webcomponents***, deve 
 Na pasta raiz do repositório, onde se encontra um projeto angular simples.  Nele iremos testar e usar nossas mudanças.
 
 ```bash 
-	ng g application-webcomponents:init
+ng g application-webcomponents:init
 ```
 
 
