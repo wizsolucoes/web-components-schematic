@@ -1,21 +1,26 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "application": {
+    "ng-add": {
       "aliases": ["init"],
+      "factory": "./ng-add",
+      "schema": "./ng-add/schema.json",
+      "description": "Criação do pacote"
+    },
+    "application": {
       "factory": "./template-webcomponents",
       "schema": "./template-webcomponents/schema.json",
-      "description": "Create an Angular application."
+      "description": "Criação do pacote"
     },
     "application-mfe": {
       "factory": "./template-mfe",
       "schema": "./template-mfe/schema.json",
-      "description": "Create an Angular application."
+      "description": "Inserir MFE"
     },
     "application-mfe-final-change": {
       "factory": "./template-mfe-final-change",
       "schema": "./template-mfe-final-change/schema.json",
-      "description": "Create an Angular application."
+      "description": "Modificador Webpack"
     }
   }
 }

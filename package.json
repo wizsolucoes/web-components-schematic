@@ -13,6 +13,8 @@
     "schematics:intall": "yarn --cwd ./application-webcomponents install",
     "schematics:build": "yarn --cwd ./application-webcomponents build",
     "schematics:link": "npm unlink ./application-webcomponents && npm link ./application-webcomponents",
+    "extra:build": "ng build --project loklok --output-hashing none --aot --build-optimizer",
+    "extra:build:staging": "ng build --configuration=staging --project loklok --output-hashing none --aot --build-optimizer",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
@@ -22,7 +24,7 @@
     "@angular/common": "^15.2.0",
     "@angular/compiler": "^15.2.0",
     "@angular/core": "^15.2.0",
-    "@angular/elements": "^15.2.4",
+    "@angular/elements": "^15.2.5",
     "@angular/forms": "^15.2.0",
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",

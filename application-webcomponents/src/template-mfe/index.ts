@@ -7,16 +7,12 @@
  */
 
 import {
-  chain, Rule, SchematicContext, Tree
+  chain, externalSchematic, Rule, SchematicContext, Tree
 } from '@angular-devkit/schematics';
-import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
-import { Schema as ApplicationOptions } from '@schematics/angular/application/schema';
-import { exec } from 'child_process';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 
-async function addDependenciesWebComponents(
-  options: any
-): Promise<Rule> {
+function addDependenciesWebComponents(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const packageJsonPath = 'package.json';
     const content = tree.read(packageJsonPath)?.toString('utf-8');
@@ -32,30 +28,33 @@ async function addDependenciesWebComponents(
       context.logger.info('A dependência @angular/elements já existe no package.json');
     } else {
       context.logger.info('Adicionando a dependência web component...');
-      exec('npm install @angular/elements', (err) => {
-        context.logger.error(`Erro ao instalar dependências: @angular/elements - ${err}`);
-      })
     };
 
-    /// Verificando se já existe a dependência @angular-architects/module-federation
+    const installElements = context.addTask(new NodePackageInstallTask({
+      packageManager: 'npm',
+      packageName: '@angular/elements'
+    }))
 
-    exec(`ng add @angular-architects/module-federation --project ${options.name} --port ${options.port} --skip-confirmation`, (error) => {
-      if (error) {
-        context.logger.error(`Erro ao instalar dependências: @angular-architects/module-federation - ${error}`);
-        return;
-      }
-      context.addTask(new RunSchematicTask("application-mfe-final-change", options))
-    });
+    context.addTask(new NodePackageInstallTask({
+      packageManager: 'npm',
+      packageName: '@angular-architects/module-federation'
+    }), [installElements])
 
     return tree
   };
 }
 
+export default function (options: { port: string, name: string, prefix: string }): Rule {
 
-export default function (options: ApplicationOptions): Rule {
-  return async () => {
+  return () => {
     return chain([
-      await addDependenciesWebComponents(options)
+      addDependenciesWebComponents(),
+      externalSchematic('@angular-architects/module-federation', 'ng-add', {
+        project: options.name,
+        port: options.port
+      }, {
+        interactive: false
+      })
     ]);
   };
 }
