@@ -12,45 +12,33 @@ import {
   applyTemplates,
   chain, filter, MergeStrategy, mergeWith,
   move,
-  noop, Rule, SchematicContext, strings, Tree, url
+  noop, Rule, SchematicContext, SchematicsException, strings, Tree, url
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
 import { Schema as ComponentOptions } from '@schematics/angular/component/schema';
-import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { latestVersions } from '@schematics/angular/utility/latest-versions';
 import { relativePathToWorkspaceRoot } from '@schematics/angular/utility/paths';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/workspace';
 import { Builders, ProjectType } from '@schematics/angular/utility/workspace-models';
 
-function addDependenciesToPackageJson(options: ApplicationOptions) {
-  return (host: Tree, context: SchematicContext) => {
-    [
-      {
-        type: NodeDependencyType.Dev,
-        name: '@angular/compiler-cli',
-        version: latestVersions.Angular,
-      },
-      {
-        type: NodeDependencyType.Dev,
-        name: '@angular-devkit/build-angular',
-        version: latestVersions.DevkitBuildAngular,
-      },
-      {
-        type: NodeDependencyType.Dev,
-        name: 'typescript',
-        version: latestVersions['typescript'],
-      }
-    ].forEach((dependency) => addPackageJsonDependency(host, dependency));
+function addScripts(option: ApplicationOptions): Rule {
+  const projectName = option.name || 'module';
+  return (tree: Tree, _context: SchematicContext) => {
+    _context.logger.info(`Criando script para build. ${projectName}`);
+    const packageJsonBuffer = tree.read('package.json');
 
-    if (!options.skipInstall) {
-      context.addTask(new NodePackageInstallTask(
-
-      ));
-      context.addTask(new NodePackageInstallTask());
+    if (!packageJsonBuffer) {
+      throw new SchematicsException('No package.json file found');
     }
 
-    return host;
+    const packageJsonObject = JSON.parse(packageJsonBuffer.toString());
+    const scripts = packageJsonObject.scripts;
+
+    scripts['extra:build'] = `ng build --project ${projectName} --output-hashing none --aot --build-optimizer`;
+    scripts['extra:build:staging'] = `ng build --configuration=staging --project ${projectName} --output-hashing none --aot --build-optimizer`;
+
+    tree.overwrite('package.json', JSON.stringify(packageJsonObject, null, 2));
+
+    return tree;
   };
 }
 
@@ -117,7 +105,7 @@ function addAppToWorkspaceFile(
       {
         type: 'anyComponentStyle',
         maximumWarning: '2kb',
-        maximumError: '4kb',
+        maximumError: '2mb',
       },
     ];
   } else {
@@ -238,6 +226,11 @@ function addAppToWorkspaceFile(
     });
   });
 }
+
+
+
+
+
 function minimalPathFilter(path: string): boolean {
   const toRemoveList = /(test.ts|tsconfig.spec.json|karma.conf.js).template$/;
 
@@ -279,6 +272,7 @@ export default function (options: ApplicationOptions): Rule {
     const sourceDir = `${appDir}/src/app`;
 
     return chain([
+      addScripts(options),
       addAppToWorkspaceFile(options, appDir, folderName),
       mergeWith(
         apply(url('./files'), [
@@ -296,7 +290,9 @@ export default function (options: ApplicationOptions): Rule {
         MergeStrategy.Overwrite,
       ),
       mergeWith(
-        apply(url('./other-files'), [
+        apply(
+          url('./other-files'),
+          [
           options.strict ? noop() : filter((path) => path !== '/package.json.template'),
           componentOptions.inlineTemplate
             ? filter((path) => !path.endsWith('.html.template'))
@@ -312,18 +308,8 @@ export default function (options: ApplicationOptions): Rule {
           }),
           move(sourceDir),
         ]),
-        MergeStrategy.Overwrite,
-      ),
-      options.skipPackageJson ? noop() : addDependenciesToPackageJson(options),
-      test(options),
+        MergeStrategy.Overwrite
+      )
     ]);
   };
-}
-
-function test(options: ApplicationOptions): Rule {
-  return (_: Tree, context: SchematicContext) => {
-    context.logger.info(`🚀 Creating application "${options.name}"`);
-    const installTaskId = context.addTask(new RunSchematicTask("application-mfe", options))
-    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [installTaskId]);
-  }
 }

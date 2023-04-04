@@ -12,14 +12,14 @@ IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o pa
 Para instalar o esquema, execute o comando abaixo no seu terminal.
 
 ```bash
-npm i @wizco/schematics-webcomponents --save-dev
+npm i @wizco/schematics-webcomponents --save-dev --legacy-peer-deps
 ```
 
 ## Como usar
 Execute o comando no seu terminal. 
 
 ```bash
-ng g @wizco/schematics-webcomponents:webcomponents NOME -p ELEMENTO_TAG
+ng g @wizco/schematics-webcomponents:init NOME -p ELEMENTO_TAG
 ```
 > Substitua o parâmetro NOME e ELEMENTO_TAG pelo valor de sua escolha.
 
@@ -46,8 +46,8 @@ O pacote também ira adiciona os  scripts para build em produção e staging.
 
 ````json
 scripts: {
-  "build:web-component": "ng build --project NOME --single-bundle --output-hashing none  --aot --build-optimizer",
-  "build:web-component:staging": "ng build --configuration=staging --project NOME --single-bundle --output-hashing none  --aot --build-optimizer"
+  "extra:build:": "ng build --project NOME",
+  "extra:build:staging": "ng build --configuration=staging"
 }
 ````
 

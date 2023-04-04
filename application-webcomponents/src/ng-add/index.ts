@@ -1,0 +1,30 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+import {
+  chain, Rule, SchematicContext, Tree
+} from '@angular-devkit/schematics';
+import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { Schema as ApplicationOptions } from '@schematics/angular/application/schema';
+
+
+function AddMFEComponents(options: ApplicationOptions): Rule {
+  return (_: Tree, context: SchematicContext) => {
+    const installTaskId = context.addTask(new RunSchematicTask("application", options))
+    const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
+    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [installMFE]);
+  }
+}
+
+export default function (options: ApplicationOptions): Rule {
+  return () => {
+    return chain([
+      AddMFEComponents(options)
+    ]);
+  };
+}
