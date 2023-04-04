@@ -46,6 +46,7 @@ O pacote também ira adiciona os  scripts para build em produção e staging.
 
 ````json
 scripts: {
+  "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
   "extra:build:": "ng build --project NOME",
   "extra:build:staging": "ng build --configuration=staging"
 }
@@ -55,11 +56,14 @@ scripts: {
 Os scripts podem ser executados com os seguintes comandos:
   
 ```bash 
+# Roda local ambos os projetos
+npm run run:all
+
 # Produção
-npm run build:web-component
+npm run extra:build
 
 # Homologação
-npm run build:web-component:staging
+npm run extra:build:staging
 ```
 
 
