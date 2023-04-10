@@ -30,15 +30,10 @@ function addDependenciesWebComponents(): Rule {
       context.logger.info('Adicionando a dependência web component...');
     };
 
-    const installElements = context.addTask(new NodePackageInstallTask({
+    context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
       packageName: '@angular/elements'
     }))
-
-    context.addTask(new NodePackageInstallTask({
-      packageManager: 'npm',
-      packageName: '@angular-architects/module-federation'
-    }), [installElements])
 
     return tree
   };
