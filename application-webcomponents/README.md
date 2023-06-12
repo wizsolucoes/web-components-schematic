@@ -19,9 +19,10 @@ npm i @wizco/schematics-webcomponents --save-dev --legacy-peer-deps
 Execute o comando no seu terminal. 
 
 ```bash
-ng g @wizco/schematics-webcomponents:init NOME -p ELEMENTO_TAG
+ng g @wizco/schematics-webcomponents:init
 ```
-> Substitua o parâmetro NOME e ELEMENTO_TAG pelo valor de sua escolha.
+
+
 
 | Parâmetro | Descrição | exemplo | | 
 | --- | --- | --- | --- |
