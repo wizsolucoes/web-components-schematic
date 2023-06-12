@@ -14,13 +14,10 @@
     "port": {
       "type": "number",
       "description": "rodar o web component local",
+      "default": 4430,
       "x-prompt": {
         "message": "Porta para rodar o web component local",
         "type": "number"
-      },
-      "$default": {
-        "$source": "argv",
-        "index": 1
       }
     },
     "name": {
