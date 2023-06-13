@@ -1,19 +1,34 @@
+![](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 # angular schematics web components
-Este é um *Schematic* para gerar um projeto com *Web Components* utilizando o *Angular*.
 
+O *Angular Schematics Web Components* é um Schematic que permite gerar um projeto com *Web Components* utilizando o Angular.
 ___
 
 ![](https://github.com/wizsolucoes/web-components-schematic/blob/master/docs/Thumbnail.jpg)
 ___ 
 
-IMPORTANTE: Este esquema supõe que você esteja usando uma aplicação com o padrão da Wiz. Caso não esteja, será necessário alterar algumas informações.
 
 ## Instalação
-Para instalar o esquema, execute o comando abaixo no seu terminal.
+Para instalar o esquema, execute o seguinte comando no seu terminal, de acordo com a versão desejada:
 
 ```bash
 npm i @wizco/schematics-webcomponents --save-dev --legacy-peer-deps
 ```
+
+## Versionamento
+
+O *Angular Schematics Web Components* segue um esquema de versionamento padrão para facilitar o controle e garantir a compatibilidade adequada.
+
+As versões disponíveis do pacote são:
+
+| Suporte  | Versão |
+| ------------- |:-------------:|
+| Angular 16      | @wizco/schematics-webcomponents    |
+| Angular 14 e 15     | @wizco/schematics-webcomponents@15.0.10 |
+
+Recomendamos usar a versão correspondente ao Angular que você está utilizando em seu projeto. Isso garante que todas as funcionalidades e recursos sejam compatíveis e funcionem corretamente.
 
 ## Como usar
 Execute o comando no seu terminal. 
@@ -23,18 +38,15 @@ ng g @wizco/schematics-webcomponents:init
 ```
 
 
-
-| Parâmetro | Descrição | exemplo | | 
+| Parâmetro | Descrição | exemplo |  | 
 | --- | --- | --- | --- |
-| NOME | Nome do projeto | usuarios | projects/usuarios |
-| ELEMENTO_TAG | Nome do elemento | usuarios | `<wc-usuarios-modules></wc-usuarios-modules>` | 
+| nome | Nome do projeto | usuarios | projects/usuarios |
+| Tag do elemento | Nome do elemento | usuarios | `<wc-usuarios-modules></wc-usuarios-modules>` |
+| porta | porta do modulo  | 4500 | localhost:4500 |  
 
-___
 
-![](https://github.com/wizsolucoes/web-components-schematic/blob/master/docs/termina-comands.jpg?raw=true)
-___ 
 
-## O que é gerado
+## Estrutura gerada
 O esquema irá gerar um projeto com a seguinte estrutura:
 
 ```bash
@@ -43,7 +55,7 @@ O esquema irá gerar um projeto com a seguinte estrutura:
 │   │   ├── NOME/
 ```
 
-O pacote também ira adiciona os  scripts para build em produção e staging.
+Além disso, o pacote também adicionará scripts para a construção em ambiente de produção e staging.
 
 ````json
 scripts: {
@@ -70,9 +82,6 @@ npm run extra:build:staging
 
 ## Contruibuição
 Para contribuir com o projeto, siga os passos abaixo:
-
-Clone o repositório e instale as dependências.
-
-Leia o [guia para rodar local](./README_LOCAL.md) para saber como contribuir com o projeto.
-
-Abra um pull request e envia as alterações.
+- Clone o repositório e instale as dependências.
+- Leia o [guia para rodar local](./README_LOCAL.md) para saber como contribuir com o projeto.
+- Abra um pull request e envia as alterações.
