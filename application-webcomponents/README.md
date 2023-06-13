@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 # angular schematics web components
 
 O *Angular Schematics Web Components* é um Schematic que permite gerar um projeto com *Web Components* utilizando o Angular.
