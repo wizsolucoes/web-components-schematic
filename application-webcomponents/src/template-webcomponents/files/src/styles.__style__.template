@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+/* CSS global */
+
+
+/* Confira nosso design system fenix-ds.surge.sh */
+@import 'node_modules/@wizco/fenixds-core/styles/core';

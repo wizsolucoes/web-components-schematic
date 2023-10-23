@@ -1,7 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 // Component common
 import { AppComponent } from './app.component';
@@ -12,12 +14,13 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot([
-      //// Seu modulo exportado
-      //// {
-      ////   path: '',
-      ////   component: '',
-      //// }
+      {
+        path: '<%= path %>',
+        loadChildren: () => import('./routes').then((m) => m.APP_ROUTES)
+      }
     ])
   ],
   providers: [],
@@ -31,7 +34,7 @@ export class AppModule {
 
   ngDoBootstrap(){
     const elem = createCustomElement(AppComponent, {injector: this.injector})
-    customElements.define('wc-<%= selector %>', elem);
+    customElements.define('wc-<%= name %>-module', elem);
   }
 }
 

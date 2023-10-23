@@ -1,7 +1,7 @@
 {
-  "path": "<%= relativePathToWorkspaceRoot %>/<%= name %>",
+  "path": "<%= path %>",
   "name": "<%= name %>",
-  "tag": "wc-<%= prefix %>-module",
-  "type: "web-components",
-  "exposedModule": "./web-components",
+  "tag": "wc-<%= name %>-module",
+  "type": "web-components",
+  "exposedModule": "./web-components"
 }

@@ -32,10 +32,11 @@ function addScripts(option: ApplicationOptions): Rule {
 
     const packageJsonObject = JSON.parse(packageJsonBuffer.toString());
     const scripts = packageJsonObject.scripts;
-
+    
+    scripts['start:module'] = `ng serve --project ${projectName}`;
     scripts['extra:build'] = `ng build --project ${projectName} --output-hashing none --aot --build-optimizer`;
     scripts['extra:build:staging'] = `ng build --configuration=staging --project ${projectName} --output-hashing none --aot --build-optimizer`;
-
+    
     tree.overwrite('package.json', JSON.stringify(packageJsonObject, null, 2));
 
     return tree;
@@ -46,7 +47,7 @@ function addAppToWorkspaceFile(
   options: ApplicationOptions,
   appDir: string,
   folderName: string,
-): Rule {
+): any {
   let projectRoot = appDir;
   if (projectRoot) {
     projectRoot += '/';
@@ -147,7 +148,7 @@ function addAppToWorkspaceFile(
             `${sourceRoot}/assets`
           ],
           styles: [
-            `src/styles.${options.style}`
+            `${sourceRoot}/styles.${options.style}`
           ],
           scripts: [],
         },
@@ -156,8 +157,28 @@ function addAppToWorkspaceFile(
             budgets,
             fileReplacements: [
               {
-                replace: `src/environments/environment.ts`,
-                with: `src/environments/environment.prod.ts`,
+                replace: `${sourceRoot}/environments/environment.ts`,
+                with: `${sourceRoot}/environments/environment.prod.ts`,
+              },
+            ],
+            outputHashing: 'all',
+          },
+          staging: {
+            budgets,
+            fileReplacements: [
+              {
+                replace: `${sourceRoot}/environments/environment.ts`,
+                with: `${sourceRoot}/environments/environment.staging.ts`,
+              },
+            ],
+            outputHashing: 'all',
+          },
+          sandbox: {
+            budgets,
+            fileReplacements: [
+              {
+                replace: `${sourceRoot}/environments/environment.ts`,
+                with: `${sourceRoot}/environments/environment.sandbox.ts`,
               },
             ],
             outputHashing: 'all',

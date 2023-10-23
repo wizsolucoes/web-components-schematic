@@ -33,6 +33,12 @@
       },
       "x-prompt": "Qual o nome que você gostaria de usar para o web-components? "
     },
+    "path": {
+      "description": "test",
+      "type": "string",
+      "x-prompt": "Qual o caminho para o web component ? exemplo: /home",
+      "default": "/home"
+    },
     "inlineStyle": {
       "description": "Include styles inline in the root component.ts file. Only CSS styles can be included inline. Default is false, meaning that an external styles file is created and referenced in the root component.ts file.",
       "type": "boolean",

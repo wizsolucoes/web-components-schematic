@@ -100,35 +100,35 @@
 				}
 			}
 		},
-		"modulo": {
+		"monitoramento": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/modulo",
-			"sourceRoot": "projects/modulo/src",
-			"prefix": "package",
+			"root": "projects/monitoramento",
+			"sourceRoot": "projects/monitoramento/src",
+			"prefix": "mon",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/modulo",
-						"index": "projects/modulo/src/index.html",
-						"main": "projects/modulo/src/main.ts",
-						"polyfills": "projects/modulo/src/polyfills.ts",
-						"tsConfig": "projects/modulo/tsconfig.app.json",
+						"outputPath": "dist/monitoramento",
+						"index": "projects/monitoramento/src/index.html",
+						"main": "projects/monitoramento/src/main.ts",
+						"polyfills": "projects/monitoramento/src/polyfills.ts",
+						"tsConfig": "projects/monitoramento/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/modulo/src/favicon.ico",
-							"projects/modulo/src/assets"
+							"projects/monitoramento/src/favicon.ico",
+							"projects/monitoramento/src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"projects/monitoramento/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/modulo/webpack.config.js",
+						"extraWebpackConfig": "projects/monitoramento/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +147,54 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.prod.ts"
+									"replace": "projects/monitoramento/src/environments/environment.ts",
+									"with": "projects/monitoramento/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/modulo/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/monitoramento/webpack.prod.config.js"
+						},
+						"staging": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "2mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "2mb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/monitoramento/src/environments/environment.ts",
+									"with": "projects/monitoramento/src/environments/environment.staging.ts"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"sandbox": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "2mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "2mb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/monitoramento/src/environments/environment.ts",
+									"with": "projects/monitoramento/src/environments/environment.sandbox.ts"
+								}
+							],
+							"outputHashing": "all"
 						},
 						"development": {
 							"buildOptimizer": false,
@@ -168,17 +210,17 @@
 				"serve": {
 					"builder": "ngx-build-plus:dev-server",
 					"options": {
-						"port": 5423,
-						"publicHost": "http://localhost:5423",
-						"extraWebpackConfig": "projects/modulo/webpack.config.js"
+						"port": 4430,
+						"publicHost": "http://localhost:4430",
+						"extraWebpackConfig": "projects/monitoramento/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "modulo:build:production",
-							"extraWebpackConfig": "projects/modulo/webpack.prod.config.js"
+							"browserTarget": "monitoramento:build:production",
+							"extraWebpackConfig": "projects/monitoramento/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "modulo:build:development"
+							"browserTarget": "monitoramento:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -186,21 +228,21 @@
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "modulo:build",
-						"extraWebpackConfig": "projects/modulo/webpack.config.js"
+						"browserTarget": "monitoramento:build",
+						"extraWebpackConfig": "projects/monitoramento/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/modulo/src/test.ts",
-						"polyfills": "projects/modulo/src/polyfills.ts",
-						"tsConfig": "projects/modulo/tsconfig.spec.json",
-						"karmaConfig": "projects/modulo/karma.conf.js",
+						"main": "projects/monitoramento/src/test.ts",
+						"polyfills": "projects/monitoramento/src/polyfills.ts",
+						"tsConfig": "projects/monitoramento/tsconfig.spec.json",
+						"karmaConfig": "projects/monitoramento/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/modulo/src/favicon.ico",
-							"projects/modulo/src/assets"
+							"projects/monitoramento/src/favicon.ico",
+							"projects/monitoramento/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"
