@@ -1,0 +1,15 @@
+<button class="btn btn-basic btn-primary btn-sm mb-lg">
+      <span class="material-icons">arrow_back</span>
+      Voltar
+</button>
+<h2 class="display-2 mb-sm">
+    <strong>
+        <%= prefix %>-module
+    </strong>
+</h2>
+<div class="container-wco">
+    <a href="https://wizsolucoes.com.br/fenix-ds" class="btn btn-primary btn-sm mb-lg">
+        <span class="material-icons">home</span>
+        conferir design system
+    </a>
+</div>

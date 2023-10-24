@@ -28,7 +28,6 @@ function AddMFEComponents(options: ApplicationOptions): Rule {
 export default function (options: ApplicationOptions): Rule {
   return () => {
     return chain([
-
       AddMFEComponents(options)
     ]);
   };

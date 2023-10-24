@@ -32,6 +32,7 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         './web-components': './projects/<%= name %>/src/bootstrap.ts',
+        './routes': './projects/<%= name %>/src/app/routes.ts',
       },
       shared: share({
         "@angular/core": { requiredVersion: "auto" },

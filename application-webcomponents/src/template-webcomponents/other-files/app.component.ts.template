@@ -1,16 +1,24 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: '<%= selector %>',
-  template: `<router-outlet></router-outlet>`,
-  styles: []
+  template: `
+    <ng-template *ngIf="widget; else app">
+      <<%= selector %>-widget/>
+    </ng-template>
+    <ng-template #app>
+      <router-outlet></router-outlet>
+    </ng-template>
+  `,
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class AppComponent implements OnChanges {
-
+  @Input() widget = false
   @Input() currentPath!: string;
-  @Output() appOutput = new EventEmitter(); // --> custom event in DOOM
+  @Output() appOutput = new EventEmitter();
 
    ngOnChanges(changes: SimpleChanges) {
     if ('currentPath' in changes) {
