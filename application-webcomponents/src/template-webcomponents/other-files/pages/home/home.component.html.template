@@ -2,7 +2,7 @@
       <span class="material-icons">arrow_back</span>
       Voltar
 </button>
-<h2 class="display-1 mb-sm">
+<h2 class="display-2 mb-sm">
     <strong>
         <%= prefix %>-module
     </strong>

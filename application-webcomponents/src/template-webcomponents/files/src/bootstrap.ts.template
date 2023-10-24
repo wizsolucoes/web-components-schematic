@@ -7,7 +7,7 @@ const ngVersion = require('../../../package.json').dependencies[
 ]; // better just take the major version
 
 function getMajor(version: string) {
-  return version.split('.')[0].replace(/[^0-9]/g, '');
+  return version.split('.')[1].replace(/[^0-9]/g, '');
 }
 
 const plattform = (window as any).plattform || {};

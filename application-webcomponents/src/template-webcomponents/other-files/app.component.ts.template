@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   selector: '<%= selector %>',
   template: `
     <ng-template *ngIf="widget; else app">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab veniam dolorum inventore nisi delectus voluptas, soluta nulla, eveniet excepturi saepe tempora, vel facilis quas expedita doloremque qui asperiores veritatis illum!
+      <<%= selector %>-widget/>
     </ng-template>
     <ng-template #app>
       <router-outlet></router-outlet>
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnChanges {
   @Input() widget = false
   @Input() currentPath!: string;
-  @Output() appOutput = new EventEmitter(); // --> custom event in DOOM
+  @Output() appOutput = new EventEmitter();
 
    ngOnChanges(changes: SimpleChanges) {
     if ('currentPath' in changes) {

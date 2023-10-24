@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-// Component common
+
 import { AppComponent } from './app.component';
 import { WidgetComponent } from './components/widget/widget.component';
 
