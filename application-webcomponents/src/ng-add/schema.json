@@ -28,12 +28,12 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "Qual o nome que você gostaria de usar para o web-components? "
+      "x-prompt": "Qual o nome que você gostaria de usar para o módulo ? "
     },
     "path": {
       "description": "test",
       "type": "string",
-      "x-prompt": "Qual o caminho para o web component ? exemplo: /home",
+      "x-prompt": "Qual será a rota  padrão do seu módulo ? exemplo: /home",
       "default": "/home"
     },
     "inlineStyle": {
@@ -60,13 +60,21 @@
       "description": "Adicionar um prefixo para o seu web component",
       "default": "app",
       "alias": "p",
-      "x-prompt": "Qual o prefixo para seu web component ? exemplo: monitoramento"
+      "x-prompt": "Qual o prefixo do seu módulo ? exemplo: app"
     },
     "style": {
       "description": "The file extension or preprocessor to use for style files.",
       "type": "string",
       "default": "scss",
       "enum": ["css", "scss", "sass", "less"]
+    },
+    "materialuser": {
+      "description": "Adicionar o material design",
+      "type": "boolean",
+      "default": false,
+      "alias": "M",
+      "x-user-analytics": 221,
+      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",

@@ -1,7 +1,8 @@
 {
   "path": "<%= path %>",
-  "name": "<%= name %>",
-  "tag": "wc-<%= name %>-module",
+  "moduleName": "<%= name %>",
+  "elementName": "wc-<%= name %>-module",
   "type": "web-components",
-  "exposedModule": "./web-components"
+  "exposedModule": "./web-components",
+  "layout": "dashboard"
 }

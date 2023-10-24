@@ -248,15 +248,12 @@ function addAppToWorkspaceFile(
   });
 }
 
-
-
-
-
 function minimalPathFilter(path: string): boolean {
   const toRemoveList = /(test.ts|tsconfig.spec.json|karma.conf.js).template$/;
 
   return !toRemoveList.test(path);
 }
+
 
 export default function (options: ApplicationOptions): Rule {
   return async (host: Tree) => {
@@ -330,7 +327,7 @@ export default function (options: ApplicationOptions): Rule {
           move(sourceDir),
         ]),
         MergeStrategy.Overwrite
-      )
+      ),
     ]);
   };
 }

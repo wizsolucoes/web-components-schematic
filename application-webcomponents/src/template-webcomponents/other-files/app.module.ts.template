@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Component common
 import { AppComponent } from './app.component';
+import { WidgetComponent } from './components/widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,15 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    WidgetComponent,
     RouterModule.forRoot([
       {
         path: '<%= path %>',
         loadChildren: () => import('./routes').then((m) => m.APP_ROUTES)
+      },
+      {
+        path: '**',
+        redirectTo: '<%= path %>'
       }
     ])
   ],

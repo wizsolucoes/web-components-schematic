@@ -31,8 +31,16 @@
     "path": {
       "description": "test",
       "type": "string",
-      "x-prompt": "Qual o caminho para o web component ? exemplo: /home",
+      "x-prompt": "Qual será a rota  padrão do seu módulo ? exemplo: /home",
       "default": "/home"
+    },
+    "materialuser": {
+      "description": "Adicionar o material design",
+      "type": "boolean",
+      "default": false,
+      "alias": "M",
+      "x-user-analytics": 221,
+      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "inlineStyle": {
       "description": "Include styles inline in the root component.ts file. Only CSS styles can be included inline. Default is false, meaning that an external styles file is created and referenced in the root component.ts file.",
@@ -55,7 +63,7 @@
       "description": "Adicionar um prefixo para o seu web component",
       "default": "app",
       "alias": "p",
-      "x-prompt": "Qual o prefixo para seu web component ? exemplo: monitoramento"
+      "x-prompt": "Qual o prefixo do seu módulo ? exemplo: app"
     },
     "style": {
       "description": "The file extension or preprocessor to use for style files.",

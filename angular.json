@@ -100,35 +100,35 @@
 				}
 			}
 		},
-		"monitoramento": {
+		"dwsae": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/monitoramento",
-			"sourceRoot": "projects/monitoramento/src",
-			"prefix": "mon",
+			"root": "projects/dwsae",
+			"sourceRoot": "projects/dwsae/src",
+			"prefix": "cdas",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/monitoramento",
-						"index": "projects/monitoramento/src/index.html",
-						"main": "projects/monitoramento/src/main.ts",
-						"polyfills": "projects/monitoramento/src/polyfills.ts",
-						"tsConfig": "projects/monitoramento/tsconfig.app.json",
+						"outputPath": "dist/dwsae",
+						"index": "projects/dwsae/src/index.html",
+						"main": "projects/dwsae/src/main.ts",
+						"polyfills": "projects/dwsae/src/polyfills.ts",
+						"tsConfig": "projects/dwsae/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/monitoramento/src/favicon.ico",
-							"projects/monitoramento/src/assets"
+							"projects/dwsae/src/favicon.ico",
+							"projects/dwsae/src/assets"
 						],
 						"styles": [
-							"projects/monitoramento/src/styles.scss"
+							"projects/dwsae/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/monitoramento/webpack.config.js",
+						"extraWebpackConfig": "projects/dwsae/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +147,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/monitoramento/src/environments/environment.ts",
-									"with": "projects/monitoramento/src/environments/environment.prod.ts"
+									"replace": "projects/dwsae/src/environments/environment.ts",
+									"with": "projects/dwsae/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/monitoramento/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/dwsae/webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -169,8 +169,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/monitoramento/src/environments/environment.ts",
-									"with": "projects/monitoramento/src/environments/environment.staging.ts"
+									"replace": "projects/dwsae/src/environments/environment.ts",
+									"with": "projects/dwsae/src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -190,8 +190,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/monitoramento/src/environments/environment.ts",
-									"with": "projects/monitoramento/src/environments/environment.sandbox.ts"
+									"replace": "projects/dwsae/src/environments/environment.ts",
+									"with": "projects/dwsae/src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -212,15 +212,15 @@
 					"options": {
 						"port": 4430,
 						"publicHost": "http://localhost:4430",
-						"extraWebpackConfig": "projects/monitoramento/webpack.config.js"
+						"extraWebpackConfig": "projects/dwsae/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "monitoramento:build:production",
-							"extraWebpackConfig": "projects/monitoramento/webpack.prod.config.js"
+							"browserTarget": "dwsae:build:production",
+							"extraWebpackConfig": "projects/dwsae/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "monitoramento:build:development"
+							"browserTarget": "dwsae:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -228,21 +228,21 @@
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "monitoramento:build",
-						"extraWebpackConfig": "projects/monitoramento/webpack.config.js"
+						"browserTarget": "dwsae:build",
+						"extraWebpackConfig": "projects/dwsae/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/monitoramento/src/test.ts",
-						"polyfills": "projects/monitoramento/src/polyfills.ts",
-						"tsConfig": "projects/monitoramento/tsconfig.spec.json",
-						"karmaConfig": "projects/monitoramento/karma.conf.js",
+						"main": "projects/dwsae/src/test.ts",
+						"polyfills": "projects/dwsae/src/polyfills.ts",
+						"tsConfig": "projects/dwsae/tsconfig.spec.json",
+						"karmaConfig": "projects/dwsae/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/monitoramento/src/favicon.ico",
-							"projects/monitoramento/src/assets"
+							"projects/dwsae/src/favicon.ico",
+							"projects/dwsae/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"
