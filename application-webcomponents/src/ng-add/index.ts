@@ -21,7 +21,8 @@ function AddMFEComponents(options: ApplicationOptions): Rule {
     }))
     const installTaskId = context.addTask(new RunSchematicTask("application", options), [installTasMFEPackage])
     const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
-    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [installMFE]);
+    const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
+    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [addPipeline]);
   }
 }
 

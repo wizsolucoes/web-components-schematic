@@ -17,6 +17,11 @@
       "schema": "./template-mfe/schema.json",
       "description": "Inserir MFE"
     },
+    "template-pipeline-ci": {
+      "factory": "./template-pipeline-ci",
+      "schema": "./template-pipeline-ci/schema.json",
+      "description": "Inserir arquivo pipeline default"
+    },
     "application-mfe-final-change": {
       "factory": "./template-mfe-final-change",
       "schema": "./template-mfe-final-change/schema.json",

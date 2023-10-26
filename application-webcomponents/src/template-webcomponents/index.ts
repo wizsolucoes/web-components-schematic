@@ -327,7 +327,7 @@ export default function (options: ApplicationOptions): Rule {
           move(sourceDir),
         ]),
         MergeStrategy.Overwrite
-      ),
+      )
     ]);
   };
 }

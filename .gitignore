@@ -9,6 +9,7 @@
 # Node
 /node_modules
 project-web-component/node_modules
+/azure-pipelines.yml
 angular.json
 .vscode
 projects/*
