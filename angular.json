@@ -100,35 +100,35 @@
 				}
 			}
 		},
-		"sinaweb": {
+		"dmwdw": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/sinaweb",
-			"sourceRoot": "projects/sinaweb/src",
-			"prefix": "sinaweb",
+			"root": "projects/dmwdw",
+			"sourceRoot": "projects/dmwdw/src",
+			"prefix": "app",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/sinaweb",
-						"index": "projects/sinaweb/src/index.html",
-						"main": "projects/sinaweb/src/main.ts",
-						"polyfills": "projects/sinaweb/src/polyfills.ts",
-						"tsConfig": "projects/sinaweb/tsconfig.app.json",
+						"outputPath": "dist/dmwdw",
+						"index": "projects/dmwdw/src/index.html",
+						"main": "projects/dmwdw/src/main.ts",
+						"polyfills": "projects/dmwdw/src/polyfills.ts",
+						"tsConfig": "projects/dmwdw/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/sinaweb/src/favicon.ico",
-							"projects/sinaweb/src/assets"
+							"projects/dmwdw/src/favicon.ico",
+							"projects/dmwdw/src/assets"
 						],
 						"styles": [
-							"projects/sinaweb/src/styles.scss"
+							"projects/dmwdw/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/sinaweb/webpack.config.js",
+						"extraWebpackConfig": "projects/dmwdw/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +147,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/sinaweb/src/environments/environment.ts",
-									"with": "projects/sinaweb/src/environments/environment.prod.ts"
+									"replace": "projects/dmwdw/src/environments/environment.ts",
+									"with": "projects/dmwdw/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/sinaweb/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/dmwdw/webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -169,8 +169,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/sinaweb/src/environments/environment.ts",
-									"with": "projects/sinaweb/src/environments/environment.staging.ts"
+									"replace": "projects/dmwdw/src/environments/environment.ts",
+									"with": "projects/dmwdw/src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -190,8 +190,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/sinaweb/src/environments/environment.ts",
-									"with": "projects/sinaweb/src/environments/environment.sandbox.ts"
+									"replace": "projects/dmwdw/src/environments/environment.ts",
+									"with": "projects/dmwdw/src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -212,15 +212,15 @@
 					"options": {
 						"port": 4430,
 						"publicHost": "http://localhost:4430",
-						"extraWebpackConfig": "projects/sinaweb/webpack.config.js"
+						"extraWebpackConfig": "projects/dmwdw/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "sinaweb:build:production",
-							"extraWebpackConfig": "projects/sinaweb/webpack.prod.config.js"
+							"browserTarget": "dmwdw:build:production",
+							"extraWebpackConfig": "projects/dmwdw/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "sinaweb:build:development"
+							"browserTarget": "dmwdw:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -228,21 +228,21 @@
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "sinaweb:build",
-						"extraWebpackConfig": "projects/sinaweb/webpack.config.js"
+						"browserTarget": "dmwdw:build",
+						"extraWebpackConfig": "projects/dmwdw/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/sinaweb/src/test.ts",
-						"polyfills": "projects/sinaweb/src/polyfills.ts",
-						"tsConfig": "projects/sinaweb/tsconfig.spec.json",
-						"karmaConfig": "projects/sinaweb/karma.conf.js",
+						"main": "projects/dmwdw/src/test.ts",
+						"polyfills": "projects/dmwdw/src/polyfills.ts",
+						"tsConfig": "projects/dmwdw/tsconfig.spec.json",
+						"karmaConfig": "projects/dmwdw/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/sinaweb/src/favicon.ico",
-							"projects/sinaweb/src/assets"
+							"projects/dmwdw/src/favicon.ico",
+							"projects/dmwdw/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"
