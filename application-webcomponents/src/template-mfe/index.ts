@@ -32,7 +32,7 @@ function addDependenciesWebComponents(): Rule {
 
     context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
-      packageName: '@angular/elements'
+      packageName: '@angular/elements@16.2.12'
     }))
 
     return tree
@@ -82,7 +82,7 @@ function addDependenciesAngularMaterial(options: { name: string }): Rule {
 
     context.addTask(new NodePackageInstallTask({
         packageManager: 'npm',
-        packageName: '@angular/cdk @angular/material'
+        packageName: '@angular/cdk@16.2.11 @angular/material@16.2.12'
     }));
     context.logger.info('Adicionando a dependência Angular Material...');
     

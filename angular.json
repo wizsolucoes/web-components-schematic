@@ -100,35 +100,35 @@
 				}
 			}
 		},
-		"dmwdw": {
+		"modle": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/dmwdw",
-			"sourceRoot": "projects/dmwdw/src",
+			"root": "projects/modle",
+			"sourceRoot": "projects/modle/src",
 			"prefix": "app",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/dmwdw",
-						"index": "projects/dmwdw/src/index.html",
-						"main": "projects/dmwdw/src/main.ts",
-						"polyfills": "projects/dmwdw/src/polyfills.ts",
-						"tsConfig": "projects/dmwdw/tsconfig.app.json",
+						"outputPath": "dist/modle",
+						"index": "projects/modle/src/index.html",
+						"main": "projects/modle/src/main.ts",
+						"polyfills": "projects/modle/src/polyfills.ts",
+						"tsConfig": "projects/modle/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/dmwdw/src/favicon.ico",
-							"projects/dmwdw/src/assets"
+							"projects/modle/src/favicon.ico",
+							"projects/modle/src/assets"
 						],
 						"styles": [
-							"projects/dmwdw/src/styles.scss"
+							"projects/modle/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/dmwdw/webpack.config.js",
+						"extraWebpackConfig": "projects/modle/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +147,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/dmwdw/src/environments/environment.ts",
-									"with": "projects/dmwdw/src/environments/environment.prod.ts"
+									"replace": "projects/modle/src/environments/environment.ts",
+									"with": "projects/modle/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/dmwdw/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/modle/webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -169,8 +169,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/dmwdw/src/environments/environment.ts",
-									"with": "projects/dmwdw/src/environments/environment.staging.ts"
+									"replace": "projects/modle/src/environments/environment.ts",
+									"with": "projects/modle/src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -190,8 +190,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/dmwdw/src/environments/environment.ts",
-									"with": "projects/dmwdw/src/environments/environment.sandbox.ts"
+									"replace": "projects/modle/src/environments/environment.ts",
+									"with": "projects/modle/src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -212,15 +212,15 @@
 					"options": {
 						"port": 4430,
 						"publicHost": "http://localhost:4430",
-						"extraWebpackConfig": "projects/dmwdw/webpack.config.js"
+						"extraWebpackConfig": "projects/modle/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "dmwdw:build:production",
-							"extraWebpackConfig": "projects/dmwdw/webpack.prod.config.js"
+							"browserTarget": "modle:build:production",
+							"extraWebpackConfig": "projects/modle/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "dmwdw:build:development"
+							"browserTarget": "modle:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -228,21 +228,21 @@
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "dmwdw:build",
-						"extraWebpackConfig": "projects/dmwdw/webpack.config.js"
+						"browserTarget": "modle:build",
+						"extraWebpackConfig": "projects/modle/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/dmwdw/src/test.ts",
-						"polyfills": "projects/dmwdw/src/polyfills.ts",
-						"tsConfig": "projects/dmwdw/tsconfig.spec.json",
-						"karmaConfig": "projects/dmwdw/karma.conf.js",
+						"main": "projects/modle/src/test.ts",
+						"polyfills": "projects/modle/src/polyfills.ts",
+						"tsConfig": "projects/modle/tsconfig.spec.json",
+						"karmaConfig": "projects/modle/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/dmwdw/src/favicon.ico",
-							"projects/dmwdw/src/assets"
+							"projects/modle/src/favicon.ico",
+							"projects/modle/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"
