@@ -32,7 +32,7 @@ function addDependenciesWebComponents(): Rule {
 
     context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
-      packageName: '@angular/elements@16.2.12'
+      packageName: '@angular/elements@16.2.12 --legacy-peer-deps'
     }))
 
     return tree
@@ -58,7 +58,7 @@ function addDependenciesDesignSystem(): Rule {
       context.logger.info('Adicionando a dependência design system CORE...');
       context.addTask(new NodePackageInstallTask({
         packageManager: 'npm',
-        packageName: '@wizco/fenixds-core'
+        packageName: '@wizco/fenixds-core --legacy-peer-deps'
       }))
     };
 
@@ -68,7 +68,7 @@ function addDependenciesDesignSystem(): Rule {
       context.logger.info('Adicionando a dependência design system NGX...');
       context.addTask(new NodePackageInstallTask({
         packageManager: 'npm',
-        packageName: '@wizco/fenixds-ngx'
+        packageName: '@wizco/fenixds-ngx --legacy-peer-deps'
       }))
     };
     
@@ -82,7 +82,7 @@ function addDependenciesAngularMaterial(options: { name: string }): Rule {
 
     context.addTask(new NodePackageInstallTask({
         packageManager: 'npm',
-        packageName: '@angular/cdk@16.2.11 @angular/material@16.2.12'
+        packageName: '@angular/cdk@16.2.12 @angular/material@16.2.12 --legacy-peer-deps'
     }));
     context.logger.info('Adicionando a dependência Angular Material...');
     

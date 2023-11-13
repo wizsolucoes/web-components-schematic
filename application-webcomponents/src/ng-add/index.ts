@@ -17,7 +17,7 @@ function AddMFEComponents(options: ApplicationOptions): Rule {
   return (_: Tree, context: SchematicContext) => {
     const installTasMFEPackage = context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
-      packageName: '@angular-architects/module-federation@16.0.4'
+      packageName: '@angular-architects/module-federation@16.0.4 --legacy-peer-deps'
     }))
     const installTaskId = context.addTask(new RunSchematicTask("application", options), [installTasMFEPackage])
     const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
