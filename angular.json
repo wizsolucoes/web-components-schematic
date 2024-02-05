@@ -100,35 +100,35 @@
 				}
 			}
 		},
-		"fono": {
+		"sinistro": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/fono",
-			"sourceRoot": "projects/fono/src",
-			"prefix": "app",
+			"root": "projects/sinistro",
+			"sourceRoot": "projects/sinistro/src",
+			"prefix": "local",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/fono",
-						"index": "projects/fono/src/index.html",
-						"main": "projects/fono/src/main.ts",
-						"polyfills": "projects/fono/src/polyfills.ts",
-						"tsConfig": "projects/fono/tsconfig.app.json",
+						"outputPath": "dist/sinistro",
+						"index": "projects/sinistro/src/index.html",
+						"main": "projects/sinistro/src/main.ts",
+						"polyfills": "projects/sinistro/src/polyfills.ts",
+						"tsConfig": "projects/sinistro/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/fono/src/favicon.ico",
-							"projects/fono/src/assets"
+							"projects/sinistro/src/favicon.ico",
+							"projects/sinistro/src/assets"
 						],
 						"styles": [
-							"projects/fono/src/styles.scss"
+							"projects/sinistro/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/fono/webpack.config.js",
+						"extraWebpackConfig": "projects/sinistro/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +147,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.prod.ts"
+									"replace": "projects/sinistro/src/environments/environment.ts",
+									"with": "projects/sinistro/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/fono/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/sinistro/webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -169,8 +169,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.staging.ts"
+									"replace": "projects/sinistro/src/environments/environment.ts",
+									"with": "projects/sinistro/src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -190,8 +190,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.sandbox.ts"
+									"replace": "projects/sinistro/src/environments/environment.ts",
+									"with": "projects/sinistro/src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -210,17 +210,17 @@
 				"serve": {
 					"builder": "ngx-build-plus:dev-server",
 					"options": {
-						"port": 4459,
-						"publicHost": "http://localhost:4459",
-						"extraWebpackConfig": "projects/fono/webpack.config.js"
+						"port": 9090,
+						"publicHost": "http://localhost:9090",
+						"extraWebpackConfig": "projects/sinistro/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "fono:build:production",
-							"extraWebpackConfig": "projects/fono/webpack.prod.config.js"
+							"browserTarget": "sinistro:build:production",
+							"extraWebpackConfig": "projects/sinistro/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "fono:build:development"
+							"browserTarget": "sinistro:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -228,21 +228,21 @@
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "fono:build",
-						"extraWebpackConfig": "projects/fono/webpack.config.js"
+						"browserTarget": "sinistro:build",
+						"extraWebpackConfig": "projects/sinistro/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/fono/src/test.ts",
-						"polyfills": "projects/fono/src/polyfills.ts",
-						"tsConfig": "projects/fono/tsconfig.spec.json",
-						"karmaConfig": "projects/fono/karma.conf.js",
+						"main": "projects/sinistro/src/test.ts",
+						"polyfills": "projects/sinistro/src/polyfills.ts",
+						"tsConfig": "projects/sinistro/tsconfig.spec.json",
+						"karmaConfig": "projects/sinistro/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/fono/src/favicon.ico",
-							"projects/fono/src/assets"
+							"projects/sinistro/src/favicon.ico",
+							"projects/sinistro/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"

@@ -13,9 +13,9 @@
     "schematics:intall": "yarn --cwd ./application-webcomponents install",
     "schematics:build": "yarn --cwd ./application-webcomponents build",
     "schematics:link": "npm unlink ./application-webcomponents && npm link ./application-webcomponents",
-    "start:module": "ng serve --project fono",
-    "extra:build": "ng build --project fono --output-hashing none --aot --build-optimizer",
-    "extra:build:staging": "ng build --configuration=staging --project fono --output-hashing none --aot --build-optimizer",
+    "start:module": "ng serve --project sinistro",
+    "extra:build": "ng build --project sinistro --output-hashing none --aot --build-optimizer",
+    "extra:build:staging": "ng build --configuration=staging --project sinistro --output-hashing none --aot --build-optimizer",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
