@@ -1,5 +1,5 @@
 /* CSS global */
 
 
-/* Confira nosso design system fenix-ds.surge.sh */
+/* Confira nosso design system https://fenix.wizsolucoes.com.br */
 @import 'node_modules/@wizco/fenixds-core/styles/core';

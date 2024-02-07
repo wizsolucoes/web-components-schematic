@@ -34,14 +34,14 @@
   "homepage": "https://github.com/wizsolucoes/web-components-schematic#readme",
   "schematics": "./src/collection.json",
   "dependencies": {
-    "@angular-devkit/core": "^15.2.4",
-    "@angular-devkit/schematics": "^15.2.4",
-    "@schematics/angular": "^15.2.4",
-    "typescript": "~4.9.3"
+    "@angular-devkit/core": "^17.1.2",
+    "@angular-devkit/schematics": "^17.1.2",
+    "@schematics/angular": "^17.1.2",
+    "typescript": "~5.3.3"
   },
   "devDependencies": {
-    "@types/jasmine": "~4.3.0",
-    "@types/node": "^14.15.0",
-    "jasmine": "^4.0.0"
+    "@types/jasmine": "~5.1.4",
+    "@types/node": "^20.11.16",
+    "jasmine": "^5.1.0"
   }
 }

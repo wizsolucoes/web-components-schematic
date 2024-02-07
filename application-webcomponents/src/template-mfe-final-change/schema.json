@@ -11,6 +11,14 @@
       "type": "string",
       "visible": false
     },
+    "folderModule": {
+      "description": "Deseja criar o módulo no projeto raiz ou projects ?",
+      "type": "object",
+      "enum": ["projects", "raiz"],
+      "visible": true,
+      "x-prompt": "Deseja criar o módulo na pasta raiz ou projects ?",
+      "default": "projects"
+    },
     "port": {
       "type": "number",
       "description": "rodar o web component local",

@@ -1,0 +1,8 @@
+{
+  "path": "sinis",
+  "moduleName": "sinsitro",
+  "elementName": "wc-sinsitro-module",
+  "type": "web-components",
+  "exposedModule": "./web-components",
+  "layout": "dashboard"
+}

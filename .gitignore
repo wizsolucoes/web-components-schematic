@@ -45,3 +45,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+karma.conf.js
+.browserslistrc
+eslintrc.json

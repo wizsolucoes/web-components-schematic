@@ -11,16 +11,33 @@
       "type": "string",
       "visible": false
     },
+   "versionAngular": {
+      "description": "Versão do Angular",
+      "type": "string",
+      "enum": ["16", "17"],
+      "x-prompt": {
+        "message": "Qual versão do angular esta usando ?",
+        "type": "list",
+        "default": "17"
+      }
+    },
+   "folderModule": {
+      "description": "Deseja criar o módulo no projeto raiz ou projects ?",
+      "type": "string",
+      "enum": ["projects", "raiz"],
+      "x-prompt": {
+        "message": "Deseja criar o módulo na pasta raiz ou projects ?",
+        "type": "list",
+        "default": "projects"
+      }
+    },
     "port": {
       "type": "number",
       "description": "rodar o web component local",
+      "default": 4430,
       "x-prompt": {
         "message": "Porta para rodar o web component local",
         "type": "number"
-      },
-      "$default": {
-        "$source": "argv",
-        "index": 1
       }
     },
     "name": {
@@ -32,14 +49,6 @@
         "index": 0
       },
       "x-prompt": "Qual o nome que você gostaria de usar para o módulo ? "
-    },
-    "materialuser": {
-      "description": "Adicionar o material design",
-      "type": "boolean",
-      "default": false,
-      "alias": "M",
-      "x-user-analytics": 221,
-      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "path": {
       "description": "test",
@@ -77,27 +86,15 @@
       "description": "The file extension or preprocessor to use for style files.",
       "type": "string",
       "default": "scss",
-      "enum": ["css", "scss", "sass", "less"],
-      "x-prompt": {
-        "message": "Escolha um formato de estilo para seu web component",
-        "type": "list",
-        "items": [
-          { "value": "css", "label": "CSS" },
-          {
-            "value": "scss",
-            "label": "SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]"
-          },
-          {
-            "value": "sass",
-            "label": "Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]"
-          },
-          {
-            "value": "less",
-            "label": "Less   [ http://lesscss.org                                             ]"
-          }
-        ]
-      },
-      "x-user-analytics": 5
+      "enum": ["css", "scss", "sass", "less"]
+    },
+    "materialuser": {
+      "description": "Adicionar o material design",
+      "type": "boolean",
+      "default": false,
+      "alias": "M",
+      "x-user-analytics": 221,
+      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",

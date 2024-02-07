@@ -1,13 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
-  <title>AngularSchematicsWebcomponents</title>
+  <title>Sinsitro</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round|Material+Icons+Outlined" rel="stylesheet" defer/>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,900&display=swap" rel="stylesheet" defer/>
+
 </head>
 <body>
-  <app-root></app-root>
+  <main id="area-faker-wizco">
+    <div id="header-faker"></div>
+    <div id="aside-faker"></div>
+    <div id="content-faker">
+      <wc-sinsitro-module></wc-sinsitro-module>
+    </div>
+  </main>
 </body>
+
+<style>#area-faker-wizco { width: 100vw; height: 100vh; display: grid; grid-template-columns: 96px 1fr; grid-template-rows: 84px 1fr; grid-template-areas: 'aside header' 'aside content'; #header-faker { grid-area: header; height: 84px; background-color: var(--wco-color-neutral-50); } #aside-faker { grid-area: aside; width: 96px; height: 100%; background-color: var(--wco-color-primary-50); } #content-faker { grid-area: content; padding: var(--wco-spacing-xs); } } html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers */ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } body { line-height: 1; }</style>
 </html>
