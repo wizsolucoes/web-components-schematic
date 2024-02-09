@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "template-pipeline-ci",
+  "$id": "template-add-eslint-prettier",
   "title": "Angular Application Options Schema",
   "type": "object",
   "description": "Generates a new basic application definition in the \"projects\" subfolder of the workspace.",

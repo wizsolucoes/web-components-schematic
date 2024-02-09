@@ -30,6 +30,7 @@ extends:
     azSubscriptionUAT: "WX1"
     azSubscriptionPRD: "WX1"
     instrumentationKey: "c9dd9600-aa5b-4a28-9fd7-5e472cd30899"
+    npmNodeVersion: '18'
     appConfig:
       httpPath: "modulo"
       httpPathModule: "<%= folderName%>"

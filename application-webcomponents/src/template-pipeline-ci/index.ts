@@ -15,12 +15,9 @@ import {
   SchematicContext, 
   Tree, 
   url,
-  MergeStrategy,
-
+  MergeStrategy
 } from '@angular-devkit/schematics';
-
-
-
+import { OptionsDefaultModule } from '../types/options.types';
 
 function addPipelineDefault(name: string): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -37,8 +34,7 @@ function addPipelineDefault(name: string): Rule {
   };
 }
 
-export default function (options: { port: string, name: string, materialuser: boolean, prefix: string }): Rule {
-  
+export default function (options: OptionsDefaultModule): Rule {
   return () => {
     const templateSource = apply(url('./root-files'), [
       move('/')

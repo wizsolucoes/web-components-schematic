@@ -10,7 +10,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "sinsitro",
+    uniqueName: "modulo",
     publicPath: "auto"
   },
   optimization: {
@@ -29,7 +29,7 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        // name: "sinsitro",
+        // name: "modulo",
         // filename: "remoteEntry.js",
         // exposes: {
         //     './Component': './/src/app/app.component.ts',

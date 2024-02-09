@@ -7,7 +7,7 @@ export const APP_ROUTES: Routes = [
         pathMatch: 'full'
     },
     {
-         path: 'home',
-         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+        path: 'home',
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
     }
 ];

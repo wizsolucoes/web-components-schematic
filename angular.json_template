@@ -96,6 +96,39 @@
           }
         }
       }
+    },
+    "wizpro-tools": {
+      "projectType": "library",
+      "root": "libs/wizpro-tools",
+      "sourceRoot": "libs/wizpro-tools/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libs/wizpro-tools/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/wizpro-tools/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/wizpro-tools/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "libs/wizpro-tools/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

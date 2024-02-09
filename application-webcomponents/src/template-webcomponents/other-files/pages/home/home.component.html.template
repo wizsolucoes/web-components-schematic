@@ -4,7 +4,7 @@
 </button>
 <h2 class="display-2 mb-sm">
     <strong>
-        <%= prefix %>-module
+        <%= name %>
     </strong>
 </h2>
 <div class="container-wco">

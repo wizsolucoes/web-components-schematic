@@ -17,6 +17,11 @@
       "schema": "./template-mfe/schema.json",
       "description": "Inserir MFE"
     },
+    "template-add-eslint-prettier": {
+      "factory": "./template-add-eslint-prettier",
+      "schema": "./template-add-eslint-prettier/schema.json",
+      "description": "Inserir eslint e prettier"
+    },
     "template-pipeline-ci": {
       "factory": "./template-pipeline-ci",
       "schema": "./template-pipeline-ci/schema.json",

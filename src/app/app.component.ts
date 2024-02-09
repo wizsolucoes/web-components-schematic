@@ -1,34 +1,30 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'sini-module',
+  selector: 'app-module',
   template: `
-    <ng-template *ngIf="widget; else app">
-      <sini-module-widget/>
-    </ng-template>
-    <ng-template #app>
+    <ng-container *ngIf="widget>
+      <app-module-widget/>
+    </ng-container>
+    <ng-container *ngIf="!widget>
       <router-outlet></router-outlet>
-    </ng-template>
+    </ng-container>
   `,
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
-export class AppComponent implements OnChanges {
+export class AppComponent implements AfterViewInit {
   @Input() widget = false
   @Input() currentPath!: string;
   @Output() appOutput = new EventEmitter();
 
-   ngOnChanges(changes: SimpleChanges) {
-    if ('currentPath' in changes) {
-      this.router.navigateByUrl(
-        changes['currentPath'].currentValue as string
-      );
-    }
-  }
+  constructor(private router: Router) {}
 
-  constructor(private router:Router) {
-    this.router.initialNavigation();
+  ngAfterViewInit(): void {
+    if(!this.widget) {
+      connectRouter(this.router);
+    }
   }
 }

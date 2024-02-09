@@ -17,7 +17,7 @@ import {
 import { Schema as ComponentOptions, Style } from '@schematics/angular/component/schema';
 import { relativePathToWorkspaceRoot } from '@schematics/angular/utility/paths';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/workspace';
-import { Builders, ProjectType } from '@schematics/angular/utility/workspace-models';
+import { ProjectType } from '@schematics/angular/utility/workspace-models';
 import { OptionsDefaultModule } from '../types/options.types';
 
 
@@ -203,8 +203,14 @@ function addAppToWorkspaceFile(
           },
         },
       },
-      'extract-i18n': {
-        builder: Builders.ExtractI18n
+      lint: {
+        "builder": "@angular-eslint/builder:lint",
+        "options": {
+          "lintFilePatterns": [
+            `${sourceRoot}/**/*.ts`,
+            `${sourceRoot}/**/*.html`,
+          ]
+        }
       },
       test: options.minimal
         ? undefined
