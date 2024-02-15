@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 import { getDataStorage } from '../../utils/token.storage';
 
   @Injectable()
-  export class TenantInterceptor implements HttpInterceptor {
+  export class WcoTenantInterceptor implements HttpInterceptor {
     constructor() {}
     intercept(
       request: HttpRequest<any>,

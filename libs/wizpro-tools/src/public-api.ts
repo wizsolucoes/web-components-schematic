@@ -7,3 +7,4 @@ export * from './utils/token.storage';
 export * from './service/module/index';
 export * from './guards/guardRoles';
 export * from './types/routes.types';
+export * from './service/share-events/share-events';

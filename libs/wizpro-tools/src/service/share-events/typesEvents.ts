@@ -1,0 +1,1 @@
+export type WcoEventsType = 'trackPage' | 'track' | 'logout' ;

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WidgetComponent } from './components/widget/widget.component';
+import { WcoTenantInterceptor } from '@wizco/wizpro-tools';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,13 @@ import { WidgetComponent } from './components/widget/widget.component';
       }
     ])
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WcoTenantInterceptor, multi: true },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class AppModule implements DoBootstrap {
+export class AppModule implements DoBootstrap { 
   constructor(
     private injector: Injector
   ) {}

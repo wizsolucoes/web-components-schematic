@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WcoService } from '@wizco/wizpro-tools';
 
 @Component({
   selector: '<%= selector %>',
@@ -20,11 +21,14 @@ export class AppComponent implements AfterViewInit {
   @Input() currentPath!: string;
   @Output() appOutput = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private wcoService: WcoService
+  ) {}
 
   ngAfterViewInit(): void {
     if(!this.widget) {
-      connectRouter(this.router);
+      this.wcoService.connectRouter(this.router);
     }
   }
 }

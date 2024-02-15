@@ -39,6 +39,7 @@ module.exports = {
         "@angular/common": { requiredVersion: "auto" },
         "@angular/router": { requiredVersion: "auto" },
         "rxjs": { requiredVersion: "auto" },
+        "@wizco/wizpro-tools": { requiredVersion: "auto" },
         ...sharedMappings.getDescriptors()
       })
     }),

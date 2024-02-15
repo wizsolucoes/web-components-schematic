@@ -22,14 +22,14 @@ import { packagesVersions, packagesVersionsMaterial } from './versionsPackages';
 function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
   return (_: Tree, context: SchematicContext) => {
     const versionAngular = options.versionAngular || '17'
-    let packagesRequire = packagesVersions[versionAngular];
-    let packageMaterial = packagesVersionsMaterial[versionAngular]
+    const packagesRequire = packagesVersions[versionAngular];
+    const packageMaterial = packagesVersionsMaterial[versionAngular]
   
     if(options.materialuser) {
       packagesRequire.push(...packageMaterial)
-    };
+    }
 
-    let packagesInstall =  packagesRequire.join(' ');
+    const packagesInstall =  packagesRequire.join(' ');
 
     context.logger.info('Adicionando pacotes necessários'); 
     const installTasMFEPackage = context.addTask(new NodePackageInstallTask({

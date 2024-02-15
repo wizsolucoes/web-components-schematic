@@ -5,6 +5,7 @@ export const packagesVersions = {
     '@angular-eslint/schematics@17.2.x',
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
+    '@wizco/wizpro-tools@latest',
   ],
   16: [
     '@angular-architects/module-federation@16.x',
@@ -12,6 +13,7 @@ export const packagesVersions = {
     '@angular-eslint/schematics@16.x',
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
+    '@wizco/wizpro-tools@latest',
   ]
 }
 
