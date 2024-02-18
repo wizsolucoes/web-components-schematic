@@ -13,7 +13,9 @@ copyFile('./angular.json_template', './angular.json', (err) => {
   console.log('Arquivo copiado com sucesso!');
 });
 
-exec('npm uninstall @wizco/fenixds-core @wizco/fenixds-ngx @angular-architects/module-federation @angular-eslint/schematics @angular/elements @angular/material --force');
+exec(
+  "npm uninstall @wizco/fenixds-core @wizco/fenixds-ngx @wizco/wizpro-tools @angular-architects/module-federation @angular-eslint/schematics @angular/elements @angular/material --force"
+);
 
 exec("rm -rf ./src ./webpack.config.js ./webpack.prod.config.js");
 if (existsSync('./projects')) {

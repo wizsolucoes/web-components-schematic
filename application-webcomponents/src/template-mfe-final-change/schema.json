@@ -11,20 +11,33 @@
       "type": "string",
       "visible": false
     },
-    "folderModule": {
+   "versionAngular": {
+      "description": "Versão do Angular",
+      "type": "string",
+      "enum": ["16", "17"],
+      "x-prompt": {
+        "message": "Qual versão do angular esta usando ?",
+        "type": "list",
+        "default": "17"
+      }
+    },
+   "folderModule": {
       "description": "Deseja criar o módulo no projeto raiz ou projects ?",
-      "type": "object",
+      "type": "string",
       "enum": ["projects", "raiz"],
-      "visible": true,
-      "x-prompt": "Deseja criar o módulo na pasta raiz ou projects ?",
-      "default": "projects"
+      "x-prompt": {
+        "message": "Deseja criar o módulo na pasta raiz ou projects ?",
+        "type": "list",
+        "default": "projects"
+      }
     },
     "port": {
       "type": "number",
       "description": "rodar o web component local",
-      "$default": {
-        "$source": "argv",
-        "index": 1
+      "default": 4430,
+      "x-prompt": {
+        "message": "Porta para rodar o web component local",
+        "type": "number"
       }
     },
     "name": {
@@ -34,7 +47,8 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      }
+      },
+      "x-prompt": "Qual o nome que você gostaria de usar para o módulo ? "
     },
     "path": {
       "description": "test",
@@ -42,28 +56,23 @@
       "x-prompt": "Qual será a rota  padrão do seu módulo ? exemplo: /home",
       "default": "/home"
     },
-    "materialuser": {
-      "description": "Adicionar o material design",
-      "type": "boolean",
-      "default": false,
-      "alias": "M",
-      "x-user-analytics": 221,
-      "x-prompt": "Deseja adicionar o Angular material ?"
-    },
     "inlineStyle": {
       "description": "Include styles inline in the root component.ts file. Only CSS styles can be included inline. Default is false, meaning that an external styles file is created and referenced in the root component.ts file.",
       "type": "boolean",
-      "alias": "s"
+      "alias": "s",
+      "x-user-analytics": 9
     },
     "inlineTemplate": {
       "description": "Include template inline in the root component.ts file. Default is false, meaning that an external template file is created and referenced in the root component.ts file. ",
       "type": "boolean",
-      "alias": "t"
+      "alias": "t",
+      "x-user-analytics": 10
     },
     "viewEncapsulation": {
       "description": "The view encapsulation strategy to use in the new application.",
       "enum": ["Emulated", "None", "ShadowDom"],
-      "type": "string"
+      "type": "string",
+      "x-user-analytics": 11
     },
     "prefix": {
       "type": "string",
@@ -76,33 +85,23 @@
     "style": {
       "description": "The file extension or preprocessor to use for style files.",
       "type": "string",
-      "default": "css",
-      "enum": ["css", "scss", "sass", "less"],
-      "x-prompt": {
-        "message": "Escolha um formato de estilo para seu web component",
-        "type": "list",
-        "items": [
-          { "value": "css", "label": "CSS" },
-          {
-            "value": "scss",
-            "label": "SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]"
-          },
-          {
-            "value": "sass",
-            "label": "Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]"
-          },
-          {
-            "value": "less",
-            "label": "Less   [ http://lesscss.org                                             ]"
-          }
-        ]
-      }
+      "default": "scss",
+      "enum": ["css", "scss", "sass", "less"]
+    },
+    "materialuser": {
+      "description": "Adicionar o material design",
+      "type": "boolean",
+      "default": false,
+      "alias": "M",
+      "x-user-analytics": 221,
+      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",
       "type": "boolean",
       "default": false,
-      "alias": "S"
+      "alias": "S",
+      "x-user-analytics": 12
     },
     "skipPackageJson": {
       "type": "boolean",
@@ -112,7 +111,8 @@
     "minimal": {
       "description": "Create a bare-bones project without any testing frameworks. (Use for learning purposes only.)",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-user-analytics": 14
     },
     "skipInstall": {
       "description": "Skip installing dependency packages.",
@@ -122,13 +122,15 @@
     "strict": {
       "description": "Creates an application with stricter bundle budgets settings.",
       "type": "boolean",
-      "default": true
+      "default": true,
+      "x-user-analytics": 7
     },
     "routing": {
       "description": "Generate a routing module.",
       "type": "boolean",
       "default": true,
-      "alias": "r"
+      "alias": "r",
+      "x-user-analytics": 8
     }
   }
 }

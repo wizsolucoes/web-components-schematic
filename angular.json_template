@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-schematics-webcomponents:build:production"
+              "buildTarget": "angular-schematics-webcomponents:build:production"
             },
             "development": {
-              "browserTarget": "angular-schematics-webcomponents:build:development"
+              "buildTarget": "angular-schematics-webcomponents:build:development"
             }
           },
           "defaultConfiguration": "development"

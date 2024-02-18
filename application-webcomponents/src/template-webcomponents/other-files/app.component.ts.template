@@ -5,10 +5,10 @@ import { WcoService } from '@wizco/wizpro-tools';
 @Component({
   selector: '<%= selector %>',
   template: `
-    <ng-container *ngIf="widget>
+    <ng-container *ngIf="widget">
       <<%= selector %>-widget/>
     </ng-container>
-    <ng-container *ngIf="!widget>
+    <ng-container *ngIf="!widget">
       <router-outlet></router-outlet>
     </ng-container>
   `,

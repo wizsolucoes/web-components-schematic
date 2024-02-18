@@ -1,8 +1,0 @@
-{
-  "path": "/home",
-  "moduleName": "modulo",
-  "elementName": "wc-modulo-module",
-  "type": "web-components",
-  "exposedModule": "./web-components",
-  "layout": "dashboard"
-}

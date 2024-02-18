@@ -7,7 +7,7 @@ import { WcoEventsType } from './typesEvents';
 export class WcoEventsService  {
   constructor(private ngZone: NgZone) {}
 
-  private handleEvent(event: CustomEvent) {
+  private handleEvent() {
     this.ngZone.run(() => {});
   }
 

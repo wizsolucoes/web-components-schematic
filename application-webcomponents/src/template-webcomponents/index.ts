@@ -195,11 +195,11 @@ function addAppToWorkspaceFile(
         },
         configurations: {
           production: {
-            browserTarget: `${options.name}:build:production`,
+            buildTarget: `${options.name}:build:production`,
             extraWebpackConfig: `${options.name}/webpack.prod.config.js`
           },
           development: {
-            browserTarget: `${options.name}:build:development`,
+            buildTarget: `${options.name}:build:development`,
           },
         },
       },
