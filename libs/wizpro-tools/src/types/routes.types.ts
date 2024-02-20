@@ -22,17 +22,16 @@ export interface RouteModule extends Route {
    * data: {
     * breadcrumb: [
     *  {
-    *     title: 'Home',
+    *     label: 'Home',
     *     url: '/home'
     *   }
     * ],
-    * permission: [
-    *   {
-    *     roles: ['administrador'],
-    *     prefix: 'wiz.termos.de.uso',
-    *     redirectTo: 'terms/error'
+    * permission: {
+    *     roles: ['administrador', 'gerente'],
+    *     prefix: 'wiz.MEU_MODULO',
+    *     redirectTo: 'error' // sua  página de error
     *   }
-    * ]
+    * 
   */
   data?: dataRouteModule;
 }

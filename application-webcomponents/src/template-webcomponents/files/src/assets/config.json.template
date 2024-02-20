@@ -4,5 +4,34 @@
   "elementName": "wc-<%= name %>-module",
   "type": "web-components",
   "exposedModule": "./web-components",
+  "breadcrumb": "<%= name %>",
   "layout": "dashboard"
+  "title": "add um título no arquivo config.json",
+  "description": "add um descrição no arquivo config.json",
+  "icon": "Adiciona um ícone do IconMaterial",
+  "urlRepository": "add url do repositório no congig.json",
+  "hasWidget": true,
+  "active": true,
+  "isPrivate": true
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
