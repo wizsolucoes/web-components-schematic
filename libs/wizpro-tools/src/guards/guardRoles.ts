@@ -10,13 +10,13 @@ import { getJwtRoles } from "../public-api";
 * @returns boolean
 * @description Verifica se o usuário tem permissão para acessar a página
 * @example canActivate: [guardWizRoles],
-        *  data: {
-        *    permission: {
-        *      roles: ['administrador'],
-        *      prefix: 'wiz.termos.de.uso',
-        *      redirectTo: 'terms/error'
-        *    }
-        *  } 
+    *  data: {
+    *    permission: {
+    *      roles: ['administrador'],
+    *      prefix: 'wiz.MEUMODULO',
+    *      redirectTo: 'error'
+    *    }
+    *  } 
 */ 
 export const guardWizRoles: CanActivateFn = (next: ActivatedRouteSnapshot) => {
       const router = inject(Router);
@@ -28,7 +28,6 @@ export const guardWizRoles: CanActivateFn = (next: ActivatedRouteSnapshot) => {
         return true;
       }  
       
-
       /// Roles do usuário
       const roles = getJwtRoles();
       const _roles = roles ? roles.map(

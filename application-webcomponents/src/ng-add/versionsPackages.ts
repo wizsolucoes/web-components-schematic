@@ -6,7 +6,7 @@ export const packagesVersions = {
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
     '@wizco/wizpro-tools',
-    "jwt-decode@^3.1.2"
+    "jwt-decode"
   ],
   16: [
     '@angular-architects/module-federation@16.x',
@@ -15,7 +15,7 @@ export const packagesVersions = {
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
     '@wizco/wizpro-tools',
-    "jwt-decode@^3.1.2"
+    "jwt-decode"
   ]
 }
 

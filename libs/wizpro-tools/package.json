@@ -1,10 +1,11 @@
 {
   "name": "@wizco/wizpro-tools",
-  "version": "17.0.11",
+  "version": "17.0.12",
   "peerDependencies": {
-    "jwt-decode": "3.1.2"
+    "jwt-decode": "^4.0.0"
   },
   "dependencies": {
+    "jwt-decode": "^4.0.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
