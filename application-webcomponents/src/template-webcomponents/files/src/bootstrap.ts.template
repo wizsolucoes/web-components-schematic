@@ -1,26 +1,10 @@
-import { platformBrowser } from '@angular/platform-browser';
 import { AppModule } from './app/app.module';
-declare const require: any;
+import { environment } from './environments/environment';
+import { bootstrap } from '@angular-architects/module-federation-tools';
 
-const ngVersion = require('../../../package.json').dependencies[
-  '@angular/core'
-]; // better just take the major version
-
-function getMajor(version: string) {
-  return version.split('.')[1].replace(/[^0-9]/g, '');
-}
-
-const plattform = (window as any).plattform || {};
-
-let platform: any;
-Object.keys(plattform).forEach((key) => {
-  if (getMajor(ngVersion) === getMajor(key)) {
-    platform = plattform[key];
-  }
+bootstrap(AppModule, {
+  production: environment.production,
+  appType: 'microfrontend',
+  activeLegacyMode: true,
+  ngZoneSharing: true
 });
-
-if (!platform) {
-  platform = platformBrowser();
-}
-
-platform.bootstrapModule(AppModule).catch((err: any) => console.error(err));

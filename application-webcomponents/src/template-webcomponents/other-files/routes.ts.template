@@ -1,13 +1,39 @@
-import { Routes } from "@angular/router";
+/**
+ * @description Esse é o arquivo de rotas padrões para módulos da WizPro. 
+ * @info Por padrão a rota deve conter um data com a permissão de acesso e um breadcrumb 
+ * @see https://www.npmjs.com/package/@wizco/wizpro-tools
+*/
+import { RouteModule, guardWizRoles } from "@wizco/wizpro-tools";
 
-export const APP_ROUTES: Routes = [
+export const APP_ROUTES: RouteModule[] = [
     {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
     },
     {
-         path: 'home',
-         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+        path: 'home', 
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+        canActivate: [guardWizRoles],
+        data: {
+            breadcrumb: [
+                { label: 'Página inicial', url: '#' }
+            ]
+        }
+    }, 
+    {
+        path: 'home-privada', // Exemplo de rota privada
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+        canActivate: [guardWizRoles],
+        data: {
+            permission: { // TODO: mudar Informações 
+                prefix: 'wiz.EXEMPLO.<%= name %>', 
+                redirectTo: 'terms/error',
+                roles: ['administrador']
+            },
+            breadcrumb: [
+                { label: 'Página inicial privada', url: '#' }
+            ]
+        }
     }
 ];

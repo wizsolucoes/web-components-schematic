@@ -1,13 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule, DoBootstrap } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WidgetComponent } from './components/widget/widget.component';
+import { WcoTenantInterceptor } from '@wizco/wizpro-tools';
 
 @NgModule({
   declarations: [
@@ -22,18 +22,16 @@ import { WidgetComponent } from './components/widget/widget.component';
       {
         path: '<%= path %>',
         loadChildren: () => import('./routes').then((m) => m.APP_ROUTES)
-      },
-      {
-        path: '**',
-        redirectTo: '<%= path %>'
       }
     ])
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WcoTenantInterceptor, multi: true },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class AppModule {
+export class AppModule implements DoBootstrap { 
   constructor(
     private injector: Injector
   ) {}

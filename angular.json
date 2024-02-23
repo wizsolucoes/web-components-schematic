@@ -65,19 +65,16 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "angular-schematics-webcomponents:build:production"
+							"buildTarget": "angular-schematics-webcomponents:build:production"
 						},
 						"development": {
-							"browserTarget": "angular-schematics-webcomponents:build:development"
+							"buildTarget": "angular-schematics-webcomponents:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "angular-schematics-webcomponents:build"
-					}
+					"builder": "@angular-devkit/build-angular:extract-i18n"
 				},
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
@@ -100,35 +97,68 @@
 				}
 			}
 		},
-		"fono": {
+		"wizpro-tools": {
+			"projectType": "library",
+			"root": "libs/wizpro-tools",
+			"sourceRoot": "libs/wizpro-tools/src",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "libs/wizpro-tools/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/wizpro-tools/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/wizpro-tools/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "libs/wizpro-tools/tsconfig.spec.json",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						]
+					}
+				}
+			}
+		},
+		"botafogo": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/fono",
-			"sourceRoot": "projects/fono/src",
-			"prefix": "app",
+			"root": "projects/botafogo",
+			"sourceRoot": "projects/botafogo/src",
+			"prefix": "bfg",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/fono",
-						"index": "projects/fono/src/index.html",
-						"main": "projects/fono/src/main.ts",
-						"polyfills": "projects/fono/src/polyfills.ts",
-						"tsConfig": "projects/fono/tsconfig.app.json",
+						"outputPath": "dist/botafogo",
+						"index": "projects/botafogo/src/index.html",
+						"main": "projects/botafogo/src/main.ts",
+						"polyfills": "projects/botafogo/src/polyfills.ts",
+						"tsConfig": "projects/botafogo/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/fono/src/favicon.ico",
-							"projects/fono/src/assets"
+							"projects/botafogo/src/favicon.ico",
+							"projects/botafogo/src/assets"
 						],
 						"styles": [
-							"projects/fono/src/styles.scss"
+							"projects/botafogo/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/fono/webpack.config.js",
+						"extraWebpackConfig": "projects/botafogo/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -147,12 +177,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.prod.ts"
+									"replace": "projects/botafogo/src/environments/environment.ts",
+									"with": "projects/botafogo/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/fono/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/botafogo/webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -169,8 +199,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.staging.ts"
+									"replace": "projects/botafogo/src/environments/environment.ts",
+									"with": "projects/botafogo/src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -190,8 +220,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/fono/src/environments/environment.ts",
-									"with": "projects/fono/src/environments/environment.sandbox.ts"
+									"replace": "projects/botafogo/src/environments/environment.ts",
+									"with": "projects/botafogo/src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -210,39 +240,41 @@
 				"serve": {
 					"builder": "ngx-build-plus:dev-server",
 					"options": {
-						"port": 4459,
-						"publicHost": "http://localhost:4459",
-						"extraWebpackConfig": "projects/fono/webpack.config.js"
+						"port": 7878,
+						"publicHost": "http://localhost:7878",
+						"extraWebpackConfig": "projects/botafogo/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "fono:build:production",
-							"extraWebpackConfig": "projects/fono/webpack.prod.config.js"
+							"buildTarget": "botafogo:build:production",
+							"extraWebpackConfig": "projects/botafogo/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "fono:build:development"
+							"buildTarget": "botafogo:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
 				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"browserTarget": "fono:build",
-						"extraWebpackConfig": "projects/fono/webpack.config.js"
+						"lintFilePatterns": [
+							"projects/botafogo/src/**/*.ts",
+							"projects/botafogo/src/**/*.html"
+						]
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/fono/src/test.ts",
-						"polyfills": "projects/fono/src/polyfills.ts",
-						"tsConfig": "projects/fono/tsconfig.spec.json",
-						"karmaConfig": "projects/fono/karma.conf.js",
+						"main": "projects/botafogo/src/test.ts",
+						"polyfills": "projects/botafogo/src/polyfills.ts",
+						"tsConfig": "projects/botafogo/tsconfig.spec.json",
+						"karmaConfig": "projects/botafogo/karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/fono/src/favicon.ico",
-							"projects/fono/src/assets"
+							"projects/botafogo/src/favicon.ico",
+							"projects/botafogo/src/assets"
 						],
 						"styles": [
 							"src/styles.scss"
@@ -252,6 +284,5 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "angular-schematics-webcomponents"
+	}
 }

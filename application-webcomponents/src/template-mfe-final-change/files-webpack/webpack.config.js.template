@@ -6,7 +6,7 @@ const share = mf.share;
 
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
-  path.join(__dirname, '../../tsconfig.json'),
+  path.join(__dirname, '<%= pathPackage %>'),
   [/* mapped paths to share */]);
 
 module.exports = {
@@ -31,14 +31,15 @@ module.exports = {
       name: "<%= name %>",
       filename: "remoteEntry.js",
       exposes: {
-        './web-components': './projects/<%= name %>/src/bootstrap.ts',
-        './routes': './projects/<%= name %>/src/app/routes.ts',
+        './web-components': '<%= pathExposes %>/bootstrap.ts',
+        './routes': '<%= pathExposes %>/app/routes.ts',
       },
       shared: share({
         "@angular/core": { requiredVersion: "auto" },
         "@angular/common": { requiredVersion: "auto" },
         "@angular/router": { requiredVersion: "auto" },
         "rxjs": { requiredVersion: "auto" },
+        "@wizco/wizpro-tools": { requiredVersion: "auto" },
         ...sharedMappings.getDescriptors()
       })
     }),

@@ -14,13 +14,21 @@ import {
   move,
   noop, Rule, SchematicContext, SchematicsException, strings, Tree, url
 } from '@angular-devkit/schematics';
-import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
-import { Schema as ComponentOptions } from '@schematics/angular/component/schema';
+import { Schema as ComponentOptions, Style } from '@schematics/angular/component/schema';
 import { relativePathToWorkspaceRoot } from '@schematics/angular/utility/paths';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/workspace';
-import { Builders, ProjectType } from '@schematics/angular/utility/workspace-models';
+import { ProjectType } from '@schematics/angular/utility/workspace-models';
+import { OptionsDefaultModule } from '../types/options.types';
 
-function addScripts(option: ApplicationOptions): Rule {
+
+
+/**
+ * 
+ * @param option ApplicationOptions
+ * @returns Rule
+ * @description Adiciona os scripts de build e serve no package.json
+ */
+function addScripts(option: OptionsDefaultModule): Rule {
   const projectName = option.name || 'module';
   return (tree: Tree, _context: SchematicContext) => {
     _context.logger.info(`Criando script para build. ${projectName}`);
@@ -43,8 +51,14 @@ function addScripts(option: ApplicationOptions): Rule {
   };
 }
 
+/**
+ * 
+ * @param option ApplicationOptions, appDir string, folderName string
+ * @returns Rule
+ * @description Adiciona o app no arquivo workspace
+ */
 function addAppToWorkspaceFile(
-  options: ApplicationOptions,
+  options: OptionsDefaultModule,
   appDir: string,
   folderName: string,
 ): any {
@@ -72,26 +86,6 @@ function addAppToWorkspaceFile(
       componentSchematicsOptions.style = options.style;
     }
     schematics['@schematics/angular:component'] = componentSchematicsOptions;
-  }
-
-  if (options.skipTests || options.minimal) {
-    const schematicsWithTests = [
-      'class',
-      'component',
-      'directive',
-      'guard',
-      'interceptor',
-      'pipe',
-      'resolver',
-      'service',
-    ];
-
-    schematicsWithTests.forEach((type) => {
-      if (!(`@schematics/angular:${type}` in schematics)) {
-        schematics[`@schematics/angular:${type}`] = {};
-      }
-      (schematics[`@schematics/angular:${type}`] as JsonObject).skipTests = true;
-    });
   }
 
   const sourceRoot = join(normalize(projectRoot), 'src');
@@ -124,8 +118,6 @@ function addAppToWorkspaceFile(
     ];
   }
 
-  const inlineStyleLanguage = options?.style !== Style.Css ? options.style : undefined;
-
   const project = {
     root: normalize(projectRoot),
     sourceRoot,
@@ -142,7 +134,7 @@ function addAppToWorkspaceFile(
           main: `${sourceRoot}/main.ts`,
           polyfills: `${sourceRoot}/polyfills.ts`,
           tsConfig: `${projectRoot}tsconfig.app.json`,
-          inlineStyleLanguage,
+          inlineStyleLanguage: 'scss',
           assets: [
             `${sourceRoot}/favicon.ico`,
             `${sourceRoot}/assets`
@@ -203,19 +195,22 @@ function addAppToWorkspaceFile(
         },
         configurations: {
           production: {
-            browserTarget: `${options.name}:build:production`,
+            buildTarget: `${options.name}:build:production`,
             extraWebpackConfig: `${options.name}/webpack.prod.config.js`
           },
           development: {
-            browserTarget: `${options.name}:build:development`,
+            buildTarget: `${options.name}:build:development`,
           },
         },
       },
-      'extract-i18n': {
-        builder: Builders.ExtractI18n,
-        options: {
-          browserTarget: `${options.name}:build`,
-        },
+      lint: {
+        "builder": "@angular-eslint/builder:lint",
+        "options": {
+          "lintFilePatterns": [
+            `${sourceRoot}/**/*.ts`,
+            `${sourceRoot}/**/*.html`,
+          ]
+        }
       },
       test: options.minimal
         ? undefined
@@ -226,7 +221,7 @@ function addAppToWorkspaceFile(
               polyfills: `${sourceRoot}/polyfills.ts`,
               tsConfig: `${projectRoot}tsconfig.spec.json`,
               karmaConfig: `${projectRoot}karma.conf.js`,
-              inlineStyleLanguage,
+              inlineStyleLanguage: 'scss',
               assets: [
                 `${sourceRoot}/favicon.ico`,
                 `${sourceRoot}/assets`
@@ -255,28 +250,21 @@ function minimalPathFilter(path: string): boolean {
 }
 
 
-export default function (options: ApplicationOptions): Rule {
+export default function (options: OptionsDefaultModule): Rule {
   return async (host: Tree) => {
     const appRootSelector = `${options.prefix}-module`;
-    const componentOptions: Partial<ComponentOptions> = !options.minimal
-      ? {
-          inlineStyle: options.inlineStyle,
-          inlineTemplate: options.inlineTemplate,
-          skipTests: options.skipTests,
-          style: options.style,
-          viewEncapsulation: options.viewEncapsulation,
-        }
-      : {
-          inlineStyle: options.inlineStyle ?? true,
-          inlineTemplate: options.inlineTemplate ?? true,
-          skipTests: true,
-          style: options.style,
-          viewEncapsulation: options.viewEncapsulation,
-        };
+    const componentOptions: Partial<ComponentOptions> =  { // Deixa o componente com inlineStyle e inlineTemplate
+      inlineStyle: false,
+      inlineTemplate: false,
+      skipTests: true,
+      style: Style.Scss,
+      viewEncapsulation: options.viewEncapsulation,
+      standalone: true
+    };
 
     const workspace = await getWorkspace(host);
     const newProjectRoot = (workspace.extensions.newProjectRoot as string | undefined) || '';
-    const isRootApp = options.projectRoot !== undefined;
+    const isRootApp = options.folderModule === 'raiz'
 
     // If scoped project (i.e. "@foo/bar"), convert dir to "foo/bar".
     let folderName = options.name.startsWith('@') ? options.name.slice(1) : options.name;
@@ -290,12 +278,14 @@ export default function (options: ApplicationOptions): Rule {
     const sourceDir = `${appDir}/src/app`;
 
     return chain([
+      /// 
       addScripts(options),
       addAppToWorkspaceFile(options, appDir, folderName),
       mergeWith(
         apply(url('./files'), [
           options.minimal ? filter(minimalPathFilter) : noop(),
           applyTemplates({
+            pathPackage: options.folderModule === 'raiz' ? '../package.json' : `../../../package.json`,
             utils: strings,
             ...options,
             relativePathToWorkspaceRoot: relativePathToWorkspaceRoot(appDir),

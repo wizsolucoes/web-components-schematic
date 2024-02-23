@@ -15,12 +15,9 @@ import {
   SchematicContext, 
   Tree, 
   url,
-  MergeStrategy,
-
+  MergeStrategy
 } from '@angular-devkit/schematics';
-
-
-
+import { OptionsDefaultModule } from '../types/options.types';
 
 function addPipelineDefault(name: string): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -37,31 +34,7 @@ function addPipelineDefault(name: string): Rule {
   };
 }
 
-
-// function addDependenciesAngularMaterial(options: { name: string }): Rule {
-//   return (tree: Tree, context: SchematicContext) => {
-
-//     context.addTask(new NodePackageInstallTask({
-//         packageManager: 'npm',
-//         packageName: '@angular/cdk @angular/material'
-//     }));
-//     context.logger.info('Adicionando a dependência Angular Material...');
-    
-//     externalSchematic('@angular/material', 'ng-add', {
-//       interactive: false
-//     });
-
-//     tree.overwrite(`projects/${options.name}/src/app/app.component.scss`, `
-// @import '../style-material.scss';
-//     `);
-
-//     return tree;
-//   }
-// }
-
-
-export default function (options: { port: string, name: string, materialuser: boolean, prefix: string }): Rule {
-  
+export default function (options: OptionsDefaultModule): Rule {
   return () => {
     const templateSource = apply(url('./root-files'), [
       move('/')
