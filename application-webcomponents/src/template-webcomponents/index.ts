@@ -42,8 +42,9 @@ function addScripts(option: OptionsDefaultModule): Rule {
     const scripts = packageJsonObject.scripts;
     
     scripts['start:module'] = `ng serve --project ${projectName}`;
-    scripts['extra:build'] = `ng build --project ${projectName} --output-hashing none --aot --build-optimizer`;
-    scripts['extra:build:staging'] = `ng build --configuration=staging --project ${projectName} --output-hashing none --aot --build-optimizer`;
+    scripts['build:module'] = `ng build --project ${projectName} --output-hashing none --aot --build-optimizer`;
+    scripts['build:module:staging'] = `ng build --configuration staging --project ${projectName} --output-hashing none --aot --build-optimizer`;
+    scripts['build:module:sandbox'] = `ng build --configuration sandbox --project ${projectName} --output-hashing none --aot --build-optimizer`;
     
     tree.overwrite('package.json', JSON.stringify(packageJsonObject, null, 2));
 
