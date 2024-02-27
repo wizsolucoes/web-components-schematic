@@ -118,6 +118,13 @@ function addAppToWorkspaceFile(
     ];
   }
 
+  const buildOptionsProd = options.versionAngular === '17' ? 
+    `buildTarget: ${options.name}:build:production` : 
+    `browserTarget: ${options.name}:build:production`;
+  const buildOptionsDev =
+    options.versionAngular === '17'
+      ? `buildTarget: ${options.name}:build:development`
+      : `browserTarget: ${options.name}:build:development`;
   const project = {
     root: normalize(projectRoot),
     sourceRoot,
@@ -126,7 +133,7 @@ function addAppToWorkspaceFile(
     schematics,
     targets: {
       build: {
-        builder: "ngx-build-plus:browser",
+        builder: 'ngx-build-plus:browser',
         defaultConfiguration: 'production',
         options: {
           outputPath: `dist/${folderName}`,
@@ -135,13 +142,8 @@ function addAppToWorkspaceFile(
           polyfills: `${sourceRoot}/polyfills.ts`,
           tsConfig: `${projectRoot}tsconfig.app.json`,
           inlineStyleLanguage: 'scss',
-          assets: [
-            `${sourceRoot}/favicon.ico`,
-            `${sourceRoot}/assets`
-          ],
-          styles: [
-            `${sourceRoot}/styles.${options.style}`
-          ],
+          assets: [`${sourceRoot}/favicon.ico`, `${sourceRoot}/assets`],
+          styles: [`${sourceRoot}/styles.${options.style}`],
           scripts: [],
         },
         configurations: {
@@ -190,45 +192,40 @@ function addAppToWorkspaceFile(
         defaultConfiguration: 'development',
         options: {
           port: 5300,
-          publicHost: "http://localhost:5300",
-          extraWebpackConfig: `${options.name}/webpack.config.js`
+          publicHost: 'http://localhost:5300',
+          extraWebpackConfig: `${options.name}/webpack.config.js`,
         },
         configurations: {
           production: {
-            buildTarget: `${options.name}:build:production`,
-            extraWebpackConfig: `${options.name}/webpack.prod.config.js`
+            buildOptionsProd,
+            extraWebpackConfig: `${options.name}/webpack.prod.config.js`,
           },
           development: {
-            buildTarget: `${options.name}:build:development`,
+            buildOptionsDev
           },
         },
       },
       lint: {
-        "builder": "@angular-eslint/builder:lint",
-        "options": {
-          "lintFilePatterns": [
+        builder: '@angular-eslint/builder:lint',
+        options: {
+          lintFilePatterns: [
             `${sourceRoot}/**/*.ts`,
             `${sourceRoot}/**/*.html`,
-          ]
-        }
+          ],
+        },
       },
       test: options.minimal
         ? undefined
         : {
-            builder: "ngx-build-plus:karma",
+            builder: 'ngx-build-plus:karma',
             options: {
               main: `${sourceRoot}/test.ts`,
               polyfills: `${sourceRoot}/polyfills.ts`,
               tsConfig: `${projectRoot}tsconfig.spec.json`,
               karmaConfig: `${projectRoot}karma.conf.js`,
               inlineStyleLanguage: 'scss',
-              assets: [
-                `${sourceRoot}/favicon.ico`,
-                `${sourceRoot}/assets`
-              ],
-              styles: [
-                `src/styles.${options.style}`
-              ],
+              assets: [`${sourceRoot}/favicon.ico`, `${sourceRoot}/assets`],
+              styles: [`src/styles.${options.style}`],
               scripts: [],
             },
           },

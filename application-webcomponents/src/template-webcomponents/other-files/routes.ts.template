@@ -27,8 +27,8 @@ export const APP_ROUTES: RouteModule[] = [
         canActivate: [guardWizRoles],
         data: {
             permission: { // TODO: mudar Informações 
-                prefix: 'wiz.EXEMPLO.<%= name %>', 
-                redirectTo: 'terms/error',
+                prefix: 'wiz.<%= name %>', 
+                redirectTo: 'error',
                 roles: ['administrador']
             },
             breadcrumb: [

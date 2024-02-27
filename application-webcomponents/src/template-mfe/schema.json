@@ -26,7 +26,7 @@
       "description": "Deseja criar o módulo no projeto raiz ou projects ?",
       "type": "string",
       "enum": ["projects", "raiz"],
-      "default": "projects",
+      "default": "raiz",
       "x-prompt": {
         "message": "Deseja criar o módulo na pasta raiz ou projects ?",
         "type": "list",

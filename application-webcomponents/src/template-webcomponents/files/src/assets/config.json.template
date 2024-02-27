@@ -8,8 +8,8 @@
   "layout": "dashboard",
   "title": "add um título no arquivo config.json",
   "description": "add um descrição no arquivo config.json",
-  "icon": "Adiciona um ícone do IconMaterial",
-  "urlRepository": "add url do repositório no congig.json",
+  "icon": "hourglass_top",
+  "urlRepository": "add url do repositório no config.json",
   "hasWidget": true,
   "active": true,
   "isPrivate": true
