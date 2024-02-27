@@ -1,6 +1,6 @@
 {
   "name": "@wizco/wizpro-tools",
-  "version": "17.0.13",
+  "version": "17.0.14",
   "peerDependencies": {
     "jwt-decode": "^4.0.0"
   },
@@ -13,14 +13,5 @@
     "access": "public"
   },
   "author": "Raul Melo",
-  "contributors": [
-    {
-      "name": "Raul Fernandez"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wizsolucoes/web-components-schematic/issues"
-  },
-  "homepage": "https://github.com/wizsolucoes/web-components-schematic#readme"
+  "license": "MIT"
 }

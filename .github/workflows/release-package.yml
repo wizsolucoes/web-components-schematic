@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
+          scope: '@wizco'
           always-auth: true
       - run: |
           cd application-webcomponents
