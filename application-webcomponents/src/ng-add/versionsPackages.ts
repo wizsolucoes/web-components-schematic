@@ -1,8 +1,8 @@
 export const packagesVersions = {
   17: [
-    '@angular-architects/module-federation@17.0.1',
-    '@angular-eslint/schematics@17.2.x',
-    '@angular/elements@17.1.2',
+    '@angular-architects/module-federation@17.x',
+    '@angular-eslint/schematics@17.x',
+    '@angular/elements@17.x',
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
     '@wizco/wizpro-tools',

@@ -24,7 +24,7 @@ function addPipelineDefault(name: string): Rule {
     context.logger.info('Adicionando o pipeline default...');
     let textPipeline = tree.read(`azure-pipelines.yml`)!.toString('utf-8');
 
-    if (!!textPipeline) {
+    if (textPipeline) {
       textPipeline = textPipeline.replace(/<%= folderName%>/g, name);
     }
 
