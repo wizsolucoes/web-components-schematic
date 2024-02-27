@@ -47,7 +47,7 @@ export const getWizcoUser = () => {
 };
 
 /**
- * @description Retorna o tenant do usuário
+ * @description Retorna o tenant 
  * @example getWizcoTenant()
  * @returns any
 */

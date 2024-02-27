@@ -1,6 +1,6 @@
 {
   "name": "@wizco/schematics-webcomponents",
-  "version": "16.3.3",
+  "version": "17.0.0",
   "description": "Wizpro angular schematics for module MFE",
   "scripts": {
     "build": "tsc -p tsconfig.json",
