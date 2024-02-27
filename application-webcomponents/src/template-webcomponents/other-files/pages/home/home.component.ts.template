@@ -1,18 +1,174 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-home-example',
+  template: `
+    <div class="grid-example-home container-wco">
+      <div class="grid-example-home__container">
+        <div class="grid-example-home__item">
+          <h1 class="display-2 bold"><%= name %></h1>
+          <p>Fique por dentro do nosso ecosistema Wizpro</p>
+        </div>
+        <div class="grid-example-home__slider">
+          <ng-container *ngFor="let card of cards; let i = index">
+            <div
+              class="cardHome__module"
+              [ngStyle]="{ '--initialCardHome-delay': i * 100 + 'ms' }"
+            >
+              <div>
+                <h4 class="cardHome__module--title">
+                  <i class="material-icons">{{ card.icon }}</i>
+                  {{ card.title }}
+                </h4>
+                <p class="cardHome__module--description">
+                  {{ card.description }}
+                </p>
+              </div>
+              <footer class="cardHome__module--action">
+                <a
+                  [href]="card.link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="wco-btn btn-sm  btn-basic btn-primary"
+                >
+                  Acessar
+                  <span class="material-icons-round">arrow_forward</span>
+                </a>
+              </footer>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="
+            p-xxxs 
+            bg-netraul-50 
+            inline-flex 
+            flex-col
+            mt-md
+          "
+        style="border-radius: 8px;"
+      >
+        <h2 class="display-5 bold">Outras informações</h2>
+        <p class="display-p">
+          Preencha o arquivo <strong><code>/assets/config.json</code></strong>
+        </p>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      .grid-example-home__container {
+        display: grid;
+        gap: var(--wco-spacing-xxs);
+        padding: var(--wco-spacing-md);
+        grid-template-columns: 200px 1fr;
+      }
+
+      .grid-example-home__slider {
+        display: grid;
+        width: var(--cardsModules-size, 100%);
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--wco-spacing-xxs);
+        transition: all 500ms ease-in-out;
+        @media screen and (max-width: 1024px) {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        @media screen and (max-width: 768px) {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        @media screen and (max-width: 500px) {
+          grid-template-columns: 1fr;
+        }
+      }
+      .cardHome__module {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--wco-spacing-xxs);
+        padding: var(--wco-spacing-xxs);
+        border: 1px solid var(--wco-color-neutral-500);
+        background-color: var(--wco-color-neutral-50);
+        border-radius: var(--wco-radius-md);
+        width: 100%;
+        max-width: 300px;
+        transform-origin: center;
+        transition: all 500ms ease-in-out;
+        animation: initialCardHome 500ms ease-in-out
+          var(--initialCardHome-delay, 0ms) backwards;
+        @keyframes initialCardHome {
+          0% {
+            transform: translateX(300px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        &:has(button:active) {
+          border: 1px solid var(--wco-color-primary-600);
+          background-color: var(--wco-color-primary-50);
+        }
+        &--isDEV {
+          background-color: var(--wco-color-primary-50);
+          border: 1px solid var(--wco-color-primary-500);
+          border-style: dashed;
+        }
+        &--title {
+          font-family: var(--wco-font-family);
+          font-size: var(--wco-font-size-sm, 18px);
+          font-weight: var(--wco-font-weight-bold);
+          color: var(--wco-color-neutral-900);
+          padding-bottom: var(--wco-spacing-nano);
+          line-height: 1;
+          letter-spacing: 0.45px;
+          display: flex;
+          align-items: center;
+          gap: var(--wco-spacing-nano);
+          i {
+            font-size: var(--wco-font-size-xs, 18px);
+            line-height: 1;
+            color: var(--wco-color-primary-600);
+          }
+        }
+        button {
+          span {
+            font-size: var(--wco-font-size-xs, 18px);
+          }
+        }
+      }
+    `,
+  ],
   standalone: true,
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, RouterModule],
 })
-
 export class HomeComponent {
-    
-    constructor() {
+  constructor() {
+    this.getDataEcosystem();
+  }
 
-    }
+  public cards: { title: string; description: string; icon: string; link: string }[] = [];
+
+  getDataEcosystem() {
+    fetch(
+      'https://raw.githubusercontent.com/wizsolucoes/web-components-schematic/master/sripts/data.json'
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        const { data = [] } = response;
+        if (data.length > 0) {
+          this.cards = data;
+        }
+      });
+  }
 }
