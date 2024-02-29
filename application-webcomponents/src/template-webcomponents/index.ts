@@ -54,6 +54,43 @@ function addScripts(option: OptionsDefaultModule): Rule {
 
 /**
  * 
+ * @param option ApplicationOptions
+ * @returns Rule
+ * @description Atualiza o arquivo angular.json se o projeto for raiz 
+ */
+function angularJsonUpdateRoot(options: OptionsDefaultModule): any {
+  return async (host: Tree, _context: SchematicContext) => {
+    const workspace = await getWorkspace(host);
+
+    // Verifica se a condição desejada é atendida ('raiz')
+    if (options.folderModule === 'raiz') {
+      // Coleta os nomes dos projetos a serem deletados
+      const projectsToDelete: string[] = [];
+      workspace.projects.forEach((project, projectName) => {
+        if (project.extensions.projectType === 'application') {
+          const valuesConfig = project.targets.values().next().value;
+          if (valuesConfig.options.main === 'src/main.ts' && projectName !== options.name) {
+            projectsToDelete.push(projectName); // Adiciona o nome do projeto à lista de deleção
+          }
+        }
+      });
+
+      // Se houver projetos para deletar, atualiza o workspace
+      if (projectsToDelete.length > 0) {
+        await updateWorkspace((workspace) => {
+          projectsToDelete.forEach((projectName) => {
+            workspace.projects.delete(projectName); // Deleta o projeto
+          });
+        })(host, _context as any); 
+      }
+    }
+
+    return host;
+  };
+}
+
+/**
+ * 
  * @param option ApplicationOptions, appDir string, folderName string
  * @returns Rule
  * @description Adiciona o app no arquivo workspace
@@ -119,13 +156,7 @@ function addAppToWorkspaceFile(
     ];
   }
 
-  const buildOptionsProd = options.versionAngular === '17' ? 
-    `buildTarget: ${options.name}:build:production` : 
-    `browserTarget: ${options.name}:build:production`;
-  const buildOptionsDev =
-    options.versionAngular === '17'
-      ? `buildTarget: ${options.name}:build:development`
-      : `browserTarget: ${options.name}:build:development`;
+
   const project = {
     root: normalize(projectRoot),
     sourceRoot,
@@ -198,11 +229,11 @@ function addAppToWorkspaceFile(
         },
         configurations: {
           production: {
-            buildOptionsProd,
+            buildTarget: `${options.name}:build:production`,
             extraWebpackConfig: `${options.name}/webpack.prod.config.js`,
           },
           development: {
-            buildOptionsDev
+            buildTarget: `${options.name}:build:development`,
           },
         },
       },
@@ -261,6 +292,7 @@ export default function (options: OptionsDefaultModule): Rule {
     };
 
     const workspace = await getWorkspace(host);
+
     const newProjectRoot = (workspace.extensions.newProjectRoot as string | undefined) || '';
     const isRootApp = options.folderModule === 'raiz'
 
@@ -315,7 +347,8 @@ export default function (options: OptionsDefaultModule): Rule {
           move(sourceDir),
         ]),
         MergeStrategy.Overwrite
-      )
+      ),
+      angularJsonUpdateRoot(options)
     ]);
   };
 }

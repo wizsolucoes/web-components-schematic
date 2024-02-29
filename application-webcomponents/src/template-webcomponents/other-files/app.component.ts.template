@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WcoService } from '@wizco/wizpro-tools';
 

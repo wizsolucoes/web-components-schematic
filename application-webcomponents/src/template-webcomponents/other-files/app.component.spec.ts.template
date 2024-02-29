@@ -1,35 +1,53 @@
-import { TestBed } from '@angular/core/testing';<% if (routing) { %>
-import { RouterTestingModule } from '@angular/router/testing';<% } %>
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
+import { WcoService } from '@wizco/wizpro-tools';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HomeComponent } from './pages/home/home.component';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let wcoService: WcoService;
+  let router: Router;
+
   beforeEach(async () => {
-    await TestBed.configureTestingModule({<% if (routing) { %>
-      imports: [
-        RouterTestingModule
-      ],<% } %>
-      declarations: [
-        AppComponent
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent],
+        imports: [
+          RouterTestingModule.withRoutes([
+            { path: '', component: AppComponent },
+            { path: 'home', component: HomeComponent },
+          ]),
+        ],
+      providers: [
+        {
+          provide: WcoService,
+          useValue: jasmine.createSpyObj('WcoService', ['connectRouter']),
+        },
+        {
+          provide: Router,
+          useValue: jasmine.createSpyObj('Router', ['navigate']),
+        },
       ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title '<%= name %>'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('<%= name %>');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    wcoService = TestBed.inject(WcoService);
+    router = TestBed.inject(Router);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('<%= name %> app is running!');
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should call connectRouter on init when not a widget', () => {
+    component.widget = false;
+    component.ngAfterViewInit();
+    expect(wcoService.connectRouter).toHaveBeenCalledWith(router);
   });
 });

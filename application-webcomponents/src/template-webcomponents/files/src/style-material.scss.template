@@ -31,16 +31,16 @@ $md-primary: (
 );
 
 $md-mcgpalette1: (
-  50: var(--wco-color-secondary-50, #fff0e4),
-  100: var(--wco-color-secondary-100, #ffb578),
-  200: var(--wco-color-secondary-100, #ffb578),
-  300: var(--wco-color-secondary-300, #ff8826),
-  400: var(--wco-color-secondary-300, #ff8826),
-  500: var(--wco-color-secondary-500, #fa780c),
-  600: var(--wco-color-secondary-600, #bf5600),
-  700: var(--wco-color-secondary-700, #bf5600),
-  800: var(--wco-color-secondary-700, #8f4000),
-  900: var(--wco-color-secondary-900, #301600),
+  50: var(--wco-color-primary-50, #fff0e4),
+  100: var(--wco-color-primary-100, #ffb578),
+  200: var(--wco-color-primary-100, #ffb578),
+  300: var(--wco-color-primary-300, #ff8826),
+  400: var(--wco-color-primary-300, #ff8826),
+  500: var(--wco-color-primary-500, #fa780c),
+  600: var(--wco-color-primary-600, #bf5600),
+  700: var(--wco-color-primary-700, #bf5600),
+  800: var(--wco-color-primary-700, #8f4000),
+  900: var(--wco-color-primary-900, #301600),
   contrast: (
     50: #000000,
     100: #000000,

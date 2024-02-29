@@ -3,100 +3,6 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"angular-schematics-webcomponents": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss"
-				}
-			},
-			"root": "",
-			"sourceRoot": "src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
-						"outputPath": "dist/angular-schematics-webcomponents",
-						"index": "src/index.html",
-						"main": "src/main.ts",
-						"polyfills": [
-							"zone.js"
-						],
-						"tsConfig": "tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"src/favicon.ico",
-							"src/assets"
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": []
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "angular-schematics-webcomponents:build:production"
-						},
-						"development": {
-							"buildTarget": "angular-schematics-webcomponents:build:development"
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"src/favicon.ico",
-							"src/assets"
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": []
-					}
-				}
-			}
-		},
 		"wizpro-tools": {
 			"projectType": "library",
 			"root": "libs/wizpro-tools",
@@ -117,48 +23,38 @@
 						}
 					},
 					"defaultConfiguration": "production"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"tsConfig": "libs/wizpro-tools/tsconfig.spec.json",
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						]
-					}
 				}
 			}
 		},
-		"botafogo": {
+		"kol": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
 				}
 			},
-			"root": "projects/botafogo",
-			"sourceRoot": "projects/botafogo/src",
-			"prefix": "bfg",
+			"root": "",
+			"sourceRoot": "src",
+			"prefix": "app",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/botafogo",
-						"index": "projects/botafogo/src/index.html",
-						"main": "projects/botafogo/src/main.ts",
-						"polyfills": "projects/botafogo/src/polyfills.ts",
-						"tsConfig": "projects/botafogo/tsconfig.app.json",
+						"outputPath": "dist/kol",
+						"index": "src/index.html",
+						"main": "src/main.ts",
+						"polyfills": "src/polyfills.ts",
+						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/botafogo/src/favicon.ico",
-							"projects/botafogo/src/assets"
+							"src/favicon.ico",
+							"src/assets"
 						],
 						"styles": [
-							"projects/botafogo/src/styles.scss"
+							"src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/botafogo/webpack.config.js",
+						"extraWebpackConfig": "webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -177,12 +73,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/botafogo/src/environments/environment.ts",
-									"with": "projects/botafogo/src/environments/environment.prod.ts"
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/botafogo/webpack.prod.config.js"
+							"extraWebpackConfig": "webpack.prod.config.js"
 						},
 						"staging": {
 							"budgets": [
@@ -199,8 +95,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/botafogo/src/environments/environment.ts",
-									"with": "projects/botafogo/src/environments/environment.staging.ts"
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.staging.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -220,8 +116,8 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/botafogo/src/environments/environment.ts",
-									"with": "projects/botafogo/src/environments/environment.sandbox.ts"
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.sandbox.ts"
 								}
 							],
 							"outputHashing": "all"
@@ -240,17 +136,17 @@
 				"serve": {
 					"builder": "ngx-build-plus:dev-server",
 					"options": {
-						"port": 7878,
-						"publicHost": "http://localhost:7878",
-						"extraWebpackConfig": "projects/botafogo/webpack.config.js"
+						"port": 4430,
+						"publicHost": "http://localhost:4430",
+						"extraWebpackConfig": "webpack.config.js"
 					},
 					"configurations": {
 						"production": {
-							"buildTarget": "botafogo:build:production",
-							"extraWebpackConfig": "projects/botafogo/webpack.prod.config.js"
+							"buildTarget": "kol:build:production",
+							"extraWebpackConfig": "webpack.prod.config.js"
 						},
 						"development": {
-							"buildTarget": "botafogo:build:development"
+							"buildTarget": "kol:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -259,22 +155,22 @@
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
 						"lintFilePatterns": [
-							"projects/botafogo/src/**/*.ts",
-							"projects/botafogo/src/**/*.html"
+							"src/**/*.ts",
+							"src/**/*.html"
 						]
 					}
 				},
 				"test": {
 					"builder": "ngx-build-plus:karma",
 					"options": {
-						"main": "projects/botafogo/src/test.ts",
-						"polyfills": "projects/botafogo/src/polyfills.ts",
-						"tsConfig": "projects/botafogo/tsconfig.spec.json",
-						"karmaConfig": "projects/botafogo/karma.conf.js",
+						"main": "src/test.ts",
+						"polyfills": "src/polyfills.ts",
+						"tsConfig": "tsconfig.spec.json",
+						"karmaConfig": "karma.conf.js",
 						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/botafogo/src/favicon.ico",
-							"projects/botafogo/src/assets"
+							"src/favicon.ico",
+							"src/assets"
 						],
 						"styles": [
 							"src/styles.scss"

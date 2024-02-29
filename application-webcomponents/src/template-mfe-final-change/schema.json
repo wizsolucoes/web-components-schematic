@@ -55,8 +55,8 @@
     "path": {
       "description": "test",
       "type": "string",
-      "x-prompt": "Qual será a rota  padrão do seu módulo ? exemplo: /home",
-      "default": "/home"
+      "x-prompt": "Qual será a rota  padrão do seu módulo ? exemplo: home",
+      "default": "home"
     },
     "inlineStyle": {
       "description": "Include styles inline in the root component.ts file. Only CSS styles can be included inline. Default is false, meaning that an external styles file is created and referenced in the root component.ts file.",

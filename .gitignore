@@ -50,3 +50,5 @@ Thumbs.db
 karma.conf.js
 .browserslistrc
 eslintrc.json
+
+src/**/*
