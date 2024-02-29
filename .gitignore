@@ -52,3 +52,4 @@ karma.conf.js
 eslintrc.json
 
 src/**/*
+webpack.config.js

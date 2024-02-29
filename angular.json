@@ -23,10 +23,20 @@
 						}
 					},
 					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "libs/wizpro-tools/tsconfig.spec.json",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						]
+					}
 				}
 			}
 		},
-		"kol": {
+		"rural": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -35,12 +45,12 @@
 			},
 			"root": "",
 			"sourceRoot": "src",
-			"prefix": "app",
+			"prefix": "rrl",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/kol",
+						"outputPath": "dist/rural",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -142,11 +152,11 @@
 					},
 					"configurations": {
 						"production": {
-							"buildTarget": "kol:build:production",
+							"buildTarget": "rural:build:production",
 							"extraWebpackConfig": "webpack.prod.config.js"
 						},
 						"development": {
-							"buildTarget": "kol:build:development"
+							"buildTarget": "rural:build:development"
 						}
 					},
 					"defaultConfiguration": "development"

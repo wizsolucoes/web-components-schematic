@@ -14,14 +14,14 @@
     "schematics:build": "yarn --cwd ./application-webcomponents build",
     "schematics:link": "npm unlink ./application-webcomponents && npm link ./application-webcomponents",
     "wiztools:publish": "ng build wizpro-tools && npm publish ./dist/wizpro-tools",
-    "start:module": "ng serve --project kol",
+    "start:module": "ng serve --project rural",
     "extra:build": "ng build --project botafogo --output-hashing none --aot --build-optimizer",
     "extra:build:staging": "ng build --configuration=staging --project botafogo --output-hashing none --aot --build-optimizer",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
     "lint": "ng lint",
-    "build:module": "ng build --project kol --output-hashing none --aot --build-optimizer",
-    "build:module:staging": "ng build --configuration staging --project kol --output-hashing none --aot --build-optimizer",
-    "build:module:sandbox": "ng build --configuration sandbox --project kol --output-hashing none --aot --build-optimizer"
+    "build:module": "ng build --project rural --output-hashing none --aot --build-optimizer",
+    "build:module:staging": "ng build --configuration staging --project rural --output-hashing none --aot --build-optimizer",
+    "build:module:sandbox": "ng build --configuration sandbox --project rural --output-hashing none --aot --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +32,7 @@
     "@angular/common": "^17.1.2",
     "@angular/compiler": "^17.1.2",
     "@angular/core": "^17.1.2",
-    "@angular/elements": "^17.2.2",
+    "@angular/elements": "^17.2.3",
     "@angular/forms": "^17.1.2",
     "@angular/platform-browser": "^17.1.2",
     "@angular/platform-browser-dynamic": "^17.1.2",

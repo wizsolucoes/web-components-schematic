@@ -335,9 +335,6 @@ export default function (options: OptionsDefaultModule): Rule {
           componentOptions.inlineTemplate
             ? filter((path) => !path.endsWith('.html.template'))
             : noop(),
-          componentOptions.skipTests
-            ? filter((path) => !path.endsWith('.spec.ts.template'))
-            : noop(),
           applyTemplates({
             utils: strings,
             ...options,

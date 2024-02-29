@@ -11,7 +11,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "kol",
+    uniqueName: "rural",
     publicPath: "auto"
   },
   optimization: {
@@ -28,7 +28,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       library: { type: "module" },
-      name: "kol",
+      name: "rural",
       filename: "remoteEntry.js",
       exposes: {
         './web-components': 'src/bootstrap.ts',
