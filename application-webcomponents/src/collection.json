@@ -31,6 +31,11 @@
       "factory": "./template-mfe-final-change",
       "schema": "./template-mfe-final-change/schema.json",
       "description": "Modificador Webpack"
+    },
+    "env-b2c": {
+      "factory": "./env-b2c",
+      "schema": "./env-b2c/schema.json",
+      "description": "Inserir variáveis de ambiente"
     }
   }
 }
