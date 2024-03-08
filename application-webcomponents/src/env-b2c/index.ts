@@ -41,10 +41,11 @@ function addPipelineDefault(): Rule {
         const sandboxConfig = projects[project].architect.build.configurations.sandbox;
         const local = sandboxConfig['fileReplacements'][0]['with'];
         const localSandbox = tree.read(local)!.toString('utf-8');
-        tree.overwrite(
-          local.replace('environment.sandbox.ts', 'environment.b2c.ts'),
-          localSandbox
-        );
+        const localB2CPath = local.replace('environment.sandbox.ts', 'environment.b2c.ts');
+        if(tree.exists(localB2CPath)) {
+          tree.delete(localB2CPath);
+        }
+        tree.create(localB2CPath, localSandbox);
         // script para adicionar no angular.json
         projects[project].architect.build.configurations['b2c'] = {
           ...sandboxConfig,
