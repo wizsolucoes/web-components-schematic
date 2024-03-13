@@ -5,6 +5,7 @@
   "type": "web-components",
   "exposedModule": "./web-components",
   "breadcrumb": "<%= name %>",
+  "digitalProduct: "<%= produtoDigital %>",
   "layout": "dashboard",
   "title": "add um título no arquivo config.json",
   "description": "add um descrição no arquivo config.json",

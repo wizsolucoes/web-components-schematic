@@ -19,13 +19,15 @@ import {
 } from '@angular-devkit/schematics';
 import { OptionsDefaultModule } from '../types/options.types';
 
-function addPipelineDefault(name: string): Rule {
+function addPipelineDefault(name: string, produtoDigital: string): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.info('Adicionando o pipeline default...');
     let textPipeline = tree.read(`azure-pipelines.yml`)!.toString('utf-8');
 
     if (textPipeline) {
-      textPipeline = textPipeline.replace(/<%= folderName%>/g, name);
+      textPipeline = textPipeline
+        .replace(/<%= folderName%>/g, name)
+        .replace(/<%= PRODUCT_NAME%>/g, produtoDigital);
     }
 
     tree.overwrite(`azure-pipelines.yml` , textPipeline);
@@ -41,7 +43,7 @@ export default function (options: OptionsDefaultModule): Rule {
     ]);
     return chain([
       mergeWith(templateSource, MergeStrategy.Overwrite),
-      addPipelineDefault(options.name)
+      addPipelineDefault(options.name, options.produtoDigital)
     ]);
   };
 }

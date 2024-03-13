@@ -7,19 +7,22 @@
  */
 
 import {
+  apply,
   chain,
+  MergeStrategy,
+  mergeWith,
+  move,
   Rule, 
   SchematicContext, 
   SchematicsException, 
-  Tree, 
+  Tree,
+  url, 
 } from '@angular-devkit/schematics';
+import { OptionsDefaultModule } from '../types/options.types';
 
-function addPipelineDefault(): Rule {
+function addStepb2c(options: OptionsDefaultModule): Rule {
   return (tree: Tree, context: SchematicContext) => {
-
-    // eslint-disable-next-line no-debugger
-    debugger
-    context.logger.info('Adicionando o pipeline default...');
+    context.logger.info('Adicionando angular.json');
     const angularJson = tree.read(`angular.json`)!.toString('utf-8');
 
     if (!angularJson) {
@@ -28,6 +31,7 @@ function addPipelineDefault(): Rule {
 
     const packageJsonObject = JSON.parse(angularJson.toString());
     const projects = packageJsonObject.projects;
+    const projectsKeys = [];
 
     for (const project in projects) {
       if (
@@ -38,13 +42,18 @@ function addPipelineDefault(): Rule {
         projects[project].architect.build.configurations.sandbox
       ) {
         // script para criar o arquivo environment.b2c.ts
-        const sandboxConfig = projects[project].architect.build.configurations.sandbox;
+        const sandboxConfig =
+          projects[project].architect.build.configurations.sandbox;
         const local = sandboxConfig['fileReplacements'][0]['with'];
         const localSandbox = tree.read(local)!.toString('utf-8');
-        const localB2CPath = local.replace('environment.sandbox.ts', 'environment.b2c.ts');
-        if(tree.exists(localB2CPath)) {
+        const localB2CPath = local.replace(
+          'environment.sandbox.ts',
+          'environment.b2c.ts'
+        );
+        if (tree.exists(localB2CPath)) {
           tree.delete(localB2CPath);
         }
+        projectsKeys.push(`      - ${project}`);
         tree.create(localB2CPath, localSandbox);
         // script para adicionar no angular.json
         projects[project].architect.build.configurations['b2c'] = {
@@ -52,7 +61,10 @@ function addPipelineDefault(): Rule {
           fileReplacements: [
             {
               replace: sandboxConfig['fileReplacements'][0]['replace'],
-              with: local.replace('environment.sandbox.ts', 'environment.b2c.ts' ),
+              with: local.replace(
+                'environment.sandbox.ts',
+                'environment.b2c.ts'
+              ),
             },
           ],
         };
@@ -64,15 +76,33 @@ function addPipelineDefault(): Rule {
       projects: projects,
     };
 
+    if (projectsKeys.length > 0) {
+      context.logger.info('Trocando pipeline de build para b2c');
+
+      /// pegando novo template de pipeline
+      let textPipeline = tree.read(`azure-pipelines.yml`)!.toString('utf-8');
+      if (textPipeline) {
+        const templateModules = projectsKeys.join('');
+        // eslint-disable-next-line no-debugger
+        textPipeline = textPipeline
+          .replace(/<%= PROJECTS_NAMES%>/g, templateModules)
+          .replace(/<%= PRODUCT_NAME%>/g, options.produtoDigital);
+
+        tree.overwrite(`azure-pipelines.yml`, textPipeline);
+      }
+    }
+
     tree.overwrite(`angular.json`, JSON.stringify(newAngular, null, 2));
-    return tree
+    return tree;
   };
 }
 
-export default function (): Rule {
+export default function (options: OptionsDefaultModule): Rule {
   return () => {
+    const templateSource = apply(url('./root-files'), [move('/')]);
     return chain([
-      addPipelineDefault()
+      mergeWith(templateSource, MergeStrategy.Overwrite),
+      addStepb2c(options),
     ]);
   };
 }

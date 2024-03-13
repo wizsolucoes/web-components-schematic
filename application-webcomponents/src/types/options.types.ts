@@ -5,4 +5,5 @@ export interface OptionsDefaultModule extends ApplicationOptions {
   folderModule: 'projects' | 'raiz';
   materialuser: boolean;
   port: number;
+  produtoDigital: string
 }

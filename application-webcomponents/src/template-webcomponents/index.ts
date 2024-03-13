@@ -320,6 +320,7 @@ export default function (options: OptionsDefaultModule): Rule {
             ...options,
             relativePathToWorkspaceRoot: relativePathToWorkspaceRoot(appDir),
             appName: options.name,
+            produtoDigital: options.produtoDigital,
             isRootApp,
             folderName,
           }),

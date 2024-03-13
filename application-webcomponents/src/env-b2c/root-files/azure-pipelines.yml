@@ -29,4 +29,4 @@ extends:
     produtoDigital: <%= PRODUCT_NAME%>
     nodeVersion: "18.x"
     modulos: 
-      - <%= folderName%>
+<%= PROJECTS_NAMES%>

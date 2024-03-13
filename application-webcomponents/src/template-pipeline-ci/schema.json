@@ -6,6 +6,26 @@
   "description": "Generates a new basic application definition in the \"projects\" subfolder of the workspace.",
   "additionalProperties": false,
   "properties": {
+  "produtoDigital": {
+      "description": "Produto digital ? Exemplo: Turbo",
+      "type": "string",
+      "enum": [
+        "Wiz Pro",
+        "TURBO",
+        "Converte",
+        "Automacao",
+        "Apps Corporativos",
+        "Financeiro",
+        "NEXO",
+        "Operacaoes"
+      ],
+      "default": "Wiz Pro",
+      "x-prompt": {
+        "message": "Selecione o produto digital:",
+        "type": "list",
+        "default": "Wiz Pro"
+      }
+    },
     "projectRoot": {
       "description": "The root directory of the new app.",
       "type": "string",

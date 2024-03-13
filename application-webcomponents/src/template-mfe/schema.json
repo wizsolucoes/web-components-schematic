@@ -11,6 +11,26 @@
       "type": "string",
       "visible": false
     },
+    "produtoDigital": {
+      "description": "Produto digital ? Exemplo: Turbo",
+      "type": "string",
+      "enum": [
+        "Wiz Pro",
+        "TURBO",
+        "Converte",
+        "Automacao",
+        "Apps Corporativos",
+        "Financeiro",
+        "NEXO",
+        "Operacaoes"
+      ],
+      "default": "Wiz Pro",
+      "x-prompt": {
+        "message": "Selecione o produto digital:",
+        "type": "list",
+        "default": "Wiz Pro"
+      }
+    },
    "versionAngular": {
       "description": "Versão do Angular",
       "type": "string",
