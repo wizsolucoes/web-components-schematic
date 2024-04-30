@@ -10,7 +10,7 @@ resources:
     - repository: coretemplate
       type: git
       name: WizPipelines/core-template
-      ref:  refs/heads/angular-v2
+      ref:  refs/heads/v2
 
 pool:
   vmImage: ubuntu-latest
