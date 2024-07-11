@@ -5,17 +5,17 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
-import { getDataStorage, WcoEventsService } from '../../public-api';
+import { getDataStorage } from '@wizco/wizpro-tools';
+
 
 /**
  * Interceptor responsável por adicionar o cabeçalho 'x-tenant' e o token de autorização nas requisições HTTP.
  */
 @Injectable()
-export class WcoTenantInterceptor2 implements HttpInterceptor {
-  private wcoEvent = inject(WcoEventsService);
+export class WcoTenantInterceptor implements HttpInterceptor {
   private exec = false;
 
   constructor() {}
@@ -31,7 +31,7 @@ export class WcoTenantInterceptor2 implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const modifiedRequest = this.addTenantHeader(request);
+    let modifiedRequest = this.addTenantHeader(request);
     const auth = getDataStorage('', 'w-auth');
 
     if (auth) {
@@ -41,26 +41,29 @@ export class WcoTenantInterceptor2 implements HttpInterceptor {
         const expires_in = new Date(expire_date);
         const currentDateTime = new Date();
 
-        request = this.addAuthToken(modifiedRequest, token);
+        modifiedRequest = this.addAuthToken(modifiedRequest, token);
 
         if (!this.exec && refresh_token && expires_in <= currentDateTime) {
           this.exec = true;
-          this.wcoEvent.emitEvent('refreshToken', {});
+
+          // Emitir evento para recarregar o token
+          this.emitEvent()
 
           // Atrasar a requisição por 3 segundos
           return of(null).pipe(
-            delay(3000),
+            delay(5000),
             switchMap(() => {
-              const newToken = getDataStorage('hash', 'w-auth');
-              request = this.addAuthToken(modifiedRequest, newToken);
-              return next.handle(request).pipe(catchError(this.handleError));
+              // Recarregar o token após o atraso
+              const newTokenData = getDataStorage('', 'w-auth');
+              const newToken = newTokenData ? newTokenData.hash : null;
+              const newRequest = this.addAuthToken(modifiedRequest, newToken);
+              return next.handle(newRequest).pipe(catchError(this.handleError));
             })
           );
         }
       }
     }
-
-    return next.handle(request).pipe(catchError(this.handleError));
+    return next.handle(modifiedRequest).pipe(catchError(this.handleError));
   }
 
   /**
@@ -69,7 +72,7 @@ export class WcoTenantInterceptor2 implements HttpInterceptor {
    * @returns A requisição HTTP modificada com o cabeçalho 'x-tenant'.
    */
   private addTenantHeader(request: HttpRequest<any>): HttpRequest<any> {
-    const tenant = getDataStorage('tenant', 'w-theme') || '';
+    const tenant = getDataStorage('tenant', 'w-theme') || ' ';
     return request.clone({
       setHeaders: {
         'x-tenant': tenant,
@@ -100,9 +103,14 @@ export class WcoTenantInterceptor2 implements HttpInterceptor {
    * @returns Um Observable que emite o erro.
    */
   private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.status == 401) {
-      this.wcoEvent.emitEvent('refreshToken', {});
-    }
     return throwError(() => error);
+  }
+
+  /**
+   * Emite um evento para solicitar a atualização do token.
+   */
+  private emitEvent() {
+    const event = new CustomEvent('refreshToken', {});
+    window.dispatchEvent(event);
   }
 }
