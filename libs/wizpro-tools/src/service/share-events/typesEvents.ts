@@ -1,1 +1,1 @@
-export type WcoEventsType = 'trackPage' | 'track' | 'logout' ;
+export type WcoEventsType = 'trackPage' | 'track' | 'logout' | 'refreshToken' ;

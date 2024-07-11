@@ -1,6 +1,6 @@
 {
   "name": "@wizco/wizpro-tools",
-  "version": "17.0.14",
+  "version": "17.1.0",
   "peerDependencies": {
     "jwt-decode": "^4.0.0"
   },
