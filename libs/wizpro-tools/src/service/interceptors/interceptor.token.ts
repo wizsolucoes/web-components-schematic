@@ -6,10 +6,9 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { getDataStorage } from '@wizco/wizpro-tools';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
-import { getDataStorage } from '@wizco/wizpro-tools';
-
 
 /**
  * Interceptor responsável por adicionar o cabeçalho 'x-tenant' e o token de autorização nas requisições HTTP.
@@ -45,9 +44,8 @@ export class WcoTenantInterceptor implements HttpInterceptor {
 
         if (!this.exec && refresh_token && expires_in <= currentDateTime) {
           this.exec = true;
-
           // Emitir evento para recarregar o token
-          this.emitEvent()
+          this.emitEvent();
 
           // Atrasar a requisição por 3 segundos
           return of(null).pipe(
@@ -57,7 +55,13 @@ export class WcoTenantInterceptor implements HttpInterceptor {
               const newTokenData = getDataStorage('', 'w-auth');
               const newToken = newTokenData ? newTokenData.hash : null;
               const newRequest = this.addAuthToken(modifiedRequest, newToken);
-              return next.handle(newRequest).pipe(catchError(this.handleError));
+              return next.handle(newRequest).pipe(
+                catchError(this.handleError),
+                switchMap((response) => {
+                  this.exec = false;
+                  return of(response);
+                })
+              );
             })
           );
         }
@@ -103,6 +107,9 @@ export class WcoTenantInterceptor implements HttpInterceptor {
    * @returns Um Observable que emite o erro.
    */
   private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status == 401) {
+      window.location.href = '/';
+    }
     return throwError(() => error);
   }
 
@@ -110,7 +117,7 @@ export class WcoTenantInterceptor implements HttpInterceptor {
    * Emite um evento para solicitar a atualização do token.
    */
   private emitEvent() {
-    const event = new CustomEvent('refreshToken', {});
+    const event = new CustomEvent('wizpro:refreshToken', {});
     window.dispatchEvent(event);
   }
 }
