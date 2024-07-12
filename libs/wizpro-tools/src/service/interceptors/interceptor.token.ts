@@ -6,9 +6,9 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getDataStorage } from '@wizco/wizpro-tools';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
+import { getDataStorage } from '../../utils/token.storage';
 
 /**
  * Interceptor responsável por adicionar o cabeçalho 'x-tenant' e o token de autorização nas requisições HTTP.
