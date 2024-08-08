@@ -8,12 +8,12 @@
   "layout": "dashboard",
   "hasWidget": true,
   "active": true,
-  "isPrivate": true
+  "isPrivate": true,
   "breadcrumb": "<%= name %>",
   "icon": "hourglass_top",
   "urlRepository": "add url do repositório no config.json",
   "title": "add um título no arquivo config.json",
-  "description": "add um descrição no arquivo config.json",
+  "description": "add um descrição no arquivo config.json"
 }
 
 
