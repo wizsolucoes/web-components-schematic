@@ -8,6 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
+import { WcoEventsService } from '../share-events/share-events';
 import { getDataStorage } from '../../utils/token.storage';
 
 /**
@@ -17,7 +18,7 @@ import { getDataStorage } from '../../utils/token.storage';
 export class WcoTenantInterceptor implements HttpInterceptor {
   private exec = false;
 
-  constructor() {}
+  constructor(private wcoEventsService: WcoEventsService) {}
 
   /**
    * Intercepta a requisição HTTP e adiciona o cabeçalho 'x-tenant' e o token de autorização, se disponível.
@@ -46,7 +47,6 @@ export class WcoTenantInterceptor implements HttpInterceptor {
           this.exec = true;
           // Emitir evento para recarregar o token
           this.emitEvent();
-
           // Atrasar a requisição por 3 segundos
           return of(null).pipe(
             delay(5000),
@@ -56,7 +56,10 @@ export class WcoTenantInterceptor implements HttpInterceptor {
               const newToken = newTokenData ? newTokenData.hash : null;
               const newRequest = this.addAuthToken(modifiedRequest, newToken);
               return next.handle(newRequest).pipe(
-                catchError(this.handleError),
+                catchError((error) => {
+                  this.emitEventError(error);
+                  return this.handleError(error);
+                }),
                 switchMap((response) => {
                   this.exec = false;
                   return of(response);
@@ -67,7 +70,12 @@ export class WcoTenantInterceptor implements HttpInterceptor {
         }
       }
     }
-    return next.handle(modifiedRequest).pipe(catchError(this.handleError));
+    return next.handle(modifiedRequest).pipe(
+      catchError((error) => {
+        this.emitEventError(error);
+        return this.handleError(error);
+      })
+    );
   }
 
   /**
@@ -119,5 +127,26 @@ export class WcoTenantInterceptor implements HttpInterceptor {
   private emitEvent() {
     const event = new CustomEvent('wizpro:refreshToken', {});
     window.dispatchEvent(event);
+  }
+
+  /**
+   *  Emite um evento de erro.
+   * @description Emite um evento de erro para a Wizpro.
+   */
+  private emitEventError(error: HttpErrorResponse): void {
+    try {
+      if (error.status == 403 || error.status == 400 || error.status == 500) {
+        const errorData = error.error ? error.error : error;
+        this.wcoEventsService.emitTrackEvent('error:apiRequest', {
+          message: errorData.message || 'Erro desconhecido',
+          status: error.status || '0',
+          statusText: error.statusText || 'Erro desconhecido',
+          url: error.url || 'url desconcida',
+          error: errorData,
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao emitir evento de erro: ', error);
+    }
   }
 }
