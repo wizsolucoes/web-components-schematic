@@ -42,19 +42,30 @@ function addStepb2c(options: OptionsDefaultModule): Rule {
         projects[project].architect.build.configurations.sandbox
       ) {
         // script para criar o arquivo environment.b2c.ts
-        const sandboxConfig =
-          projects[project].architect.build.configurations.sandbox;
+        const sandboxConfig = projects[project].architect.build.configurations.sandbox;
         const local = sandboxConfig['fileReplacements'][0]['with'];
         const localSandbox = tree.read(local)!.toString('utf-8');
         const localB2CPath = local.replace(
           'environment.sandbox.ts',
           'environment.b2c.ts'
         );
+
+        const localDevPath = local.replace(
+          'environment.sandbox.ts',
+          'environment.dev.ts'
+        );
+        
         if (tree.exists(localB2CPath)) {
           tree.delete(localB2CPath);
         }
+
+        if (tree.exists(localDevPath)) {
+          tree.delete(localDevPath);
+        }
+
         projectsKeys.push(`      - ${project}`);
         tree.create(localB2CPath, localSandbox);
+        tree.create(localDevPath, localSandbox);
         // script para adicionar no angular.json
         projects[project].architect.build.configurations['b2c'] = {
           ...sandboxConfig,
@@ -64,6 +75,19 @@ function addStepb2c(options: OptionsDefaultModule): Rule {
               with: local.replace(
                 'environment.sandbox.ts',
                 'environment.b2c.ts'
+              ),
+            },
+          ],
+        };
+
+        projects[project].architect.build.configurations['dev'] = {
+          ...sandboxConfig,
+          fileReplacements: [
+            {
+              replace: sandboxConfig['fileReplacements'][0]['replace'],
+              with: local.replace(
+                'environment.sandbox.ts',
+                'environment.dev.ts'
               ),
             },
           ],
