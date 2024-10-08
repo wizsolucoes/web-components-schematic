@@ -39,7 +39,8 @@ function addStepb2c(options: OptionsDefaultModule): Rule {
         projects[project].architect &&
         projects[project].architect.build &&
         projects[project].architect.build.configurations &&
-        projects[project].architect.build.configurations.sandbox
+        projects[project].architect.build.configurations.sandbox &&
+        projects[project].architect.build.configurations.sandbox['fileReplacements']
       ) {
         // script para criar o arquivo environment.b2c.ts
         const sandboxConfig = projects[project].architect.build.configurations.sandbox;
