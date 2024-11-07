@@ -44,6 +44,8 @@ jobs:
           scope: '@wizco'
           always-auth: true
       - run: |
+          npm install 
+      - run: |
           npm run wiztools:publish
       - run: |
           cd wizpro-tools
