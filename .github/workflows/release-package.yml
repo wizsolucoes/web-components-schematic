@@ -30,3 +30,23 @@ jobs:
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  build-publish-wizpro-tools:
+    runs-on: ubuntu-latest  
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+          scope: '@wizco'
+          always-auth: true
+      - run: |
+          npm run wiztools:publish
+      - run: |
+          cd wizpro-tools
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

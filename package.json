@@ -15,7 +15,7 @@
     "schematics:intall": "yarn --cwd ./application-webcomponents install",
     "schematics:build": "yarn --cwd ./application-webcomponents build",
     "schematics:link": "npm unlink ./application-webcomponents && npm link ./application-webcomponents",
-    "wiztools:publish": "ng build wizpro-tools && npm publish ./dist/wizpro-tools",
+    "wiztools:publish": "ng build wizpro-tools --output-hashing none --aot",
     "start:module": "ng serve --project novidaede",
     "extra:build": "ng build --project botafogo --output-hashing none --aot --build-optimizer",
     "extra:build:staging": "ng build --configuration=staging --project botafogo --output-hashing none --aot --build-optimizer",
