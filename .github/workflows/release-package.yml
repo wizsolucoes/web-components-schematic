@@ -41,14 +41,14 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-          scope: '@wizco'
+          scope: '@wizco'p
           always-auth: true
       - run: |
           npm install 
       - run: |
           npm run wiztools:publish
       - run: |
-          cd wizpro-tools
+          cd dist/wizpro-tools
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
