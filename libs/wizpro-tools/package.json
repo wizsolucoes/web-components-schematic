@@ -1,12 +1,19 @@
 {
   "name": "@wizco/wizpro-tools",
-  "version": "17.1.9",
+  "version": "20.2.2",
   "peerDependencies": {
-    "jwt-decode": "^4.0.0"
+    "@angular/core": ">=17 <21",
+    "@angular/router": ">=17 <21"
   },
   "dependencies": {
+    "@angular-architects/module-federation": "^17.0.0",
+    "@angular-architects/module-federation-runtime": "^17.0.0",
+    "@angular-architects/module-federation-tools": "^17.0.0",
     "jwt-decode": "^4.0.0",
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/router": "^17.1.2"
   },
   "sideEffects": false,
   "publishConfig": {

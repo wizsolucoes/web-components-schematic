@@ -4,5 +4,10 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "allowedNonPeerDependencies": ["jwt-decode"]
+  "allowedNonPeerDependencies": [
+    "jwt-decode",
+    "@angular-architects/module-federation",
+    "@angular-architects/module-federation-runtime",
+    "@angular-architects/module-federation-tools"
+  ]
 }
