@@ -1,6 +1,6 @@
 {
   "name": "@wizco/wizpro-tools",
-  "version": "20.2.2",
+  "version": "20.2.3",
   "peerDependencies": {
     "@angular/core": ">=17 <21",
     "@angular/router": ">=17 <21"

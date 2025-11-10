@@ -9,5 +9,5 @@ export interface WrapperWizproModule {
   elementName: string;
   remoteEntry: string;
   exposedModule: string;
-  type: 'module' | 'manifest' | 'script';
+  type?: 'module' | 'manifest' | 'script';
 }

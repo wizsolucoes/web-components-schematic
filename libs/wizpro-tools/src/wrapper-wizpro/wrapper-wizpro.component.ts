@@ -23,7 +23,7 @@ export class WrapperWizproComponent implements OnInit, OnDestroy {
   error: boolean = false;
 
   private moduleExternalOptions: WrapperWizproModule = {
-    remoteEntry: 'http://localhost:4444/remoteEntry.js',
+    remoteEntry: 'https://modulecoreplatformprdstg.blob.core.windows.net/module-external/remoteEntry.js',
     exposedModule: './web-components',
     elementName: 'wc-module-external',
     type: 'module',
@@ -44,7 +44,7 @@ export class WrapperWizproComponent implements OnInit, OnDestroy {
       if (options.remoteEntry) {
         try {
           await loadRemoteModule({
-            type: options.type as 'module',
+            type: options.type as 'module' || 'manifest',
             remoteEntry: options.remoteEntry,
             exposedModule: options.exposedModule,
           });
