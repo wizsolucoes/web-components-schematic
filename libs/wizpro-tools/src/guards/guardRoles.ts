@@ -13,6 +13,7 @@ import { getJwtRoles } from "../public-api";
     *  data: {
     *    permission: {
     *      roles: ['administrador'],
+    *      features: ['feature1', 'feature2'],
     *      prefix: 'wiz.MEUMODULO',
     *      redirectTo: 'error'
     *    }
@@ -40,6 +41,7 @@ export const guardWizRoles: CanActivateFn = (next: ActivatedRouteSnapshot) => {
 
 
       /// Verifica se o usuário tem permissão
+    
       const hasPermission = _roles.some((role) => _rolesPage.includes(role));
       if(!hasPermission) {
         if(permission.redirectTo) {

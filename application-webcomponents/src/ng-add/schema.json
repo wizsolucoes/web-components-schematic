@@ -31,17 +31,6 @@
         "default": "Wiz Pro"
       }
     },
-   "versionAngular": {
-      "description": "Versão do Angular",
-      "type": "string",
-      "enum": ["16", "17"],
-      "default": "17",
-      "x-prompt": {
-        "message": "Qual versão do angular esta usando ?",
-        "type": "list",
-        "default": "17"
-      }
-    },
    "folderModule": {
       "description": "Deseja criar o módulo no projeto raiz ou projects ?",
       "type": "string",

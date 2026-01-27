@@ -22,87 +22,33 @@ import { OptionsDefaultModule } from '../types/options.types';
 
 function addStepb2c(options: OptionsDefaultModule): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    context.logger.info('Adicionando angular.json');
+    context.logger.info('Atualizando pipeline do Azure');
     const angularJson = tree.read(`angular.json`)!.toString('utf-8');
 
     if (!angularJson) {
-      throw new SchematicsException('No package.json file found');
+      throw new SchematicsException('No angular.json file found');
     }
 
     const packageJsonObject = JSON.parse(angularJson.toString());
     const projects = packageJsonObject.projects;
     const projectsKeys = [];
 
+    // Coleta os nomes dos projetos para o pipeline
     for (const project in projects) {
       if (
         projects[project].projectType === 'application' &&
         projects[project].architect &&
         projects[project].architect.build &&
         projects[project].architect.build.configurations &&
-        projects[project].architect.build.configurations.sandbox &&
-        projects[project].architect.build.configurations.sandbox['fileReplacements']
+        projects[project].architect.build.configurations.sandbox
       ) {
-        // script para criar o arquivo environment.b2c.ts
-        const sandboxConfig = projects[project].architect.build.configurations.sandbox;
-        const local = sandboxConfig['fileReplacements'][0]['with'];
-        const localSandbox = tree.read(local)!.toString('utf-8');
-        const localB2CPath = local.replace(
-          'environment.sandbox.ts',
-          'environment.b2c.ts'
-        );
-
-        const localDevPath = local.replace(
-          'environment.sandbox.ts',
-          'environment.dev.ts'
-        );
-        
-        if (tree.exists(localB2CPath)) {
-          tree.delete(localB2CPath);
-        }
-
-        if (tree.exists(localDevPath)) {
-          tree.delete(localDevPath);
-        }
-
         projectsKeys.push(`      - ${project}`);
-        tree.create(localB2CPath, localSandbox);
-        tree.create(localDevPath, localSandbox);
-        // script para adicionar no angular.json
-        projects[project].architect.build.configurations['b2c'] = {
-          ...sandboxConfig,
-          fileReplacements: [
-            {
-              replace: sandboxConfig['fileReplacements'][0]['replace'],
-              with: local.replace(
-                'environment.sandbox.ts',
-                'environment.b2c.ts'
-              ),
-            },
-          ],
-        };
-
-        projects[project].architect.build.configurations['dev'] = {
-          ...sandboxConfig,
-          fileReplacements: [
-            {
-              replace: sandboxConfig['fileReplacements'][0]['replace'],
-              with: local.replace(
-                'environment.sandbox.ts',
-                'environment.dev.ts'
-              ),
-            },
-          ],
-        };
       }
     }
 
-    const newAngular = {
-      ...packageJsonObject,
-      projects: projects,
-    };
-
+    // Atualiza o pipeline do Azure se houver projetos
     if (projectsKeys.length > 0) {
-      context.logger.info('Trocando pipeline de build para b2c');
+      context.logger.info('Atualizando pipeline de build');
 
       /// pegando novo template de pipeline
       let textPipeline = tree.read(`azure-pipelines.yml`)!.toString('utf-8');
@@ -117,7 +63,6 @@ function addStepb2c(options: OptionsDefaultModule): Rule {
       }
     }
 
-    tree.overwrite(`angular.json`, JSON.stringify(newAngular, null, 2));
     return tree;
   };
 }

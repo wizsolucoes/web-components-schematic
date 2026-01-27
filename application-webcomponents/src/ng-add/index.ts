@@ -7,9 +7,9 @@
  */
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { OptionsDefaultModule } from '../types/options.types'
-import { packagesVersions, packagesVersionsMaterial } from './versionsPackages';
+import { packagesVersions, packagesVersionsDev, packagesVersionsMaterial } from './versionsPackages';
 
 
 
@@ -21,26 +21,34 @@ import { packagesVersions, packagesVersionsMaterial } from './versionsPackages';
  */
 function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
   return (_: Tree, context: SchematicContext) => {
-    const versionAngular = options.versionAngular || '17'
-    const packagesRequire = packagesVersions[versionAngular];
+    const versionAngular = 20;
+    const packagesRequire = [...packagesVersions[versionAngular]];
+    const packagesDev = [...packagesVersionsDev[versionAngular]];
     const packageMaterial = packagesVersionsMaterial[versionAngular]
   
     if(options.materialuser) {
       packagesRequire.push(...packageMaterial)
     }
 
-    const packagesInstall =  packagesRequire.join(' ');
+    const packagesInstall = packagesRequire.join(' ');
+    const packagesDevInstall = packagesDev.join(' ');
 
     context.logger.info('Adicionando pacotes necessários'); 
-    const installTasMFEPackage = context.addTask(new NodePackageInstallTask({
+    context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
       packageName: packagesInstall + ' --legacy-peer-deps'
     }))
-    const installTaskId = context.addTask(new RunSchematicTask("application", options), [installTasMFEPackage]);
-    const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
-    const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
-    const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);
-    context.addTask(new RunSchematicTask('application-mfe-final-change', options), [addEslintPrettier]);
+    
+    context.logger.info('Adicionando pacotes de desenvolvimento'); 
+    context.addTask(new NodePackageInstallTask({
+      packageManager: 'npm',
+      packageName: packagesDevInstall + ' --save-dev --legacy-peer-deps'
+    }))
+    // const installTaskId = context.addTask(new RunSchematicTask("application", options), [installTasMFEPackage]);
+    // const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
+    // const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
+    // const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);
+    // context.addTask(new RunSchematicTask('application-mfe-final-change', options), [addEslintPrettier]);
   }
 }
 

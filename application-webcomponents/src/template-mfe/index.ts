@@ -25,7 +25,7 @@ function addDependenciesAngularMaterial(options: OptionsDefaultModule): Rule {
       interactive: false
     });
 
-    const localStyle =  options.folderModule === 'projects' ? `projects/${options.name}/src/app/app.component.scss` : `src/app/app.component.scss`;
+    const localStyle =  options.folderModule === 'raiz' ? `src/app/app.component.scss` : `projects/${options.name}/src/app/app.component.scss`;
     tree.overwrite(localStyle, `
 @import '../style-material.scss';
     `);

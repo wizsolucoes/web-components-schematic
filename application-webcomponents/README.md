@@ -17,19 +17,6 @@ Para instalar o esquema, execute o seguinte comando no seu terminal, de acordo c
 npm i @wizco/schematics-webcomponents --save-dev --legacy-peer-deps
 ```
 
-## Versionamento
-
-O *Angular Schematics Web Components* segue um esquema de versionamento padrão para facilitar o controle e garantir a compatibilidade adequada.
-
-As versões disponíveis do pacote são:
-
-| Suporte  | Versão |
-| ------------- |:-------------:|
-| Angular 16      | @wizco/schematics-webcomponents    |
-| Angular 14 e 15     | @wizco/schematics-webcomponents@15.0.10 |
-
-Recomendamos usar a versão correspondente ao Angular que você está utilizando em seu projeto. Isso garante que todas as funcionalidades e recursos sejam compatíveis e funcionem corretamente.
-
 ## Como usar
 Execute o comando no seu terminal. 
 
