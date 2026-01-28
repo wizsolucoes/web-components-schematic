@@ -16,10 +16,3 @@ export const packagesVersionsDev = {
     'ngx-build-plus@^20.0.0',
   ],
 };
-
-export const packagesVersionsMaterial = {
-  20: [
-    '@angular/cdk@20.x',
-    '@angular/material@20.x'
-  ]
-}

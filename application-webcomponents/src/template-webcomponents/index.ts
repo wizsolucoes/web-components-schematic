@@ -54,35 +54,57 @@ function addScripts(option: OptionsDefaultModule): Rule {
 
 /**
  * 
+ * @returns Rule
+ * @description Remove o primeiro projeto padrão do workspace antes de criar o customizado
+ */
+function removeDefaultProject(): any {
+  return async (host: Tree, _context: SchematicContext) => {
+    const workspace = await getWorkspace(host);
+
+    // Pega o primeiro projeto do workspace
+    const firstProject = workspace.projects.keys().next();
+    
+    if (firstProject.value) {
+      const firstProjectName = firstProject.value;
+      _context.logger.info(`Removendo projeto padrão: ${firstProjectName}`);
+      
+      await updateWorkspace((workspaceToUpdate) => {
+        workspaceToUpdate.projects.delete(firstProjectName);
+      })(host, _context as any);
+    }
+
+    return host;
+  };
+}
+
+/**
+ * 
  * @param option ApplicationOptions
  * @returns Rule
- * @description Atualiza o arquivo angular.json se o projeto for raiz 
+ * @description Atualiza o arquivo angular.json removendo projetos antigos da raiz
  */
 function angularJsonUpdateRoot(options: OptionsDefaultModule): any {
   return async (host: Tree, _context: SchematicContext) => {
     const workspace = await getWorkspace(host);
 
-    // Verifica se a condição desejada é atendida ('raiz')
-    if (options.folderModule === 'raiz') {
-      // Coleta os nomes dos projetos a serem deletados
-      const projectsToDelete: string[] = [];
-      workspace.projects.forEach((project, projectName) => {
-        if (project.extensions.projectType === 'application') {
-          const valuesConfig = project.targets.values().next().value;
-          if (valuesConfig.options.main === 'src/main.ts' && projectName !== options.name) {
-            projectsToDelete.push(projectName); // Adiciona o nome do projeto à lista de deleção
-          }
+    // Coleta os nomes dos projetos a serem deletados
+    const projectsToDelete: string[] = [];
+    workspace.projects.forEach((project, projectName) => {
+      if (project.extensions.projectType === 'application') {
+        const valuesConfig = project.targets?.values().next().value;
+        if (valuesConfig?.options?.main === 'src/main.ts' && projectName !== options.name) {
+          projectsToDelete.push(projectName);
         }
-      });
-
-      // Se houver projetos para deletar, atualiza o workspace
-      if (projectsToDelete.length > 0) {
-        await updateWorkspace((workspace) => {
-          projectsToDelete.forEach((projectName) => {
-            workspace.projects.delete(projectName); // Deleta o projeto
-          });
-        })(host, _context as any); 
       }
+    });
+
+    // Se houver projetos para deletar, atualiza o workspace
+    if (projectsToDelete.length > 0) {
+      await updateWorkspace((workspaceToUpdate) => {
+        projectsToDelete.forEach((projectName) => {
+          workspaceToUpdate.projects.delete(projectName);
+        });
+      })(host, _context as any); 
     }
 
     return host;
@@ -163,7 +185,7 @@ function addAppToWorkspaceFile(
     projectType: ProjectType.Application,
     prefix: options.prefix || 'app',
     schematics,
-    targets: {
+    architect: {
       build: {
         builder: 'ngx-build-plus:browser',
         defaultConfiguration: 'production',
@@ -171,12 +193,14 @@ function addAppToWorkspaceFile(
           outputPath: `dist/${folderName}`,
           index: `${sourceRoot}/index.html`,
           main: `${sourceRoot}/main.ts`,
-          polyfills: `${sourceRoot}/polyfills.ts`,
+          polyfills: ['zone.js'],
           tsConfig: `${projectRoot}tsconfig.app.json`,
           inlineStyleLanguage: 'scss',
           assets: [`${sourceRoot}/favicon.ico`, `${sourceRoot}/assets`],
           styles: [`${sourceRoot}/styles.${options.style}`],
           scripts: [],
+          extraWebpackConfig: 'webpack.config.js',
+          commonChunk: false,
         },
         configurations: {
           production: {
@@ -188,6 +212,7 @@ function addAppToWorkspaceFile(
               },
             ],
             outputHashing: 'all',
+            extraWebpackConfig: 'webpack.prod.config.js',
           },
           staging: {
             budgets,
@@ -217,20 +242,30 @@ function addAppToWorkspaceFile(
             sourceMap: true,
             namedChunks: true,
           },
+          dev: {
+            budgets,
+            fileReplacements: [
+              {
+                replace: `${sourceRoot}/environments/environment.ts`,
+                with: `${sourceRoot}/environments/environment.dev.ts`,
+              },
+            ],
+            outputHashing: 'all',
+          },
         },
       },
       serve: {
         builder: 'ngx-build-plus:dev-server',
         defaultConfiguration: 'development',
         options: {
-          port: 5300,
-          publicHost: 'http://localhost:5300',
-          extraWebpackConfig: `${options.name}/webpack.config.js`,
+          port: options.port || 4430,
+          publicHost: `http://localhost:${options.port || 4430}`,
+          extraWebpackConfig: 'webpack.config.js',
         },
         configurations: {
           production: {
             buildTarget: `${options.name}:build:production`,
-            extraWebpackConfig: `${options.name}/webpack.prod.config.js`,
+            extraWebpackConfig: 'webpack.prod.config.js',
           },
           development: {
             buildTarget: `${options.name}:build:development`,
@@ -252,7 +287,7 @@ function addAppToWorkspaceFile(
             builder: 'ngx-build-plus:karma',
             options: {
               main: `${sourceRoot}/test.ts`,
-              polyfills: `${sourceRoot}/polyfills.ts`,
+              polyfills: ['zone.js', 'zone.js/testing'],
               tsConfig: `${projectRoot}tsconfig.spec.json`,
               karmaConfig: `${projectRoot}karma.conf.js`,
               inlineStyleLanguage: 'scss',
@@ -268,7 +303,7 @@ function addAppToWorkspaceFile(
     workspace.projects.add({
       name: options.name,
       ...project,
-    });
+    } as any);
   });
 }
 
@@ -280,7 +315,7 @@ function minimalPathFilter(path: string): boolean {
 
 
 export default function (options: OptionsDefaultModule): Rule {
-  return async (host: Tree) => {
+  return async () => {
     const appRootSelector = `${options.prefix}-module`;
     const componentOptions: Partial<ComponentOptions> =  { // Deixa o componente com inlineStyle e inlineTemplate
       inlineStyle: false,
@@ -291,31 +326,26 @@ export default function (options: OptionsDefaultModule): Rule {
       standalone: true
     };
 
-    const workspace = await getWorkspace(host);
-
-    const newProjectRoot = (workspace.extensions.newProjectRoot as string | undefined) || '';
-    const isRootApp = options.folderModule === 'raiz'
-
     // If scoped project (i.e. "@foo/bar"), convert dir to "foo/bar".
     let folderName = options.name.startsWith('@') ? options.name.slice(1) : options.name;
     if (/[A-Z]/.test(folderName)) {
       folderName = strings.dasherize(folderName);
     }
 
-    const appDir = isRootApp
-      ? normalize(options.projectRoot || '')
-      : join(normalize(newProjectRoot), folderName);
+    const appDir = normalize(options.projectRoot || '');
     const sourceDir = `${appDir}/src/app`;
+    const isRootApp = true;
 
     return chain([
       /// 
+      removeDefaultProject(),
       addScripts(options),
       addAppToWorkspaceFile(options, appDir, folderName),
       mergeWith(
         apply(url('./files'), [
           options.minimal ? filter(minimalPathFilter) : noop(),
           applyTemplates({
-            pathPackage: options.folderModule === 'raiz' ? '../package.json' : `../../../package.json`,
+            pathPackage: '../package.json',
             utils: strings,
             ...options,
             relativePathToWorkspaceRoot: relativePathToWorkspaceRoot(appDir),

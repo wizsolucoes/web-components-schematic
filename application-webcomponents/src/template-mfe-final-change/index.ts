@@ -36,7 +36,7 @@ export default function (options: OptionsDefaultModule): Rule {
         apply(url('./files-webpack'), [
           applyTemplates({
             ...options,
-            pathPackage: options.folderModule === 'raiz' ? './tsconfig.json' : `../../tsconfig.json`,
+            pathPackage: './tsconfig.json',
             pathExposes: normalize(pathExposes),
           }),
           move(sourceDir),

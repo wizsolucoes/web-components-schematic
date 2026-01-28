@@ -110,14 +110,6 @@
       "default": "scss",
       "enum": ["css", "scss", "sass", "less"]
     },
-    "materialuser": {
-      "description": "Adicionar o material design",
-      "type": "boolean",
-      "default": false,
-      "alias": "M",
-      "x-user-analytics": 221,
-      "x-prompt": "Deseja adicionar o Angular material ?"
-    },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",
       "type": "boolean",

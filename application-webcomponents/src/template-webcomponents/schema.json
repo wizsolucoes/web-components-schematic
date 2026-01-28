@@ -31,28 +31,6 @@
         "default": "Wiz Pro"
       }
     },
-   "versionAngular": {
-      "description": "Versão do Angular",
-      "type": "string",
-      "enum": ["16", "17"],
-      "default": "17",
-      "x-prompt": {
-        "message": "Qual versão do angular esta usando ?",
-        "type": "list",
-        "default": "17"
-      }
-    },
-   "folderModule": {
-      "description": "Deseja criar o módulo no projeto raiz ou projects ?",
-      "type": "string",
-      "enum": ["projects", "raiz"],
-      "default": "raiz",
-      "x-prompt": {
-        "message": "Deseja criar o módulo na pasta raiz ou projects ?",
-        "type": "list",
-        "default": "projects"
-      }
-    },
     "port": {
       "type": "number",
       "description": "rodar o web component local",
@@ -109,14 +87,6 @@
       "type": "string",
       "default": "scss",
       "enum": ["css", "scss", "sass", "less"]
-    },
-    "materialuser": {
-      "description": "Adicionar o material design",
-      "type": "boolean",
-      "default": false,
-      "alias": "M",
-      "x-user-analytics": 221,
-      "x-prompt": "Deseja adicionar o Angular material ?"
     },
     "skipTests": {
       "description": "Do not create \"spec.ts\" test files for the application.",

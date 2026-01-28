@@ -9,7 +9,7 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { OptionsDefaultModule } from '../types/options.types'
-import { packagesVersions, packagesVersionsDev, packagesVersionsMaterial } from './versionsPackages';
+import { packagesVersions, packagesVersionsDev } from './versionsPackages';
 
 
 
@@ -24,11 +24,7 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     const versionAngular = 20;
     const packagesRequire = [...packagesVersions[versionAngular]];
     const packagesDev = [...packagesVersionsDev[versionAngular]];
-    const packageMaterial = packagesVersionsMaterial[versionAngular]
-  
-    if(options.materialuser) {
-      packagesRequire.push(...packageMaterial)
-    }
+
 
     const packagesInstall = packagesRequire.join(' ');
     const packagesDevInstall = packagesDev.join(' ');
@@ -46,7 +42,8 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     }))
     
     context.logger.info('Adicionando template webcomponents'); 
-    context.addTask(new RunSchematicTask("template-webcomponents", options), [installDevTaskId]);
+    const { folderModule, materialuser, ...templateOptions } = options as any;
+    context.addTask(new RunSchematicTask("template-webcomponents", templateOptions), [installDevTaskId]);
     // const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
     // const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
     // const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);
