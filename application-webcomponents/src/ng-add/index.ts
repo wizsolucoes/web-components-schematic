@@ -7,7 +7,7 @@
  */
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { OptionsDefaultModule } from '../types/options.types'
 import { packagesVersions, packagesVersionsDev, packagesVersionsMaterial } from './versionsPackages';
 
@@ -40,11 +40,13 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     }))
     
     context.logger.info('Adicionando pacotes de desenvolvimento'); 
-    context.addTask(new NodePackageInstallTask({
+    const installDevTaskId = context.addTask(new NodePackageInstallTask({
       packageManager: 'npm',
       packageName: packagesDevInstall + ' --save-dev --legacy-peer-deps'
     }))
-    // const installTaskId = context.addTask(new RunSchematicTask("application", options), [installTasMFEPackage]);
+    
+    context.logger.info('Adicionando template webcomponents'); 
+    context.addTask(new RunSchematicTask("template-webcomponents", options), [installDevTaskId]);
     // const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
     // const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
     // const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);

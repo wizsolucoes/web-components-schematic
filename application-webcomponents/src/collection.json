@@ -7,7 +7,7 @@
       "schema": "./ng-add/schema.json",
       "description": "Criação do pacote"
     },
-    "application": {
+    "template-webcomponents": {
       "factory": "./template-webcomponents",
       "schema": "./template-webcomponents/schema.json",
       "description": "Criação do pacote"
