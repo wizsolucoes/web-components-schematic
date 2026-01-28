@@ -12,10 +12,10 @@
       "schema": "./template-webcomponents/schema.json",
       "description": "Criação do pacote"
     },
-    "application-mfe": {
-      "factory": "./template-mfe",
-      "schema": "./template-mfe/schema.json",
-      "description": "Inserir MFE"
+    "clean-files": {
+      "factory": "./clean-files",
+      "schema": "./clean-files/schema.json",
+      "description": "Removendo arquivos desnecessarios do angular template inicial"
     },
     "template-add-eslint-prettier": {
       "factory": "./template-add-eslint-prettier",

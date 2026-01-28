@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "clean-files",
+  "title": "Clean Files Options Schema",
+  "type": "object",
+  "description": "Removendo arquivos desnecessarios do angular template inicial",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "Nome do web component",
+      "type": "string",
+      "pattern": "^(?:@[a-zA-Z0-9-*~][a-zA-Z0-9-*._~]*/)?[a-zA-Z0-9-~][a-zA-Z0-9-._~]*$"
+    }
+  }
+}

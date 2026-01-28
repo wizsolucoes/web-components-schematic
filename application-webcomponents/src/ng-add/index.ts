@@ -43,8 +43,8 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     
     context.logger.info('Adicionando template webcomponents'); 
     const { folderModule, materialuser, ...templateOptions } = options as any;
-    context.addTask(new RunSchematicTask("template-webcomponents", templateOptions), [installDevTaskId]);
-    // const installMFE = context.addTask(new RunSchematicTask('application-mfe', options), [installTaskId]);
+    const installTemplateTaskId = context.addTask(new RunSchematicTask("template-webcomponents", templateOptions), [installDevTaskId]);
+    context.addTask(new RunSchematicTask('clean-files', {}), [installTemplateTaskId]);
     // const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
     // const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);
     // context.addTask(new RunSchematicTask('application-mfe-final-change', options), [addEslintPrettier]);
