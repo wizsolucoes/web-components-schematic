@@ -1,0 +1,83 @@
+# Crédito Consignado
+
+## 📋 Descrição
+
+Adicione aqui uma descrição do projeto. 
+E configure o arquivo assets/config.json.template com as informações do projeto.
+
+## 🔧 Pré-requisitos
+
+- **Node.js**: versão 22
+- **Angular CLI**: versão 17
+
+## 📦 Instalação
+
+```bash
+npm install
+```
+
+## 🚀 Executando o Projeto
+
+### Servidor de Desenvolvimento
+
+```bash
+npm run start:module
+```
+
+O módulo estará disponível localmente após a execução.
+
+
+## 🔀 Branches e Pipeline
+
+O projeto utiliza Azure Pipelines para automação de deploys. Cada branch está vinculada a um ambiente específico:
+
+- **develop** → Deploy automático para ambiente DEV
+- **staging** → Deploy automático para ambiente STAGING (homologação)
+- **main** → Deploy para ambiente de produção
+
+Ao fazer merge ou push para uma dessas branches, a pipeline é acionada automaticamente, realizando o build e deploy no ambiente correspondente.
+
+## 🔗 Links Úteis
+
+### Documentação Interna
+
+- **Wizpro Tools**: [Acessar documentação](https://wizco3.sharepoint.com/sites/KnowledgeBaseFrontEnd/SitePages/Wizpro-tools.aspx)
+- **Widget Wizpro**: [Acessar documentação](https://wizco3.sharepoint.com/sites/KnowledgeBaseFrontEnd/SitePages/Widget-Wizpro.aspx)
+- **Ambientes**: [Acessar documentação](https://wizco3.sharepoint.com/:u:/r/sites/KnowledgeBaseFrontEnd/SitePages/Novos-ambientes.aspx?csf=1&web=1&e=gDJXbE)
+
+### Remote Entry
+
+- **Local**: http://localhost:4430/remoteEntry.js
+- **Homologação**: --
+
+### UI Kit Fênix
+
+- **Documentação Geral**: [Introdução](https://fenix.wizsolucoes.com.br/?path=/docs/in%C3%ADcio-introdu%C3%A7%C3%A3o--manual)
+- **Cores**: [Tokens de Cores](https://fenix.wizsolucoes.com.br/?path=/docs/tokens-02-cores--manual)
+- **Tipografia**: [Guia de Tipografia](https://fenix.wizsolucoes.com.br/?path=/docs/core-tipografia--manual)
+- **Espaçamento**: [Guia de Espaçamento](https://fenix.wizsolucoes.com.br/?path=/docs/core-espa%C3%A7amento--manual)
+- **Tokens Base**: [Documentação de Tokens](https://fenix.wizsolucoes.com.br/?path=/docs/tokens-01-base--manual)
+
+## 📚 Recursos Adicionais do Angular
+
+### Geração de Código
+
+```bash
+ng generate component component-name
+```
+
+Você também pode usar: `ng generate directive|pipe|service|class|guard|interface|enum|module`
+
+### Build
+
+```bash
+ng build
+```
+
+Os artefatos de build serão armazenados no diretório `dist/`.
+
+
+
+### Ajuda do Angular CLI
+
+Para mais informações sobre o Angular CLI, use `ng help` ou acesse a [documentação oficial](https://angular.io/cli).

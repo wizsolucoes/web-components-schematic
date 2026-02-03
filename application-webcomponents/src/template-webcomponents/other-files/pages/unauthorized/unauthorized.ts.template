@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'wiz-<%= name %>-unauthorized',
+  standalone: true,
+  imports: [],
+  templateUrl: './unauthorized.html'
+})
+export class UnauthorizedComponent {
+
+}

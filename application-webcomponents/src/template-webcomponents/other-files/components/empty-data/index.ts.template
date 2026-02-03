@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'brl-empty-data',
+  standalone: true,
+  template: `
+    <div class="wco-card flex flex-col">
+      <i class="material-icons-round text-primary-700">info</i>
+      <p>Nenhum dado disponível</p>
+    </div>
+  `,
+})
+export class EmptyDataComponent {}

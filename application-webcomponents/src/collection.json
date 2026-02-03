@@ -27,15 +27,10 @@
       "schema": "./template-pipeline-ci/schema.json",
       "description": "Inserir arquivo pipeline default"
     },
-    "application-mfe-final-change": {
+    "template-mfe-final-change": {
       "factory": "./template-mfe-final-change",
       "schema": "./template-mfe-final-change/schema.json",
       "description": "Modificador Webpack"
-    },
-    "env-b2c": {
-      "factory": "./env-b2c",
-      "schema": "./env-b2c/schema.json",
-      "description": "Inserir variáveis de ambiente"
     }
   }
 }

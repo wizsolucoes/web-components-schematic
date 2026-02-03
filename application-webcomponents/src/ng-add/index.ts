@@ -41,13 +41,13 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
       packageName: packagesDevInstall + ' --save-dev --legacy-peer-deps'
     }))
     
-    context.logger.info('Adicionando template webcomponents'); 
+    context.logger.info('Adicionando template Wizpro'); 
     const { folderModule, materialuser, ...templateOptions } = options as any;
     const installTemplateTaskId = context.addTask(new RunSchematicTask("template-webcomponents", templateOptions), [installDevTaskId]);
-    context.addTask(new RunSchematicTask('clean-files', {}), [installTemplateTaskId]);
-    // const addPipeline = context.addTask(new RunSchematicTask('template-pipeline-ci', options), [installMFE]);
-    // const addEslintPrettier = context.addTask(new RunSchematicTask('template-add-eslint-prettier', options), [addPipeline]);
-    // context.addTask(new RunSchematicTask('application-mfe-final-change', options), [addEslintPrettier]);
+    const cleanFilesTaskId = context.addTask(new RunSchematicTask('clean-files', {}), [installTemplateTaskId]);
+    const pipelineTaskId = context.addTask(new RunSchematicTask('template-pipeline-ci', templateOptions), [cleanFilesTaskId]);
+    const eslintPrettierTaskId = context.addTask(new RunSchematicTask('template-add-eslint-prettier', templateOptions), [pipelineTaskId]);
+    context.addTask(new RunSchematicTask('template-mfe-final-change', templateOptions), [eslintPrettierTaskId]);
   }
 }
 
