@@ -27,6 +27,6 @@ extends:
   template: angular/modulo.yml@coretemplate
   parameters:
     produtoDigital: <%= PRODUCT_NAME%>
-    nodeVersion: "18.x"
+    nodeVersion: "20.x"
     modulos: 
       - <%= folderName%>

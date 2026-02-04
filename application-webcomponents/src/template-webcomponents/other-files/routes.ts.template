@@ -5,6 +5,13 @@
 */
 import { RouteModule, guardWizRoles } from "@wizco/wizpro-tools";
 
+
+
+const permission = {
+  prefix: 'wiz.<%= name %>.consignado',
+  redirectTo: '/<%= path %>/nao-autorizado'
+};
+
 export const APP_ROUTES: RouteModule[] = [
     {
         path: '',
@@ -26,14 +33,25 @@ export const APP_ROUTES: RouteModule[] = [
         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
         canActivate: [guardWizRoles],
         data: {
-            permission: { // TODO: mudar Informações 
-                prefix: 'wiz.<%= name %>', 
-                redirectTo: 'error',
-                roles: ['administrador']
+            permission: {
+                ...permission,
+                roles: ['vendedor']
             },
             breadcrumb: [
                 { label: 'Página inicial privada', url: '#' }
             ]
         }
-    }
+    },
+    {
+        path: 'nao-autorizado',
+        loadComponent: () => import('./pages/unauthorized/unauthorized').then(m => m.UnauthorizedComponent),
+        data: {
+            breadcrumb: [{ label: 'Não autorizado', url: '#' }],
+        },
+    },
+    {
+        path: '**',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
 ];

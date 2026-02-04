@@ -1,19 +1,9 @@
 export const packagesVersions = {
-  17: [
-    '@angular-architects/module-federation@17.x',
-    '@angular-architects/module-federation-tools',
-    '@angular-eslint/schematics@17.x',
-    '@angular/elements@17.x',
-    '@wizco/fenixds-ngx@latest',
-    '@wizco/fenixds-core@latest',
-    '@wizco/wizpro-tools',
-    'jwt-decode',
-  ],
-  16: [
-    '@angular-architects/module-federation@16.x',
-    '@angular-architects/module-federation-tools',
-    '@angular/elements@16.x',
-    '@angular-eslint/schematics@16.x',
+  20: [
+    '@angular-architects/module-federation@^20.0.0',
+    '@angular/elements@^20.3.6',
+    '@angular/platform-browser-dynamic@^20.3.6',
+    '@angular/animations@^20.3.16',
     '@wizco/fenixds-ngx@latest',
     '@wizco/fenixds-core@latest',
     '@wizco/wizpro-tools',
@@ -21,13 +11,21 @@ export const packagesVersions = {
   ],
 };
 
-export const packagesVersionsMaterial = {
-  17: [
-    '@angular/cdk@17.x',
-    '@angular/material@17.x'
+export const packagesVersionsDev = {
+  20: [
+    '@angular-devkit/build-angular@^20.3.6',
+    'ngx-build-plus@^20.0.0',
+    '@angular-eslint/builder@^20.4.0',
+    '@angular-eslint/eslint-plugin@^20.4.0',
+    '@angular-eslint/eslint-plugin-template@^20.4.0',
+    '@angular-eslint/template-parser@^20.4.0',
+    '@angular-eslint/schematics@^20.4.0',
+    'eslint@^8.57.0',
+    '@typescript-eslint/eslint-plugin@7.11.0',
+    '@typescript-eslint/parser@7.11.0',
+    'prettier@^3.4.0',
+    'eslint-config-prettier@^9.0.0',
+    'husky@^9.0.0',
+    'lint-staged@^15.0.0',
   ],
-  16: [
-    '@angular/cdk@16.x',
-    '@angular/material@16.x'
-  ]
-}
+};

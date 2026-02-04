@@ -35,10 +35,6 @@ module.exports = {
         './routes': '<%= pathExposes %>/app/routes.ts',
       },
       shared: share({
-        "@angular/core": { requiredVersion: "auto" },
-        "@angular/common": { requiredVersion: "auto" },
-        "@angular/router": { requiredVersion: "auto" },
-        "rxjs": { requiredVersion: "auto" },
         ...sharedMappings.getDescriptors()
       })
     }),

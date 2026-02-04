@@ -7,15 +7,25 @@
       "schema": "./ng-add/schema.json",
       "description": "Criação do pacote"
     },
-    "application": {
+    "template-webcomponents": {
       "factory": "./template-webcomponents",
       "schema": "./template-webcomponents/schema.json",
       "description": "Criação do pacote"
     },
-    "application-mfe": {
-      "factory": "./template-mfe",
-      "schema": "./template-mfe/schema.json",
-      "description": "Inserir MFE"
+    "add-tsconfig-paths": {
+      "factory": "./add-tsconfig-paths",
+      "schema": "./add-tsconfig-paths/schema.json",
+      "description": "Adiciona Path Aliases no tsconfig.app.json do projeto"
+    },
+    "skill-wizpro": {
+      "factory": "./skill-wizpro",
+      "schema": "./skill-wizpro/schema.json",
+      "description": "Adiciona pasta skills com documentação em markdown para LLM/IDE"
+    },
+    "clean-files": {
+      "factory": "./clean-files",
+      "schema": "./clean-files/schema.json",
+      "description": "Removendo arquivos desnecessarios do angular template inicial"
     },
     "template-add-eslint-prettier": {
       "factory": "./template-add-eslint-prettier",
@@ -27,15 +37,10 @@
       "schema": "./template-pipeline-ci/schema.json",
       "description": "Inserir arquivo pipeline default"
     },
-    "application-mfe-final-change": {
+    "template-mfe-final-change": {
       "factory": "./template-mfe-final-change",
       "schema": "./template-mfe-final-change/schema.json",
       "description": "Modificador Webpack"
-    },
-    "env-b2c": {
-      "factory": "./env-b2c",
-      "schema": "./env-b2c/schema.json",
-      "description": "Inserir variáveis de ambiente"
     }
   }
 }

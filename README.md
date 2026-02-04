@@ -41,8 +41,71 @@ Sempre que alterar algum arquivo na pasta ***application-webcomponents***, deve 
 Na pasta raiz do repositório, onde se encontra um projeto angular simples.  Nele iremos testar e usar nossas mudanças.
 
 ```bash 
-ng g application-webcomponents:init
+ng g @wizco/schematics-webcomponents:init
 ```
 
+## Testando em projetos externos
+
+> 📖 **Guia completo:** Para instruções detalhadas sobre manutenção e testes locais, consulte o arquivo [execute-local.md](./execute-local.md)
+
+Para testar o schematic em outros projetos Angular usando `npm link`:
+
+### Passo 1: Preparar o schematic (no projeto atual)
+```bash
+npm run schematics:build
+npm run schematics:link
+```
+
+### Passo 2: Linkar no projeto de teste
+No projeto onde você quer testar, execute:
+```bash
+npm link @wizco/schematics-webcomponents
+```
+
+### Passo 3: Usar o schematic
+```bash
+ng g @wizco/schematics-webcomponents:init
+```
+
+### Para desfazer o link (quando terminar os testes)
+No projeto de teste:
+```bash
+npm unlink @wizco/schematics-webcomponents
+npm install
+```
+
+> **Nota:** Sempre que alterar arquivos na pasta `application-webcomponents`, execute novamente o `schematics:build` e `schematics:link` no projeto atual para que as mudanças sejam refletidas no projeto de teste.
+
+## Estrutura de pastas e Path Aliases
+
+O schematic configura Path Aliases no `tsconfig.app.json` do projeto gerado. A estrutura de pastas abaixo indica onde cada alias aponta:
+
+```
+src/
+├── app/                    → @app/*
+│   ├── components/         → @components/*
+│   ├── core/               → @core/*
+│   ├── features/           → @features/*
+│   ├── shared/             → @shared/*
+│   ├── services/           → @services/*
+│   └── utils/              → @utils/*
+├── environments/           → @env/*
+├── assets/
+├── index.html
+├── main.ts
+├── polyfills.ts
+└── styles.scss
+```
+
+| Alias | Caminho |
+|-------|---------|
+| `@app/*` | `src/app/*` |
+| `@env/*` | `src/environments/*` |
+| `@shared/*` | `src/app/shared/*` |
+| `@features/*` | `src/app/features/*` |
+| `@core/*` | `src/app/core/*` |
+| `@components/*` | `src/app/components/*` |
+| `@services/*` | `src/app/services/*` |
+| `@utils/*` | `src/app/utils/*` |
 
 Isso é tudo por enquanto.

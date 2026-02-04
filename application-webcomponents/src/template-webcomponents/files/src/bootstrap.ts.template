@@ -5,6 +5,6 @@ import { bootstrap } from '@angular-architects/module-federation-tools';
 bootstrap(AppModule, {
   production: environment.production,
   appType: 'microfrontend',
-  activeLegacyMode: true,
-  ngZoneSharing: true
+  activeLegacyMode: false,
+  ngZoneSharing: false,
 });

@@ -6,24 +6,33 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { WidgetComponent } from './components/widget/widget.component';
 import { WcoTenantInterceptor } from '@wizco/wizpro-tools';
+import { EmptyDataComponent } from './components/empty-data';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    WidgetComponent,
-    RouterModule.forRoot([
+    AppComponent,
+    RouterModule.forRoot(
+      [
       {
         path: '<%= path %>',
         loadChildren: () => import('./routes').then((m) => m.APP_ROUTES)
-      }
-    ])
+      },
+      {
+        path: '**',
+        component: EmptyDataComponent,
+        data: {
+          widget: true,
+        },
+      },
+      ], 
+      {
+        onSameUrlNavigation: 'ignore',
+      })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WcoTenantInterceptor, multi: true },

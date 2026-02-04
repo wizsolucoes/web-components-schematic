@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "skill-wizpro",
+  "title": "Skill Wizpro Options Schema",
+  "type": "object",
+  "description": "Adiciona pasta skills com documentação em markdown para LLM/IDE",
+  "additionalProperties": false,
+  "properties": {}
+}
