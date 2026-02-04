@@ -14,7 +14,7 @@
   <main id="area-faker-wizco">
     <div id="header-faker"></div>
     <div id="content-faker">
-      <wc-brasil-module></wc-brasil-module>
+      <wc-<%= name %>-module></wc-<%= name %>-module>
     </div>
   </main>
 </body>
