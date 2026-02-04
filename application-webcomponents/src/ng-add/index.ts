@@ -44,7 +44,9 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     context.logger.info('Adicionando template Wizpro'); 
     const { folderModule, materialuser, ...templateOptions } = options as any;
     const installTemplateTaskId = context.addTask(new RunSchematicTask("template-webcomponents", templateOptions), [installDevTaskId]);
-    const cleanFilesTaskId = context.addTask(new RunSchematicTask('clean-files', {}), [installTemplateTaskId]);
+    context.logger.info('Adicionando skills para LLM/IDE');
+    const skillWizproTaskId = context.addTask(new RunSchematicTask('skill-wizpro', {}), [installTemplateTaskId]);
+    const cleanFilesTaskId = context.addTask(new RunSchematicTask('clean-files', {}), [skillWizproTaskId]);
     const pipelineTaskId = context.addTask(new RunSchematicTask('template-pipeline-ci', templateOptions), [cleanFilesTaskId]);
     const eslintPrettierTaskId = context.addTask(new RunSchematicTask('template-add-eslint-prettier', templateOptions), [pipelineTaskId]);
     context.addTask(new RunSchematicTask('template-mfe-final-change', templateOptions), [eslintPrettierTaskId]);
@@ -58,3 +60,4 @@ export default function (options: OptionsDefaultModule): Rule {
     ]);
   };
 }
+ 

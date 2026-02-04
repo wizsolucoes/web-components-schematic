@@ -12,6 +12,16 @@
       "schema": "./template-webcomponents/schema.json",
       "description": "Criação do pacote"
     },
+    "add-tsconfig-paths": {
+      "factory": "./add-tsconfig-paths",
+      "schema": "./add-tsconfig-paths/schema.json",
+      "description": "Adiciona Path Aliases no tsconfig.app.json do projeto"
+    },
+    "skill-wizpro": {
+      "factory": "./skill-wizpro",
+      "schema": "./skill-wizpro/schema.json",
+      "description": "Adiciona pasta skills com documentação em markdown para LLM/IDE"
+    },
     "clean-files": {
       "factory": "./clean-files",
       "schema": "./clean-files/schema.json",

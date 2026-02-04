@@ -76,4 +76,36 @@ npm install
 
 > **Nota:** Sempre que alterar arquivos na pasta `application-webcomponents`, execute novamente o `schematics:build` e `schematics:link` no projeto atual para que as mudanças sejam refletidas no projeto de teste.
 
+## Estrutura de pastas e Path Aliases
+
+O schematic configura Path Aliases no `tsconfig.app.json` do projeto gerado. A estrutura de pastas abaixo indica onde cada alias aponta:
+
+```
+src/
+├── app/                    → @app/*
+│   ├── components/         → @components/*
+│   ├── core/               → @core/*
+│   ├── features/           → @features/*
+│   ├── shared/             → @shared/*
+│   ├── services/           → @services/*
+│   └── utils/              → @utils/*
+├── environments/           → @env/*
+├── assets/
+├── index.html
+├── main.ts
+├── polyfills.ts
+└── styles.scss
+```
+
+| Alias | Caminho |
+|-------|---------|
+| `@app/*` | `src/app/*` |
+| `@env/*` | `src/environments/*` |
+| `@shared/*` | `src/app/shared/*` |
+| `@features/*` | `src/app/features/*` |
+| `@core/*` | `src/app/core/*` |
+| `@components/*` | `src/app/components/*` |
+| `@services/*` | `src/app/services/*` |
+| `@utils/*` | `src/app/utils/*` |
+
 Isso é tudo por enquanto.

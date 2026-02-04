@@ -26,6 +26,37 @@ npm run start:module
 
 O módulo estará disponível localmente após a execução.
 
+## 📁 Estrutura de pastas e Path Aliases
+
+O projeto utiliza Path Aliases configurados no `tsconfig.app.json`. A estrutura de pastas abaixo indica onde cada alias aponta:
+
+```
+src/
+├── app/                    → @app/*
+│   ├── components/         → @components/*
+│   ├── core/               → @core/*
+│   ├── features/           → @features/*
+│   ├── shared/             → @shared/*
+│   ├── services/           → @services/*
+│   └── utils/              → @utils/*
+├── environments/           → @env/*
+├── assets/
+├── index.html
+├── main.ts
+├── polyfills.ts
+└── styles.scss
+```
+
+| Alias | Caminho |
+|-------|---------|
+| `@app/*` | `src/app/*` |
+| `@env/*` | `src/environments/*` |
+| `@shared/*` | `src/app/shared/*` |
+| `@features/*` | `src/app/features/*` |
+| `@core/*` | `src/app/core/*` |
+| `@components/*` | `src/app/components/*` |
+| `@services/*` | `src/app/services/*` |
+| `@utils/*` | `src/app/utils/*` |
 
 ## 🔀 Branches e Pipeline
 
