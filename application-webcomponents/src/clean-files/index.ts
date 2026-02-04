@@ -20,6 +20,7 @@ export default function (): Rule {
       'src/app/app.routes.ts',
       'src/app/app.html',
       'src/app/app.scss',
+      'src/app/app.sass',
       'src/app/app.spec.ts',
       'src/app/app.ts'
     ];

@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "run:local",
+			"problemMatcher": [],
+			"label": "npm: run:local",
+			"detail": "npm run run:clean && npm run schematics:build && npm run schematics:link"
+		}
+	]
+}
