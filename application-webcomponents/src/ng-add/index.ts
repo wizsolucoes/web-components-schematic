@@ -49,7 +49,7 @@ function InstallPackagesRequire(options: OptionsDefaultModule): Rule {
     const cleanFilesTaskId = context.addTask(new RunSchematicTask('clean-files', {}), [skillWizproTaskId]);
     const pipelineTaskId = context.addTask(new RunSchematicTask('template-pipeline-ci', templateOptions), [cleanFilesTaskId]);
     const eslintPrettierTaskId = context.addTask(new RunSchematicTask('template-add-eslint-prettier', templateOptions), [pipelineTaskId]);
-    context.addTask(new RunSchematicTask('template-mfe-final-change', templateOptions), [eslintPrettierTaskId]);
+    context.addTask(new RunSchematicTask('template-mfe-final-change', { name: templateOptions.name }), [eslintPrettierTaskId]);
   }
 }
 
