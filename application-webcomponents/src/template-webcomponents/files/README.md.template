@@ -1,4 +1,13 @@
-# Crédito Consignado
+[![Fenix uikit Componentes](https://img.shields.io/static/v1?style=for-the-badge&label=Fenix%20uikit&message=Componentes&color=ef6c00&labelColor=a460ff&logo=angular&logoColor=541c9f)](https://fenix.wizsolucoes.com.br)
+[![SonarQube](https://img.shields.io/badge/SonarQube-Quality-4E9BCD?style=for-the-badge)](https://sonar.wiz.co/)
+[![Node.js](https://img.shields.io/badge/Node.js-22-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Angular](https://img.shields.io/badge/Angular-20-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SCSS](https://img.shields.io/badge/SCSS-CSS%20Preprocessor-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+
+
+
+# <%= name %>
 
 ## 📋 Descrição
 
@@ -69,6 +78,14 @@ O projeto utiliza Azure Pipelines para automação de deploys. Cada branch está
 Ao fazer merge ou push para uma dessas branches, a pipeline é acionada automaticamente, realizando o build e deploy no ambiente correspondente.
 
 ## 🔗 Links Úteis
+
+### SonarQube
+
+Este projeto está integrado com o SonarQube da Wiz para análise de qualidade de código:
+
+- **SonarQube Wiz**: [Acessar análise de qualidade](https://sonar.wiz.co/)
+
+O SonarQube monitora métricas como cobertura de testes, duplicação de código, complexidade ciclomática e vulnerabilidades de segurança, garantindo a qualidade e manutenibilidade do código.
 
 ### Documentação Interna
 
