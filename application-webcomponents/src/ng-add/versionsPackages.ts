@@ -25,7 +25,7 @@ export const packagesVersionsDev = {
     '@typescript-eslint/parser@7.11.0',
     'prettier@^3.4.0',
     'eslint-config-prettier@^9.0.0',
-    'husky@^9.0.0',
+    'husky@^9.1.7',
     'lint-staged@^15.0.0',
   ],
 };
