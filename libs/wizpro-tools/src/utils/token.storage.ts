@@ -27,6 +27,35 @@ export const setDataStorage = (data: any, storage = 'w-auth') => {
   localStorage.setItem(storage, JSON.stringify(data));
 };
 
+/**
+ * @description Função para pegar dados do sessionstorage
+ * @param (param: string | '', storage: string)
+ * @returns any
+ * @example getDataSessionStorage('', 'w-user-ip')
+*/
+export const getDataSessionStorage = (param: string | '', storage: string) => {
+  const data = sessionStorage.getItem(storage);
+  if (data) {
+    const verifyObject = data.startsWith('{') && data.endsWith('}');
+    const verifyArray = data.startsWith('[') && data.endsWith(']');
+    if (!verifyObject && !verifyArray) {
+      return data;
+    }
+    return param ? JSON.parse(data)[param] : JSON.parse(data);
+  }
+  return null;
+};
+
+/**
+ * @description Função para setar dados no sessionstorage
+ * @param (data: any, storage: string)
+ * @returns void
+ * @example setDataSessionStorage('token', 'w-user-ip')
+*/
+export const setDataSessionStorage = (data: any, storage: string) => {
+  sessionStorage.setItem(storage, JSON.stringify(data));
+};
+
 
 /**
  * @description Retorna o token do usuário

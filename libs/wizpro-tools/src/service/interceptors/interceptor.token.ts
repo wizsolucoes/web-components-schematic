@@ -9,7 +9,10 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, switchMap } from 'rxjs/operators';
 import { WcoEventsService } from '../share-events/share-events';
-import { getDataStorage } from '../../utils/token.storage';
+import {
+  getDataSessionStorage,
+  getDataStorage,
+} from '../../utils/token.storage';
 
 /**
  * Interceptor responsável por adicionar o cabeçalho 'x-tenant' e o token de autorização nas requisições HTTP.
@@ -84,11 +87,22 @@ export class WcoTenantInterceptor implements HttpInterceptor {
    * @returns A requisição HTTP modificada com o cabeçalho 'x-tenant'.
    */
   private addTenantHeader(request: HttpRequest<any>): HttpRequest<any> {
-    const tenant = getDataStorage('tenant', 'w-theme') || ' ';
+    const theme = getDataStorage('', 'w-theme') || ' ';
+    const tenantId = theme.tenantId || ' ';
+    const tenant = theme.tenant || ' ';
+
+    const headers: Record<string, string> = {
+      'x-tenant': tenant,
+      'x-tenant-id': tenantId,
+    };
+
+    const userIp = getDataSessionStorage('', 'w-user-ip');
+    if (userIp) {
+      headers['x-user-ip'] = userIp;
+    }
+
     return request.clone({
-      setHeaders: {
-        'x-tenant': tenant,
-      },
+      setHeaders: headers,
     });
   }
 
