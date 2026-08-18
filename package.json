@@ -29,6 +29,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation-runtime": "^20.0.0",
     "@angular-architects/module-federation-tools": "^20.0.0",
     "@angular/animations": "^20.0.0",
     "@angular/cdk": "^20.0.0",
