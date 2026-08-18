@@ -98,7 +98,7 @@ export class WcoTenantInterceptor implements HttpInterceptor {
 
     const userIp = getDataSessionStorage('', 'w-user-ip');
     if (userIp) {
-      headers['w-user-ip'] = userIp;
+      headers['x-user-ip'] = userIp;
     }
 
     return request.clone({
